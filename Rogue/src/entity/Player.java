@@ -3,9 +3,7 @@ package entity;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
 import main.GamePanel;
 import main.KeyHandler;
 
@@ -89,10 +87,6 @@ public class Player extends Entity {
 					worldX += speed;
 				}
 			}
-
-			// COLLISION CHECK
-
-			// IF NO COLLISION
 
 			spriteCounter++;
 			if (spriteCounter > 12) {
