@@ -5,9 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
 import javax.imageio.ImageIO;
-
 import main.GamePanel;
 
 public class TileManager {
@@ -24,6 +22,7 @@ public class TileManager {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
 		getTileImage();
+		// MAP TEXT FILE IMPORT
 		loadMap("/maps/map2.txt");
 	}
 
@@ -66,6 +65,7 @@ public class TileManager {
 	public void loadMap(String a) {
 
 		try {
+			// TEXT FILE ---> USABLE MAP INFO
 			InputStream is = getClass().getResourceAsStream(a);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
@@ -91,10 +91,8 @@ public class TileManager {
 				}
 			}
 			br.close();
-		} catch (Exception e) {
-
 		}
-
+		catch (Exception e) {}
 	}
 
 	public void draw(Graphics2D g2) {
@@ -102,27 +100,28 @@ public class TileManager {
 		int worldRow = 0;
 
 		while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
-
+			// VARIABLE DECLARATION
 			int tileNum = mapTileNum[worldCol][worldRow];
-
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;
 			int screenY = worldY - gp.player.worldY + gp.player.screenY;
 			
+			// SCREEN PARAMETER CHECK
 			if(worldX + (gp.tileSize)> gp.player.worldX - gp.player.screenX && 
 			   worldX - (gp.tileSize) < gp.player.worldX + gp.player.screenX && 
 			   worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY && 
 			   worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
-				
+				// DRAWS TILES JUST OUTSIDE USER VIEW
 				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 			}
-			
-			worldCol++;
 
+			worldCol++;
+			// RESETS COL AND START NEW COL
 			if (worldCol == gp.maxWorldCol) {
 				worldCol = 0;
 				worldRow++;
+
 			}
 		}
 
