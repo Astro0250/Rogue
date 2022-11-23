@@ -20,7 +20,7 @@ public class TileManager {
 
 		this.gp = gp;
 
-		tile = new Tile[20];
+		tile = new Tile[9];
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
 		getTileImage();
@@ -49,25 +49,13 @@ public class TileManager {
 			tile[4].collision = true;
 
 			tile[5] = new Tile();
-			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GrassDirtTransDown.png"));
-
+			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Sand.png"));
+			
 			tile[6] = new Tile();
-			tile[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GrassDirtTransUp.png"));
-
+			tile[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/BridgeLR.png"));
+			
 			tile[7] = new Tile();
-			tile[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GrassDirtTransRight.png"));
-
-			tile[8] = new Tile();
-			tile[8].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GrassDirtTransLeft.png"));
-
-			tile[9] = new Tile();
-			tile[9].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Sand.png"));
-			
-			tile[10] = new Tile();
-			tile[10].image = ImageIO.read(getClass().getResourceAsStream("/tiles/BridgeLR.png"));
-			
-			tile[11] = new Tile();
-			tile[11].image = ImageIO.read(getClass().getResourceAsStream("/tiles/BridgeUD.png"));
+			tile[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/BridgeUD.png"));
 			
 
 		} catch (IOException e) {
