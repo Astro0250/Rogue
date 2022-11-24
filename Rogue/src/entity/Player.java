@@ -3,7 +3,9 @@ package entity;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
+
 import main.GamePanel;
 import main.KeyHandler;
 
@@ -25,9 +27,9 @@ public class Player extends Entity {
 
 		// HITBOX SETTINGS
 		hitBox = new Rectangle();
-		hitBox.x = 10;
+		hitBox.x = 4;
 		hitBox.y = 16;
-		hitBox.width = 32;
+		hitBox.width = 38;
 		hitBox.height = 32;
 
 		setDefaultValues();
@@ -43,15 +45,22 @@ public class Player extends Entity {
 
 	public void getPlayerImage() {
 		try {
-
-			up1 = ImageIO.read(getClass().getResource("/player/JackUp1.png"));
-			up2 = ImageIO.read(getClass().getResource("/player/JackUp2.png"));
-			down1 = ImageIO.read(getClass().getResource("/player/JackDown1.png"));
-			down2 = ImageIO.read(getClass().getResource("/player/JackDown2.png"));
-			right1 = ImageIO.read(getClass().getResource("/player/JackRight1.png"));
-			right2 = ImageIO.read(getClass().getResource("/player/JackRight2.png"));
-			left1 = ImageIO.read(getClass().getResource("/player/JackLeft1.png"));
-			left2 = ImageIO.read(getClass().getResource("/player/JackLeft2.png"));
+			
+			up1 = ImageIO.read(getClass().getResource("/player/Up1.png"));
+			up2 = ImageIO.read(getClass().getResource("/player/Up2.png"));
+			
+			down1 = ImageIO.read(getClass().getResource("/player/Down1.png"));
+			down2 = ImageIO.read(getClass().getResource("/player/Down2.png"));
+			
+			right1 = ImageIO.read(getClass().getResource("/player/Right1.png"));
+			right2 = ImageIO.read(getClass().getResource("/player/Right2.png"));
+			right3 = ImageIO.read(getClass().getResource("/player/Right3.png"));
+			right4 = ImageIO.read(getClass().getResource("/player/Right4.png"));
+			
+			left1 = ImageIO.read(getClass().getResource("/player/Left1.png"));
+			left2 = ImageIO.read(getClass().getResource("/player/Left2.png"));
+			left3 = ImageIO.read(getClass().getResource("/player/Left3.png"));
+			left4 = ImageIO.read(getClass().getResource("/player/Left4.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -65,12 +74,18 @@ public class Player extends Entity {
 		if ((keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed)) {
 			if (keyH.upPressed) {
 				direction = "up";
+				if (spriteNum == 3 || spriteNum == 4) {
+					spriteNum = 1;
+				}
 				if (!collisionOn) {
 					worldY -= speed;
 				}
 			}
 			if (keyH.downPressed) {
 				direction = "down";
+				if (spriteNum == 3 || spriteNum == 4) {
+					spriteNum = 1;
+				}
 				if (!collisionOn) {
 					worldY += speed;
 				}
@@ -89,7 +104,20 @@ public class Player extends Entity {
 			}
 
 			spriteCounter++;
-			if (spriteCounter > 12) {
+			if (spriteCounter > (36/speed) && (direction.equals("left") || direction.equals("right"))) {
+				if (spriteNum == 1) {
+					spriteNum = 2;
+				} else if (spriteNum == 2) {
+					spriteNum = 3;
+				} else if (spriteNum == 3) {
+					spriteNum = 4;
+				} else if (spriteNum == 4){
+					spriteNum = 1;  
+				}
+				spriteCounter = 0;
+			}
+			
+			if (spriteCounter > (40/speed) && !(direction.equals("left") || direction.equals("right"))) {
 				if (spriteNum == 1) {
 					spriteNum = 2;
 				} else if (spriteNum == 2) {
@@ -130,6 +158,12 @@ public class Player extends Entity {
 			if (spriteNum == 2) {
 				image = right2;
 			}
+			if (spriteNum == 3) {
+				image = right3;
+			}
+			if (spriteNum == 4) {
+				image = right4;
+			}
 			break;
 
 		case "left":
@@ -138,6 +172,12 @@ public class Player extends Entity {
 			}
 			if (spriteNum == 2) {
 				image = left2;
+			}
+			if (spriteNum == 3) {
+				image = left3;
+			}
+			if (spriteNum == 4) {
+				image = left4;
 			}
 			break;
 		}

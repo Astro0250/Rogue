@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public GamePanel() { // GAME PANEL INSTANTIATION
 
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setBackground(Color.black);
+		this.setBackground(new Color(76,103,133));
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
