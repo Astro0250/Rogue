@@ -3,6 +3,7 @@ package main;
 import javax.swing.*;
 
 import entity.Player;
+import item.Item;
 import tile.TileManager;
 
 import java.awt.*;
@@ -33,7 +34,10 @@ public class GamePanel extends JPanel implements Runnable {
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	public CollisionDetecter cDetect = new CollisionDetecter(this);
+	public AssetSetter aSetter = new AssetSetter(this);
 	public Player player = new Player(this, keyH);
+	public Item obj[] = new Item[10];
+	
 
 	public GamePanel() { // GAME PANEL INSTANTIATION
 
@@ -42,6 +46,11 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
+	}
+	
+	public void setupItems() {
+		
+		aSetter.setObject();
 	}
 
 	public void startGameThread() {
@@ -85,8 +94,17 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
+		// TILE
 		tileM.draw(g2);
-
+		
+		// ITEM
+		for(int i = 0; i<obj.length; i++) {
+			if(obj[i] != null) {
+				obj[i].draw(g2, this);
+			}
+		}
+		
+		// PlAYER
 		player.draw(g2);
 
 		g2.dispose();

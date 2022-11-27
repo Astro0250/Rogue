@@ -16,6 +16,8 @@ public class Player extends Entity {
 
 	public final int screenX;
 	public final int screenY;
+	
+	int hasKey = 0;
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -27,10 +29,12 @@ public class Player extends Entity {
 
 		// HITBOX SETTINGS
 		hitBox = new Rectangle();
-		hitBox.x = 4;
+		hitBox.x = 8;
 		hitBox.y = 16;
-		hitBox.width = 38;
-		hitBox.height = 32;
+		hitBoxDefaultX = hitBox.x;
+		hitBoxDefaultY = hitBox.y;
+		hitBox.width = 30;
+		hitBox.height = 30;
 
 		setDefaultValues();
 		getPlayerImage();
@@ -68,8 +72,14 @@ public class Player extends Entity {
 	}
 
 	public void update() {
+		
+		// CHECK TILE COLLISION
 		collisionOn = false;
 		gp.cDetect.checkTile(this);
+		// CHECK OBJECT COLLISION
+		int objIndex = gp.cDetect.checkObject(this, true);
+		pickUpObject(objIndex);
+		
 
 		if ((keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed)) {
 			if (keyH.upPressed) {
@@ -124,6 +134,27 @@ public class Player extends Entity {
 					spriteNum = 1;
 				}
 				spriteCounter = 0;
+			}
+		}
+	}
+	public void pickUpObject(int i) {
+		if(i!=999) {
+			
+			String objectName = gp.obj[i].name;
+			
+			switch (objectName) {
+			case "Key":
+				hasKey++;
+				gp.obj[i] = null;
+				System.out.println("key:"+hasKey);
+				break;
+			case "Door":
+				if (hasKey > 0) {
+					gp.obj[i] = null;
+					hasKey--;
+					System.out.println("key:"+hasKey);
+				}
+				break;
 			}
 		}
 	}
