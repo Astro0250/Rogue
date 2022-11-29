@@ -23,5 +23,9 @@ public class AssetSetter {
 		gp.obj[2].worldX = 37 * gp.tileSize;
 		gp.obj[2].worldY = 38 * gp.tileSize;
 		
+		gp.obj[3] = new Key();
+		gp.obj[3].worldX = 39 * gp.tileSize;
+		gp.obj[3].worldY = 16 * gp.tileSize;
+		
 	}
 }
