@@ -1,6 +1,6 @@
-package main;
+package item;
 
-import item.*;
+import main.GamePanel;
 
 public class AssetSetter {
 	GamePanel gp;

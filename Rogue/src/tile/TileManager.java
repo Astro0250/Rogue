@@ -20,7 +20,7 @@ public class TileManager {
 
 		this.gp = gp;
 
-		tile = new Tile[99];
+		tile = new Tile[100];
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
 		getTileImage();
@@ -30,16 +30,16 @@ public class TileManager {
 	public void getTileImage() {
 
 		try {
-			for(int i=0; i<10; i++) {
+			for (int i = 0; i < 10; i++) {
 				tile[i] = new Tile();
 				tile[i].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Void.png"));
 				tile[i].collision = true;
 			}
-			
+
 			tile[10] = new Tile();
 			tile[10].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Void.png"));
 			tile[10].collision = true;
-			
+
 			tile[11] = new Tile();
 			tile[11].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass.png"));
 
@@ -55,25 +55,30 @@ public class TileManager {
 
 			tile[16] = new Tile();
 			tile[16].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Sand.png"));
-			
+
 			tile[17] = new Tile();
 			tile[17].image = ImageIO.read(getClass().getResourceAsStream("/tiles/BridgeLR.png"));
-			
+
 			tile[18] = new Tile();
 			tile[18].image = ImageIO.read(getClass().getResourceAsStream("/tiles/BridgeUD.png"));
-			
+
 			tile[19] = new Tile();
 			tile[19].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Tree1.png"));
 			tile[19].collision = true;
-			
+
 			tile[20] = new Tile();
 			tile[20].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Tree2.png"));
 			tile[20].collision = true;
-			
+			tile[20].topLayer = true;
+
 			tile[21] = new Tile();
 			tile[21].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Tree3.png"));
 			tile[21].collision = true;
-			
+			tile[21].topLayer = true;
+
+			tile[22] = new Tile(); // FALSE TREE
+			tile[22].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Tree2.png"));
+			tile[22].topLayer = true;
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -126,15 +131,50 @@ public class TileManager {
 			int worldY = worldRow * gp.tileSize;
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;
 			int screenY = worldY - gp.player.worldY + gp.player.screenY;
-			
-			if(worldX + (gp.tileSize)> gp.player.worldX - gp.player.screenX && 
-			   worldX - (gp.tileSize) < gp.player.worldX + gp.player.screenX && 
-			   worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY && 
-			   worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
-				
+
+			if (worldX + (gp.tileSize) > gp.player.worldX - gp.player.screenX
+					&& worldX - (gp.tileSize) < gp.player.worldX + gp.player.screenX
+					&& worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY
+					&& worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
+				if(tile[tileNum].topLayer || tileNum == 20) {
+					g2.drawImage(tile[11].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+				}
 				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 			}
-			
+
+			worldCol++;
+
+			if (worldCol == gp.maxWorldCol) {
+				worldCol = 0;
+				worldRow++;
+			}
+		}
+
+	}
+
+	public void drawTop(Graphics2D g2) {
+		int worldCol = 0;
+		int worldRow = 0;
+
+		while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
+
+			int tileNum = mapTileNum[worldCol][worldRow];
+
+			int worldX = worldCol * gp.tileSize;
+			int worldY = worldRow * gp.tileSize;
+			int screenX = worldX - gp.player.worldX + gp.player.screenX;
+			int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+			if (worldX + (gp.tileSize) > gp.player.worldX - gp.player.screenX
+					&& worldX - (gp.tileSize) < gp.player.worldX + gp.player.screenX
+					&& worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY
+					&& worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
+			// CHECKS IF THE IMAGE SHOULD BE DRAW ON THE TOP LAYER
+				if (tile[tileNum].topLayer) { 
+					g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+				}
+			}
+
 			worldCol++;
 
 			if (worldCol == gp.maxWorldCol) {

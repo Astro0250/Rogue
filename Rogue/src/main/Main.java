@@ -9,15 +9,15 @@ public class Main {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
 		window.setTitle("Rogue");
-		
+
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
-		
+
 		window.pack();
-		
+
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
-		
+
 		gamePanel.setupItems();
 		gamePanel.startGameThread();
 	}

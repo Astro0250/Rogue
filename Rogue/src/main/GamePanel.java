@@ -3,6 +3,7 @@ package main;
 import javax.swing.*;
 
 import entity.Player;
+import item.AssetSetter;
 import item.Item;
 import tile.TileManager;
 
@@ -104,9 +105,11 @@ public class GamePanel extends JPanel implements Runnable {
 			}
 		}
 		
-		// PlAYER
+		// PLAYER
 		player.draw(g2);
-
+		// TOP LAYER TILES
+		tileM.drawTop(g2);
+		
 		g2.dispose();
 	}
 
