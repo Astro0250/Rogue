@@ -144,16 +144,23 @@ public class Player extends Entity {
 			
 			switch (objectName) {
 			case "Key":
+				gp.playSoundEffect(0);
 				hasKey++;
 				gp.obj[i] = null;
 				System.out.println("key:"+hasKey);
 				break;
 			case "Door":
 				if (hasKey > 0) {
+					gp.playSoundEffect(0);
 					gp.obj[i] = null;
 					hasKey--;
 					System.out.println("key:"+hasKey);
 				}
+				break;
+			case "SpeedPotion":
+				gp.playSoundEffect(0);
+				speed += 2;
+				gp.obj[i] = null;
 				break;
 			}
 		}
