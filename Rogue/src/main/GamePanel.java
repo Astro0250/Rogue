@@ -16,6 +16,9 @@ public class GamePanel extends JPanel implements Runnable {
 	final int scale = 3;
 
 	public final int tileSize = originalTileSize * scale; // 48x48 tile
+	public int tileSize() {
+		return tileSize;
+	}
 	public final int maxScreenCol = 16;
 	public final int maxScreenRow = 12;
 	public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
@@ -106,11 +109,13 @@ public class GamePanel extends JPanel implements Runnable {
 		for(int i = 0; i<obj.length; i++) {
 			if(obj[i] != null) {
 				obj[i].draw(g2, this);
+				
 			}
 		}
 		
 		// PLAYER
 		player.draw(g2);
+		
 		// TOP LAYER TILES
 		tileM.drawTop(g2);
 		

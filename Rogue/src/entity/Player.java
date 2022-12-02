@@ -39,13 +39,20 @@ public class Player extends Entity {
 		setDefaultValues();
 		getPlayerImage();
 	}
+	public int worldX(int xcoord) {
+		return worldX = xcoord - gp.tileSize;
+	}
+	public int worldY(int ycoord) {
+		return worldY = ycoord - gp.tileSize;
+	}
 
 	public void setDefaultValues() {
-		worldX = gp.tileSize * 14;
-		worldY = gp.tileSize * 24;
+		worldX(gp.tileSize * 14);
+		worldY(gp.tileSize * 24);
 		speed = 4;
 		direction = "down";
 	}
+	
 
 	public void getPlayerImage() {
 		try {

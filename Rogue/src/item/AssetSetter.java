@@ -9,28 +9,37 @@ public class AssetSetter {
 		this.gp = gp;
 	}
 
+	public int worldX(int xcoord) {
+		int worldX = 0;
+		return worldX = xcoord - gp.tileSize;
+	}
+	public int worldY(int ycoord) {
+		int worldY = 0;
+		return worldY = ycoord - gp.tileSize;
+	}
 	public void setObject() {
 		
 		// INSTANTIATES AND PLACES ITEMS ON THE MAP
+		
 		gp.obj[0] = new Chest();
-		gp.obj[0].worldX = 31 * gp.tileSize;
-		gp.obj[0].worldY = 38 * gp.tileSize;
+		gp.obj[0].worldX = worldX(32 * gp.tileSize);
+		gp.obj[0].worldY = worldY(39 * gp.tileSize);
 		
 		gp.obj[1] = new Key();
-		gp.obj[1].worldX = 55 * gp.tileSize;
-		gp.obj[1].worldY = 38 * gp.tileSize;
+		gp.obj[1].worldX = worldX(56 * gp.tileSize);
+		gp.obj[1].worldY = worldY(39 * gp.tileSize);
 		
 		gp.obj[2] = new Door();
-		gp.obj[2].worldX = 37 * gp.tileSize;
-		gp.obj[2].worldY = 38 * gp.tileSize;
+		gp.obj[2].worldX = worldX(38 * gp.tileSize);
+		gp.obj[2].worldY = worldY(39 * gp.tileSize);
 		
 		gp.obj[3] = new Key();
-		gp.obj[3].worldX = 39 * gp.tileSize;
-		gp.obj[3].worldY = 16 * gp.tileSize;
+		gp.obj[3].worldX = worldX(40 * gp.tileSize);
+		gp.obj[3].worldY = worldY(17 * gp.tileSize);
 		
 		gp.obj[4] = new SpeedPotion();
-		gp.obj[4].worldX = 30 * gp.tileSize;
-		gp.obj[4].worldY = 15 * gp.tileSize;
+		gp.obj[4].worldX = worldX(31 * gp.tileSize);
+		gp.obj[4].worldY = worldY(16 * gp.tileSize);
 		
 	}
 }
