@@ -1,4 +1,5 @@
-hi -Christian
+hi - Christian
+hi - Daniel
 
 Project Requirements:
 
