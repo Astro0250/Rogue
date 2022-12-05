@@ -14,7 +14,8 @@ public class KeyHandler implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 
 		int code = e.getKeyCode();
-
+		
+		//https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html
 		if (code == KeyEvent.VK_W) {
 			upPressed = true;
 		}
@@ -27,7 +28,20 @@ public class KeyHandler implements KeyListener {
 		if (code == KeyEvent.VK_D) {
 			rightPressed = true;
 		}
-
+		
+		
+		if (code == KeyEvent.VK_UP) {
+			upPressed = true;
+		}
+		if (code == KeyEvent.VK_DOWN) {
+			downPressed = true;
+		}
+		if (code == KeyEvent.VK_LEFT) {
+			leftPressed = true;
+		}
+		if (code == KeyEvent.VK_RIGHT) {
+			rightPressed = true;
+		}
 	}
 
 	@Override
@@ -47,7 +61,20 @@ public class KeyHandler implements KeyListener {
 		if (code == KeyEvent.VK_D) {
 			rightPressed = false;
 		}
-
+		
+		if (code == KeyEvent.VK_UP) {
+			upPressed = false;
+		}
+		if (code == KeyEvent.VK_DOWN) {
+			downPressed = false;
+		}
+		if (code == KeyEvent.VK_LEFT) {
+			leftPressed = false;
+		}
+		if (code == KeyEvent.VK_RIGHT) {
+			rightPressed = false;
+		}
 	}
 
 }
+
