@@ -23,23 +23,23 @@ public class AssetSetter {
 		
 		gp.obj[0] = new Chest();
 		gp.obj[0].worldX = worldX(32 * gp.tileSize);
-		gp.obj[0].worldY = worldY(39 * gp.tileSize);
+		gp.obj[0].worldY = worldY(38 * gp.tileSize);
 		
 		gp.obj[1] = new Key();
 		gp.obj[1].worldX = worldX(56 * gp.tileSize);
-		gp.obj[1].worldY = worldY(39 * gp.tileSize);
+		gp.obj[1].worldY = worldY(38 * gp.tileSize);
 		
 		gp.obj[2] = new Door();
 		gp.obj[2].worldX = worldX(38 * gp.tileSize);
-		gp.obj[2].worldY = worldY(39 * gp.tileSize);
+		gp.obj[2].worldY = worldY(38 * gp.tileSize);
 		
 		gp.obj[3] = new Key();
 		gp.obj[3].worldX = worldX(40 * gp.tileSize);
-		gp.obj[3].worldY = worldY(17 * gp.tileSize);
+		gp.obj[3].worldY = worldY(16 * gp.tileSize);
 		
 		gp.obj[4] = new SpeedPotion();
-		gp.obj[4].worldX = worldX(31 * gp.tileSize);
-		gp.obj[4].worldY = worldY(16 * gp.tileSize);
+		gp.obj[4].worldX = worldX(33 * gp.tileSize);
+		gp.obj[4].worldY = worldY(25 * gp.tileSize);
 		
 	}
 }

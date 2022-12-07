@@ -16,8 +16,8 @@ public class Player extends Entity {
 
 	public final int screenX;
 	public final int screenY;
-	
-	int hasKey = 0;
+
+	public int hasKey = 0;
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -39,9 +39,11 @@ public class Player extends Entity {
 		setDefaultValues();
 		getPlayerImage();
 	}
+
 	public int worldX(int xcoord) {
 		return worldX = xcoord - gp.tileSize;
 	}
+
 	public int worldY(int ycoord) {
 		return worldY = ycoord - gp.tileSize;
 	}
@@ -52,22 +54,21 @@ public class Player extends Entity {
 		speed = 4;
 		direction = "down";
 	}
-	
 
 	public void getPlayerImage() {
 		try {
-			
+
 			up1 = ImageIO.read(getClass().getResource("/player/Up1.png"));
 			up2 = ImageIO.read(getClass().getResource("/player/Up2.png"));
-			
+
 			down1 = ImageIO.read(getClass().getResource("/player/Down1.png"));
 			down2 = ImageIO.read(getClass().getResource("/player/Down2.png"));
-			
+
 			right1 = ImageIO.read(getClass().getResource("/player/Right1.png"));
 			right2 = ImageIO.read(getClass().getResource("/player/Right2.png"));
 			right3 = ImageIO.read(getClass().getResource("/player/Right3.png"));
 			right4 = ImageIO.read(getClass().getResource("/player/Right4.png"));
-			
+
 			left1 = ImageIO.read(getClass().getResource("/player/Left1.png"));
 			left2 = ImageIO.read(getClass().getResource("/player/Left2.png"));
 			left3 = ImageIO.read(getClass().getResource("/player/Left3.png"));
@@ -79,14 +80,13 @@ public class Player extends Entity {
 	}
 
 	public void update() {
-		
+
 		// CHECK TILE COLLISION
 		collisionOn = false;
 		gp.cDetect.checkTile(this);
 		// CHECK OBJECT COLLISION
 		int objIndex = gp.cDetect.checkObject(this, true);
 		pickUpObject(objIndex);
-		
 
 		if ((keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed)) {
 			if (keyH.upPressed) {
@@ -121,20 +121,20 @@ public class Player extends Entity {
 			}
 
 			spriteCounter++;
-			if (spriteCounter > (36/speed) && (direction.equals("left") || direction.equals("right"))) {
+			if (spriteCounter > (36 / speed) && (direction.equals("left") || direction.equals("right"))) {
 				if (spriteNum == 1) {
 					spriteNum = 2;
 				} else if (spriteNum == 2) {
 					spriteNum = 3;
 				} else if (spriteNum == 3) {
 					spriteNum = 4;
-				} else if (spriteNum == 4){
-					spriteNum = 1;  
+				} else if (spriteNum == 4) {
+					spriteNum = 1;
 				}
 				spriteCounter = 0;
 			}
-			
-			if (spriteCounter > (40/speed) && !(direction.equals("left") || direction.equals("right"))) {
+
+			if (spriteCounter > (40 / speed) && !(direction.equals("left") || direction.equals("right"))) {
 				if (spriteNum == 1) {
 					spriteNum = 2;
 				} else if (spriteNum == 2) {
@@ -144,24 +144,24 @@ public class Player extends Entity {
 			}
 		}
 	}
+
 	public void pickUpObject(int i) {
-		if(i!=999) {
-			
+		if (i != 999) {
+
 			String objectName = gp.obj[i].name;
-			
+
 			switch (objectName) {
 			case "Key":
 				gp.playSoundEffect(0);
 				hasKey++;
 				gp.obj[i] = null;
-				System.out.println("key:"+hasKey);
+				gp.UI.showMessage("You got a key!");
 				break;
 			case "Door":
 				if (hasKey > 0) {
 					gp.playSoundEffect(0);
 					gp.obj[i] = null;
 					hasKey--;
-					System.out.println("key:"+hasKey);
 				}
 				break;
 			case "SpeedPotion":
