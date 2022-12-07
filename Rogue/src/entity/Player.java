@@ -158,18 +158,26 @@ public class Player extends Entity {
 				gp.UI.showMessage("You got a key!");
 				break;
 			case "Door":
+				gp.UI.showMessage("You need a Key!");
 				if (hasKey > 0) {
 					gp.playSoundEffect(0);
 					gp.obj[i] = null;
 					hasKey--;
+					gp.UI.showMessage("*CLICK*");
 				}
 				break;
 			case "SpeedPotion":
+				gp.UI.showMessage("Speed Boost!");
 				gp.playSoundEffect(0);
 				speed += 2;
 				gp.obj[i] = null;
 				break;
+			case "Chest":
+				gp.UI.gameWin = true;
+				gp.stopMusic();
+				break;
 			}
+				
 		}
 	}
 

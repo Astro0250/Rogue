@@ -30,7 +30,7 @@ public class AssetSetter {
 		gp.obj[1].worldY = worldY(38 * gp.tileSize);
 		
 		gp.obj[2] = new Door();
-		gp.obj[2].worldX = worldX(38 * gp.tileSize);
+		gp.obj[2].worldX = worldX(37 * gp.tileSize);
 		gp.obj[2].worldY = worldY(38 * gp.tileSize);
 		
 		gp.obj[3] = new Key();
@@ -40,6 +40,10 @@ public class AssetSetter {
 		gp.obj[4] = new SpeedPotion();
 		gp.obj[4].worldX = worldX(33 * gp.tileSize);
 		gp.obj[4].worldY = worldY(25 * gp.tileSize);
+		
+		gp.obj[5] = new Door();
+		gp.obj[5].worldX = worldX(39 * gp.tileSize);
+		gp.obj[5].worldY = worldY(38 * gp.tileSize);
 		
 	}
 }

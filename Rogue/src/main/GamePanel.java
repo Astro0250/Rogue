@@ -68,6 +68,10 @@ public class GamePanel extends JPanel implements Runnable {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
+	public void stopGameThread() {
+		
+		gameThread.stop();
+	}
 
 	@Override
 	public void run() { // DELTA GAME LOOP
