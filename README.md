@@ -1,6 +1,6 @@
 hi - Christian - Corruptor of Main 
-hi - Daniel
-hi - Arthur
+hi - Daniel - Project Dictator
+hi - Arthur - Maker of Tile
 
 Project Requirements: ["@ " = Done -- Put before requirement]
 
