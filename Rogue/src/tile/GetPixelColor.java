@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 //Takes a png with very specific RGB colors and prints out the map accordingly
-//Run separately from the actual program
+//In hindsight I probably could have made a new file and have had all the values here appended to it
 //Console buffer size should be 500,000 or higher to work 
 public class GetPixelColor {
 	public static void main(String args[]) throws IOException{ 
@@ -29,7 +29,7 @@ public class GetPixelColor {
                 else if (red == 25 && green == 59 && blue == 25) { System.out.print("109 "); }
                 else {System.out.print("Not Colored In");}
                 newLine++;                
-                if (newLine == width) {     //Does /n whenever neccesary           	
+                if (newLine == width) {     //Does /n whenever necessary           	
                 	newLine = 0;
                 	System.out.println();
                 }              
