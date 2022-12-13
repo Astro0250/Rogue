@@ -47,6 +47,13 @@ public class Player extends Entity {
 	public int worldY(int ycoord) {
 		return worldY = ycoord - gp.tileSize;
 	}
+//	public int speedModifier(int percent) {
+//		int speedModifier = 1;
+//		if (percent > 0) {
+//		return speedModifier = percent;
+//		}
+//		return speedModifier;
+//	}
 
 	public void setDefaultValues() {
 		worldX(gp.tileSize * 14);

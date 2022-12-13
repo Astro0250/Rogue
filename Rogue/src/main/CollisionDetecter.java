@@ -6,6 +6,7 @@ public class CollisionDetecter {
 
 	GamePanel gp;
 
+
 	public CollisionDetecter(GamePanel gp) {
 		this.gp = gp;
 	}
@@ -30,6 +31,7 @@ public class CollisionDetecter {
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
 			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
 				entity.collisionOn = true;
+
 			}
 
 			break;
@@ -39,6 +41,7 @@ public class CollisionDetecter {
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
 				entity.collisionOn = true;
+
 			}
 
 			break;
@@ -48,8 +51,9 @@ public class CollisionDetecter {
 			tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
 			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
 				entity.collisionOn = true;
+				
 			}
-
+			
 			break;
 		case "right":
 			entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
@@ -57,11 +61,13 @@ public class CollisionDetecter {
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
 				entity.collisionOn = true;
+				
 			}
 
 			break;
 		}
 	}
+	
 
 	public int checkObject(Entity entity, boolean player) {
 

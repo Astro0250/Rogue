@@ -24,7 +24,7 @@ public class TileManager {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
 		getTileImage();
-		loadMap("/maps/map2.txt");
+		loadMap("/maps/map3.txt");
 	}
 
 	public void getTileImage() {
@@ -42,6 +42,7 @@ public class TileManager {
 
 			tile[101] = new Tile(); //101
 			tile[101].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass.png"));
+			
 
 			tile[102] = new Tile(); //102
 			tile[102].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Path1.png"));
