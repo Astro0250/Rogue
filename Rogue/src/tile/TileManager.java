@@ -57,10 +57,10 @@ public class TileManager {
 			tile[105] = new Tile(); //105
 			tile[105].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Sand.png"));
 
-			tile[106] = new Tile(); //106
+			tile[106] = new Tile(); //106 -- Horizontal Bridge
 			tile[106].image = ImageIO.read(getClass().getResourceAsStream("/tiles/BridgeLR.png"));
 
-			tile[107] = new Tile(); //107
+			tile[107] = new Tile(); //107 -- Vertical Bridge
 			tile[107].image = ImageIO.read(getClass().getResourceAsStream("/tiles/BridgeUD.png"));
 
 			tile[108] = new Tile(); //108
