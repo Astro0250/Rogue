@@ -11,7 +11,7 @@ public class GetPixelColor {
 	public static void main(String args[]) throws IOException{ 
 		int a = 0;
         BufferedImage bufferedImage = ImageIO.read(new File("res/premap/Pre-World-Main.png"));    //Put png here    
-        int height = 200, width = bufferedImage.getWidth();
+        int height = bufferedImage.getHeight(), width = bufferedImage.getWidth();
         int newLine = 0; 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
@@ -25,23 +25,23 @@ public class GetPixelColor {
                 newLine++;
                 }
                 a++;
-                if (newLine == width) {     //Does /n whenever necessary           	
+                if (newLine == width) { //Does /n whenever necessary           	
                 	newLine = 0;
                 	System.out.println();
-                }            
+                }
                 switch (rgb) {
-                	case "0 204 0":System.out.print("101 ");break;
-                	case "64 64 64":System.out.print("102 ");break;
-                	case "123 123 123":System.out.print("103 ");break;
-                	case "0 0 204":System.out.print("104 ");break;
-                	case "255 255 0":System.out.print("105 ");break;
-                	case "230 41 230":System.out.print("106 ");break;
-                	case "120 0 120":System.out.print("107 ");break;
-                	case "102 51 0":System.out.print("108 ");break;
-                	case "25 59 25":System.out.print("109 ");break;
-                	case "48 107 48":System.out.print("110 ");break;
-                	case "40 20 0":System.out.print("111 ");break;
-                	case "255 255 255":System.out.print("100 ");break;
+                	case "0 204 0": System.out.print("101 "); break;
+                	case "64 64 64": System.out.print("102 "); break;
+                	case "123 123 123": System.out.print("103 "); break;
+                	case "0 0 204": System.out.print("104 "); break;
+                	case "255 255 0": System.out.print("105 "); break;
+                	case "230 41 230": System.out.print("106 "); break;
+                	case "120 0 120": System.out.print("107 "); break;
+                	case "102 51 0": System.out.print("108 "); break;
+                	case "25 59 25": System.out.print("109 "); break;
+                	case "48 107 48": System.out.print("110 "); break;
+                	case "40 20 0": System.out.print("111 "); break;
+                	case "255 255 255": System.out.print("100 "); break;
                 }
                 
 //                if (red == 0 && green == 204 && blue == 0) { System.out.print("101 "); } // GRASS
