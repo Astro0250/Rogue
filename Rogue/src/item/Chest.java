@@ -6,8 +6,7 @@ import javax.imageio.ImageIO;
 
 public class Chest extends Item{
 
-	public Chest() {
-		
+	public Chest() {		
 		name = "Chest";
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/items/Chest.png"));
