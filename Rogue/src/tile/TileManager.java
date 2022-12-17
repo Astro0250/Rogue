@@ -81,40 +81,40 @@ public class TileManager {
 			tile[111].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Tree2.png"));
 			tile[111].topLayer = true;
 			
-			tile[112] = new Tile(); //112
+			tile[112] = new Tile(); //112 Grass->Sand Bottom
 			tile[112].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-B.png"));
 			
-			tile[113] = new Tile(); //113
+			tile[113] = new Tile(); //113 Grass->Sand BottomLeft
 			tile[113].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-BL-L.png"));
 			
-			tile[114] = new Tile(); //114
+			tile[114] = new Tile(); //114 Grass->Sand BottomRight
 			tile[114].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-BR-L.png"));
 			
-			tile[115] = new Tile(); //115
+			tile[115] = new Tile(); //115 Grass->Sand Left
 			tile[115].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-L.png"));
 			
-			tile[116] = new Tile(); //116
+			tile[116] = new Tile(); //116 Grass->Sand TopLeft
 			tile[116].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-TL-L.png"));
 			
-			tile[117] = new Tile(); //117
+			tile[117] = new Tile(); //117 Grass->Sand Top
 			tile[117].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-T.png"));
 			
-			tile[118] = new Tile(); //118
+			tile[118] = new Tile(); //118 Grass->Sand TopRight
 			tile[118].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-TR-L.png"));
 			
-			tile[119] = new Tile(); //119
+			tile[119] = new Tile(); //119 Grass->Sand Right
 			tile[119].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-R.png"));
 			
-			tile[120] = new Tile(); //119
+			tile[120] = new Tile(); //119 Grass->Sand BottomLeftCorner
 			tile[120].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-BL-S.png"));
 			
-			tile[121] = new Tile(); //119
+			tile[121] = new Tile(); //120 Grass->Sand BottomRightCorner
 			tile[121].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-BR-S.png"));
 			
-			tile[122] = new Tile(); //119
+			tile[122] = new Tile(); //122 Grass->Sand TopLeftCorner
 			tile[122].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-TL-S.png"));
 			
-			tile[123] = new Tile(); //119
+			tile[123] = new Tile(); //123 Grass->Sand TopRightCorner
 			tile[123].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-TR-S.png"));
 
 		} catch (IOException e) {
