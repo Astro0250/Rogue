@@ -82,28 +82,40 @@ public class TileManager {
 			tile[111].topLayer = true;
 			
 			tile[112] = new Tile(); //112
-			tile[112].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Bottom.png"));
+			tile[112].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-B.png"));
 			
 			tile[113] = new Tile(); //113
-			tile[113].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Bottom-Left.png"));
+			tile[113].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-BL-L.png"));
 			
 			tile[114] = new Tile(); //114
-			tile[114].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Bottom-Right.png"));
+			tile[114].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-BR-L.png"));
 			
 			tile[115] = new Tile(); //115
-			tile[115].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Left.png"));
+			tile[115].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-L.png"));
 			
 			tile[116] = new Tile(); //116
-			tile[116].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Top-Left.png"));
+			tile[116].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-TL-L.png"));
 			
 			tile[117] = new Tile(); //117
-			tile[117].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Top.png"));
+			tile[117].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-T.png"));
 			
 			tile[118] = new Tile(); //118
-			tile[118].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Top-Right.png"));
+			tile[118].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-TR-L.png"));
 			
 			tile[119] = new Tile(); //119
-			tile[119].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Right.png"));
+			tile[119].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-R.png"));
+			
+			tile[120] = new Tile(); //119
+			tile[120].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-BL-S.png"));
+			
+			tile[121] = new Tile(); //119
+			tile[121].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-BR-S.png"));
+			
+			tile[122] = new Tile(); //119
+			tile[122].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-TL-S.png"));
+			
+			tile[123] = new Tile(); //119
+			tile[123].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GS-TR-S.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();

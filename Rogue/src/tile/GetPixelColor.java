@@ -50,6 +50,11 @@ public class GetPixelColor {
                 	case "221 255 0": System.out.print("117 "); break;
                 	case "174 255 0": System.out.print("118 "); break;
                 	case "91 133 0": System.out.print("119 "); break;
+                	case "155 226 0": System.out.print("120 "); break;
+                	case "72 105 0": System.out.print("121 "); break;
+                	case "125 183 0": System.out.print("122 "); break;
+                	case "143 209 0": System.out.print("123 "); break;
+
                 }
                 
 //                if (red == 0 && green == 204 && blue == 0) { System.out.print("101 "); } // GRASS
