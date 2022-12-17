@@ -80,6 +80,30 @@ public class TileManager {
 			tile[111] = new Tile(); //111 -- False tree top
 			tile[111].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Tree2.png"));
 			tile[111].topLayer = true;
+			
+			tile[112] = new Tile(); //112
+			tile[112].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Bottom.png"));
+			
+			tile[113] = new Tile(); //113
+			tile[113].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Bottom-Left.png"));
+			
+			tile[114] = new Tile(); //114
+			tile[114].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Bottom-Right.png"));
+			
+			tile[115] = new Tile(); //115
+			tile[115].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Left.png"));
+			
+			tile[116] = new Tile(); //116
+			tile[116].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Top-Left.png"));
+			
+			tile[117] = new Tile(); //117
+			tile[117].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Top.png"));
+			
+			tile[118] = new Tile(); //118
+			tile[118].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Top-Right.png"));
+			
+			tile[119] = new Tile(); //119
+			tile[119].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Right.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -30,6 +30,7 @@ public class GetPixelColor {
                 	System.out.println();
                 }
                 switch (rgb) {
+            		case "255 255 255": System.out.print("100 "); break;
                 	case "0 204 0": System.out.print("101 "); break;
                 	case "64 64 64": System.out.print("102 "); break;
                 	case "123 123 123": System.out.print("103 "); break;
@@ -41,7 +42,14 @@ public class GetPixelColor {
                 	case "25 59 25": System.out.print("109 "); break;
                 	case "48 107 48": System.out.print("110 "); break;
                 	case "40 20 0": System.out.print("111 "); break;
-                	case "255 255 255": System.out.print("100 "); break;
+                	case "67 77 0": System.out.print("112 "); break;
+                	case "105 121 0": System.out.print("113 "); break;
+                	case "150 173 0": System.out.print("114 "); break;
+                	case "188 217 0": System.out.print("115 "); break;
+                	case "197 228 0": System.out.print("116 "); break;
+                	case "221 255 0": System.out.print("117 "); break;
+                	case "174 255 0": System.out.print("118 "); break;
+                	case "91 133 0": System.out.print("119 "); break;
                 }
                 
 //                if (red == 0 && green == 204 && blue == 0) { System.out.print("101 "); } // GRASS
