@@ -90,42 +90,79 @@ public class Player extends Entity {
 
 		// CHECK TILE COLLISION
 		collisionOn = false;
-		gp.cDetect.checkTile(this);
+		//Inside the if statements
+		
 		// CHECK OBJECT COLLISION
 		int objIndex = gp.cDetect.checkObject(this, true);
 		pickUpObject(objIndex);
+		final int speedpy = (int)(speed/1.42);
+
 
 		if ((keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed)) {
-			if (keyH.upPressed) {
-				direction = "up";
-				if (spriteNum == 3 || spriteNum == 4) {
-					spriteNum = 1;
+			if (keyH.rightPressed) {
+				direction = "right";
+				gp.cDetect.checkTile(this);
+
+				if (!collisionOn) {	
+					if (keyH.upPressed || keyH.downPressed) {
+						worldX += speedpy;						
+					}
+					else {
+						worldX += speed;					
+					}
 				}
+				
+			}
+			 if (keyH.leftPressed) {
+				direction = "left";
+				gp.cDetect.checkTile(this);
+
 				if (!collisionOn) {
-					worldY -= speed;
+					if (keyH.downPressed || keyH.upPressed) {					
+						worldX -= (speedpy);						
+					}
+					else {
+						worldX -= speed;				
+					}
 				}
+				
 			}
 			if (keyH.downPressed) {
 				direction = "down";
 				if (spriteNum == 3 || spriteNum == 4) {
 					spriteNum = 1;
 				}
+				gp.cDetect.checkTile(this);
 				if (!collisionOn) {
-					worldY += speed;
+					if (keyH.leftPressed || keyH.rightPressed) {
+						worldY += (speedpy);
+					}
+					else {
+						worldY += speed;
+					}
 				}
 			}
-			if (keyH.leftPressed) {
-				direction = "left";
-				if (!collisionOn) {
-					worldX -= speed;
+			 if (keyH.upPressed) {
+				
+				direction = "up";
+				if (spriteNum == 3 || spriteNum == 4) {
+					spriteNum = 1;
 				}
-			}
-			if (keyH.rightPressed) {
-				direction = "right";
-				if (!collisionOn) {
-					worldX += speed;
+				gp.cDetect.checkTile(this);
+				if (!collisionOn) {	
+					if(keyH.rightPressed || keyH.leftPressed) {
+						worldY -= (speedpy);		
+					}
+					else {
+						worldY -= speed;
+					}
 				}
-			}
+				
+			
+			 }			 
+		
+
+			 
 
 			spriteCounter++;
 			if (spriteCounter > (36 / speed) && (direction.equals("left") || direction.equals("right"))) {
@@ -150,7 +187,7 @@ public class Player extends Entity {
 				spriteCounter = 0;
 			}
 		}
-	}
+}
 
 	public void pickUpObject(int i) {
 		if (i != 999) {
