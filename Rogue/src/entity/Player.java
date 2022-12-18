@@ -5,15 +5,15 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
+import tile.TileManager;
 import main.GamePanel;
 import main.KeyHandler;
 
 public class Player extends Entity {
-
+	
 	GamePanel gp;
 	KeyHandler keyH;
-
+	
 	public final int screenX;
 	public final int screenY;
 
@@ -23,6 +23,7 @@ public class Player extends Entity {
 
 		this.gp = gp;
 		this.keyH = keyH;
+		
 
 		screenX = (gp.screenWidth / 2) - (gp.tileSize / 2);
 		screenY = (gp.screenHeight / 2) - (gp.tileSize / 2);
@@ -38,6 +39,7 @@ public class Player extends Entity {
 
 		setDefaultValues();
 		getPlayerImage();
+
 	}
 
 	public int worldX(int xcoord) {
@@ -47,13 +49,13 @@ public class Player extends Entity {
 	public int worldY(int ycoord) {
 		return worldY = ycoord - gp.tileSize;
 	}
-//	public int speedModifier(int percent) {
-//		int speedModifier = 1;
-//		if (percent > 0) {
-//		return speedModifier = percent;
-//		}
-//		return speedModifier;
-//	}
+	public double speedModifier(int Tile) {
+		double speedModifier = 1;
+		if (!(null == TileManager.getSpeed().get(Tile))) {
+		speedModifier = TileManager.getSpeed().get(Tile);
+		}
+		return speedModifier;
+	}
 
 	public void setDefaultValues() {
 		worldX(gp.tileSize * 37);
@@ -88,6 +90,7 @@ public class Player extends Entity {
 
 	public void update() {
 
+
 		// CHECK TILE COLLISION
 		collisionOn = false;
 		//Inside the if statements
@@ -95,8 +98,9 @@ public class Player extends Entity {
 		// CHECK OBJECT COLLISION
 		int objIndex = gp.cDetect.checkObject(this, true);
 		pickUpObject(objIndex);
-		final int speedpy = (int)(speed/1.42);
-
+		double speedD = speed * speedModifier(gp.cDetect.tileStoodUpon(this));
+		int speedpy = (int)(speedD/1.42);
+		
 
 		if ((keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed)) {
 			if (keyH.rightPressed) {
@@ -108,7 +112,7 @@ public class Player extends Entity {
 						worldX += speedpy;						
 					}
 					else {
-						worldX += speed;					
+						worldX += speedD;					
 					}
 				}
 				
@@ -122,7 +126,7 @@ public class Player extends Entity {
 						worldX -= (speedpy);						
 					}
 					else {
-						worldX -= speed;				
+						worldX -= speedD;				
 					}
 				}
 				
@@ -138,7 +142,7 @@ public class Player extends Entity {
 						worldY += (speedpy);
 					}
 					else {
-						worldY += speed;
+						worldY += speedD;
 					}
 				}
 			}
@@ -154,7 +158,7 @@ public class Player extends Entity {
 						worldY -= (speedpy);		
 					}
 					else {
-						worldY -= speed;
+						worldY -= speedD;
 					}
 				}
 				

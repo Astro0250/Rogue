@@ -5,12 +5,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
+
 
 import main.GamePanel;
 
 public class TileManager {
+//					 TileNum ↓       ↓ Speed Multiplier
+	private static HashMap<Integer, Double> tileSpeed = new HashMap<Integer, Double>();
+	public synchronized static HashMap<Integer, Double> getSpeed(){
+		return tileSpeed;
+	}
+
+
 
 	GamePanel gp;
 	public Tile[] tile; //Tile array
@@ -42,13 +51,16 @@ public class TileManager {
 
 			tile[101] = new Tile(); //101
 			tile[101].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass.png"));
+			tileSpeed.put(101, 0.9);
 			
 
 			tile[102] = new Tile(); //102
 			tile[102].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Path1.png"));
+			tileSpeed.put(102, 1.33);
 
 			tile[103] = new Tile(); //103
 			tile[103].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Path2.png"));
+			tileSpeed.put(103, 1.33);
 
 			tile[104] = new Tile(); //104
 			tile[104].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Water.png"));
@@ -56,12 +68,15 @@ public class TileManager {
 
 			tile[105] = new Tile(); //105
 			tile[105].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Sand.png"));
+			tileSpeed.put(105, 0.8);
 
 			tile[106] = new Tile(); //106 -- Horizontal Bridge
 			tile[106].image = ImageIO.read(getClass().getResourceAsStream("/tiles/BridgeLR.png"));
+			tileSpeed.put(106, 1.11);
 
 			tile[107] = new Tile(); //107 -- Vertical Bridge
 			tile[107].image = ImageIO.read(getClass().getResourceAsStream("/tiles/BridgeUD.png"));
+			tileSpeed.put(107, 7.0);
 
 			tile[108] = new Tile(); //108
 			tile[108].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Tree1.png"));
@@ -104,6 +119,7 @@ public class TileManager {
 			
 			tile[119] = new Tile(); //119
 			tile[119].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass-Sand-Right.png"));
+
 
 		} catch (IOException e) {
 			e.printStackTrace();

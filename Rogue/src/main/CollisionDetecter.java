@@ -10,6 +10,19 @@ public class CollisionDetecter {
 	public CollisionDetecter(GamePanel gp) {
 		this.gp = gp;
 	}
+	//This will probably be important when certain tiles give you buffs
+	//or hurt you or something, so here have a comment 
+	public int tileStoodUpon(Entity entity) {
+		int entityMiddleWorldX = entity.worldX + entity.hitBox.x + (entity.hitBox.width/2);
+		int entityMiddleWorldY = entity.worldY + entity.hitBox.y + (entity.hitBox.height/2);
+			
+		int entityMiddleCol = entityMiddleWorldX / gp.tileSize;
+		int entityMiddleRow = entityMiddleWorldY / gp.tileSize;
+		
+		int tileNumOn = gp.tileM.mapTileNum[entityMiddleCol][entityMiddleRow];
+		return tileNumOn;
+	}
+	
 
 	public void checkTile(Entity entity) {
 		entity.collisionOn = false;
@@ -40,6 +53,7 @@ public class CollisionDetecter {
 
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+			
 
 
 

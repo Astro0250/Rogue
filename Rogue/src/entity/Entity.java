@@ -3,6 +3,7 @@ package entity;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+
 public class Entity {
 
 	public int worldX;
@@ -15,5 +16,6 @@ public class Entity {
 	public Rectangle hitBox;
 	public int hitBoxDefaultX, hitBoxDefaultY;
 	public boolean collisionOn = false;
-	public boolean collisionFuture = false;
+
+
 }
