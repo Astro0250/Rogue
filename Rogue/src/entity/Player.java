@@ -10,10 +10,10 @@ import main.GamePanel;
 import main.KeyHandler;
 
 public class Player extends Entity {
-	
+
 	GamePanel gp;
 	KeyHandler keyH;
-	
+
 	public final int screenX;
 	public final int screenY;
 
@@ -23,7 +23,6 @@ public class Player extends Entity {
 
 		this.gp = gp;
 		this.keyH = keyH;
-		
 
 		screenX = (gp.screenWidth / 2) - (gp.tileSize / 2);
 		screenY = (gp.screenHeight / 2) - (gp.tileSize / 2);
@@ -49,10 +48,11 @@ public class Player extends Entity {
 	public int worldY(int ycoord) {
 		return worldY = ycoord - gp.tileSize;
 	}
+
 	public double speedModifier(int Tile) {
 		double speedModifier = 1;
 		if (!(null == TileManager.getSpeed().get(Tile))) {
-		speedModifier = TileManager.getSpeed().get(Tile);
+			speedModifier = TileManager.getSpeed().get(Tile);
 		}
 		return speedModifier;
 	}
@@ -89,12 +89,11 @@ public class Player extends Entity {
 	}
 
 	public void update() {
-		
 
 		// CHECK TILE COLLISION
 		collisionOn = false;
-		//Inside the if statements
-		
+		// Inside the if statements
+
 		// CHECK OBJECT COLLISION
 		int objIndex = gp.cDetect.checkObject(this, true);
 		pickUpObject(objIndex);
@@ -103,38 +102,9 @@ public class Player extends Entity {
 		if (keyH.shiftPressed) {
 			speedD *= 1.25;
 		}
-		int speedpy = (int)(speedD/1.42);
-		
+		int speedpy = (int) (speedD / 1.42);
 
 		if ((keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed)) {
-			if (keyH.rightPressed) {
-				direction = "right";
-				gp.cDetect.checkTile(this);
-
-				if (!collisionOn) {	
-					if (keyH.upPressed || keyH.downPressed) {
-						worldX += speedpy;						
-					}
-					else {
-						worldX += speedD;					
-					}
-				}
-				
-			}
-			 if (keyH.leftPressed) {
-				direction = "left";
-				gp.cDetect.checkTile(this);
-
-				if (!collisionOn) {
-					if (keyH.downPressed || keyH.upPressed) {					
-						worldX -= (speedpy);						
-					}
-					else {
-						worldX -= speedD;				
-					}
-				}
-				
-			}
 			if (keyH.downPressed) {
 				direction = "down";
 				if (spriteNum == 3 || spriteNum == 4) {
@@ -144,33 +114,52 @@ public class Player extends Entity {
 				if (!collisionOn) {
 					if (keyH.leftPressed || keyH.rightPressed) {
 						worldY += (speedpy);
-					}
-					else {
+					} else {
 						worldY += speedD;
 					}
 				}
 			}
-			 if (keyH.upPressed) {
-				
+			if (keyH.upPressed) {
+
 				direction = "up";
 				if (spriteNum == 3 || spriteNum == 4) {
 					spriteNum = 1;
 				}
 				gp.cDetect.checkTile(this);
-				if (!collisionOn) {	
-					if(keyH.rightPressed || keyH.leftPressed) {
-						worldY -= (speedpy);		
-					}
-					else {
+				if (!collisionOn) {
+					if (keyH.rightPressed || keyH.leftPressed) {
+						worldY -= (speedpy);
+					} else {
 						worldY -= speedD;
 					}
 				}
-				
-			
-			 }			 
-		
+			}
+			if (keyH.rightPressed) {
+				direction = "right";
+				gp.cDetect.checkTile(this);
 
-			 
+				if (!collisionOn) {
+					if (keyH.upPressed || keyH.downPressed) {
+						worldX += speedpy;
+					} else {
+						worldX += speedD;
+					}
+				}
+
+			}
+			if (keyH.leftPressed) {
+				direction = "left";
+				gp.cDetect.checkTile(this);
+
+				if (!collisionOn) {
+					if (keyH.downPressed || keyH.upPressed) {
+						worldX -= (speedpy);
+					} else {
+						worldX -= speedD;
+					}
+				}
+
+			}
 
 			spriteCounter++;
 			if (spriteCounter > (36 / speed) && (direction.equals("left") || direction.equals("right"))) {
@@ -195,7 +184,7 @@ public class Player extends Entity {
 				spriteCounter = 0;
 			}
 		}
-}
+	}
 
 	public void pickUpObject(int i) {
 		if (i != 999) {
@@ -229,7 +218,7 @@ public class Player extends Entity {
 				gp.stopMusic();
 				break;
 			}
-				
+
 		}
 	}
 
@@ -238,24 +227,6 @@ public class Player extends Entity {
 		BufferedImage image = null;
 
 		switch (direction) {
-		case "up":
-			if (spriteNum == 1) {
-				image = up1;
-			}
-			if (spriteNum == 2) {
-				image = up2;
-			}
-			break;
-
-		case "down":
-			if (spriteNum == 1) {
-				image = down2;
-			}
-			if (spriteNum == 2) {
-				image = down1;
-			}
-			break;
-
 		case "right":
 			if (spriteNum == 1) {
 				image = right1;
@@ -283,6 +254,23 @@ public class Player extends Entity {
 			}
 			if (spriteNum == 4) {
 				image = left4;
+			}
+			break;
+		case "up":
+			if (spriteNum == 1) {
+				image = up1;
+			}
+			if (spriteNum == 2) {
+				image = up2;
+			}
+			break;
+
+		case "down":
+			if (spriteNum == 1) {
+				image = down2;
+			}
+			if (spriteNum == 2) {
+				image = down1;
 			}
 			break;
 		}
