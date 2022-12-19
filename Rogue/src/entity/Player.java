@@ -89,7 +89,7 @@ public class Player extends Entity {
 	}
 
 	public void update() {
-
+		
 
 		// CHECK TILE COLLISION
 		collisionOn = false;
@@ -98,7 +98,11 @@ public class Player extends Entity {
 		// CHECK OBJECT COLLISION
 		int objIndex = gp.cDetect.checkObject(this, true);
 		pickUpObject(objIndex);
+
 		double speedD = speed * speedModifier(gp.cDetect.tileStoodUpon(this));
+		if (keyH.shiftPressed) {
+			speedD *= 1.25;
+		}
 		int speedpy = (int)(speedD/1.42);
 		
 
