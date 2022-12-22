@@ -3,7 +3,7 @@ package main;
 import javax.swing.*;
 
 public class Main {
-	// THIS IS THE MAIN METHOD
+	// THIS IS THE MAIN METHOD hi-Daniel
 	public static void main(String[] args) {
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

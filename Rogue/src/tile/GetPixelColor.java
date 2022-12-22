@@ -30,7 +30,9 @@ public class GetPixelColor {
                 	System.out.println();
                 }
                 switch (rgb) {
+                	// Main Textures
             		case "255 255 255": System.out.print("100 "); break;
+            		case "0 0 0": System.out.print("100 "); break;
                 	case "0 204 0": System.out.print("101 "); break;
                 	case "64 64 64": System.out.print("102 "); break;
                 	case "123 123 123": System.out.print("103 "); break;
@@ -42,6 +44,7 @@ public class GetPixelColor {
                 	case "25 59 25": System.out.print("109 "); break;
                 	case "48 107 48": System.out.print("110 "); break;
                 	case "40 20 0": System.out.print("111 "); break;
+                	// GS Transitions
                 	case "67 77 0": System.out.print("112 "); break;
                 	case "105 121 0": System.out.print("113 "); break;
                 	case "150 173 0": System.out.print("114 "); break;
@@ -54,27 +57,21 @@ public class GetPixelColor {
                 	case "72 105 0": System.out.print("121 "); break;
                 	case "125 183 0": System.out.print("122 "); break;
                 	case "143 209 0": System.out.print("123 "); break;
-
+                	// GW Transitions
+                	case "0 90 73": System.out.print("124 "); break;
+                	case "0 111 91": System.out.print("125 "); break;
+                	case "0 133 109": System.out.print("126 "); break;
+                	case "0 161 131": System.out.print("127 "); break;
+                	case "0 193 157": System.out.print("128 "); break;
+                	case "0 229 187": System.out.print("129 "); break;
+                	case "0 255 208": System.out.print("130 "); break;
+                	case "0 65 53": System.out.print("131 "); break;
+                	case "0 70 106": System.out.print("132 "); break;
+                	case "0 44 65": System.out.print("133 "); break;
+                	case "0 97 145": System.out.print("134 "); break;
+                	case "0 131 196": System.out.print("135 "); break;
+                	
                 }
-                
-//                if (red == 0 && green == 204 && blue == 0) { System.out.print("101 "); } // GRASS
-//                else if (red == 64 && green == 64 && blue == 64) { System.out.print("102 "); } // PATH1
-//                else if (red == 123 && green == 123 && blue == 123) { System.out.print("103 "); } // PATH2
-//                else if (red == 0 && green == 0 && blue == 204) { System.out.print("104 "); } // WATER
-//                else if (red == 255 && green == 255 && blue == 0) { System.out.print("105 "); } // SAND
-//                else if (red == 230 && green == 41 && blue == 230) { System.out.print("106 "); } // BRIDGELR
-//                else if (red == 120 && green == 0 && blue == 120) { System.out.print("107 "); } // BRIDGEUD
-//                else if (red == 102 && green == 51 && blue == 0) { System.out.print("108 "); } // TREE1
-//                else if (red == 25 && green == 59 && blue == 25) { System.out.print("109 "); } // TREE2
-//                else if (red == 48 && green == 107 && blue == 48) { System.out.print("110 "); } // TREE3
-//                else if (red == 40 && green == 20 && blue == 0) { System.out.print("111 "); } // FAKETREE
-//                else if (red == 255 && green == 255 && blue == 255) { System.out.print("100 "); } // VOID
-//                else {System.out.print("Not Colored In");}
-//                newLine++;
-//                if (newLine == width) {     //Does /n whenever necessary           	
-//                	newLine = 0;
-//                	System.out.println();
-//                }              
            }  
         }
     }
