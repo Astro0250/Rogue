@@ -32,19 +32,19 @@ public class GamePanel extends JPanel implements Runnable {
 	int FPS = 60;
 
 	// INSTANTIATION
-	// SYSTEM
-	TileManager tileM = new TileManager(this);
-	KeyHandler keyH = new KeyHandler();
-	Sound music = new Sound();
-	Sound soundEffect = new Sound();
-	public CollisionDetecter cDetect = new CollisionDetecter(this);
-	public AssetSetter aSetter = new AssetSetter(this);
-	public UserInterface UI = new UserInterface(this);
-	Thread gameThread;
-	
-	// ENTITY & ITEM
-	public Player player = new Player(this, keyH);
-	public Item obj[] = new Item[20];
+		// SYSTEM
+		TileManager tileM = new TileManager(this);
+		KeyHandler keyH = new KeyHandler();
+		Sound music = new Sound();
+		Sound soundEffect = new Sound();
+		public CollisionDetecter cDetect = new CollisionDetecter(this);
+		public AssetSetter aSetter = new AssetSetter(this);
+		public UserInterface UI = new UserInterface(this);
+		Thread gameThread;
+		
+		// ENTITY & ITEM
+		public Player player = new Player(this, keyH);
+		public Item obj[] = new Item[20];
 	
 
 	public GamePanel() { // GAME PANEL INSTANTIATION
@@ -107,6 +107,12 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
+		// DEBUG
+		long drawStart = 0;
+		if(keyH.checkDrawTime) {
+			drawStart = System.nanoTime();
+		}
+		
 		// TILE
 		tileM.draw(g2);
 		
@@ -116,6 +122,15 @@ public class GamePanel extends JPanel implements Runnable {
 				obj[i].draw(g2, this);
 				
 			}
+		}
+		
+		// DEBUG
+		if(keyH.checkDrawTime) {
+			long drawEnd = System.nanoTime();
+			long passed = drawEnd - drawStart;
+			g2.setColor(Color.white);
+			g2.drawString("Draw Time: " + passed, 10, 400);
+			System.out.println("Draw Time: " + passed);
 		}
 		
 		// PLAYER

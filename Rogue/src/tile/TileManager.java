@@ -1,6 +1,7 @@
 package tile;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -171,7 +172,20 @@ public class TileManager {
 				for(int c = 124; c < 136; c++) {
 					tile[c].collision = true;
 				}
-				
+				//Invalidates the rest of the tiles as void tiles
+				for (int i = 136; i < 1000; i++) {
+					tile[i] = new Tile();
+					tile[i].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Void.png"));
+					tile[i].collision = true;
+				}
+				// SCALES EACH TIME IMAGE TO THE TILE SIZE
+				for(Tile a : tile) {
+					BufferedImage scaledImage = new BufferedImage(gp.tileSize, gp.tileSize, a.image.getType());
+					Graphics2D g2 = scaledImage.createGraphics();
+					g2.drawImage(a.image, 0, 0, gp.tileSize, gp.tileSize, null);
+					a.image = scaledImage;
+					g2.dispose();
+				}
 			} else if (tileSet == 1) {
 				for(int c = 100; c<124; c++) {
 					tile[c] = new Tile();
@@ -235,9 +249,9 @@ public class TileManager {
 					&& worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY
 					&& worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
 				if(tile[tileNum].topLayer || tileNum == 109) {
-					g2.drawImage(tile[101].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+					g2.drawImage(tile[101].image, screenX, screenY, null);
 				}
-				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+				g2.drawImage(tile[tileNum].image, screenX, screenY, null);
 			}
 
 			worldCol++;
@@ -269,7 +283,7 @@ public class TileManager {
 					&& worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
 			// CHECKS IF THE IMAGE SHOULD BE DRAW ON THE TOP LAYER
 				if (tile[tileNum].topLayer) { 
-					g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+					g2.drawImage(tile[tileNum].image, screenX, screenY, null);
 				}
 			}
 
