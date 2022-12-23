@@ -98,14 +98,16 @@ public class Player extends Entity {
 		int objIndex = gp.cDetect.checkObject(this, true);
 		pickUpObject(objIndex);
 
-		double speedD = speed * speedModifier(gp.cDetect.tileStoodUpon(this));
+		speedD = speed * speedModifier(gp.cDetect.tileStoodUpon(this));
 		if (keyH.shiftPressed) {
 			speedD *= 1.25;
 		}
 		int speedpy = (int) (speedD / 1.42);
 
 		if ((keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed)) {
-			if (keyH.downPressed) {
+			if (keyH.downPressed && keyH.upPressed) {
+			}
+			else if (keyH.downPressed) {
 				direction = "down";
 				if (spriteNum == 3 || spriteNum == 4) {
 					spriteNum = 1;
@@ -119,7 +121,7 @@ public class Player extends Entity {
 					}
 				}
 			}
-			if (keyH.upPressed) {
+			else if (keyH.upPressed) {
 
 				direction = "up";
 				if (spriteNum == 3 || spriteNum == 4) {
@@ -134,7 +136,9 @@ public class Player extends Entity {
 					}
 				}
 			}
-			if (keyH.rightPressed) {
+			if (keyH.rightPressed && keyH.leftPressed) {
+			}
+			else if (keyH.rightPressed) {
 				direction = "right";
 				gp.cDetect.checkTile(this);
 
@@ -147,7 +151,7 @@ public class Player extends Entity {
 				}
 
 			}
-			if (keyH.leftPressed) {
+			else if (keyH.leftPressed) {
 				direction = "left";
 				gp.cDetect.checkTile(this);
 

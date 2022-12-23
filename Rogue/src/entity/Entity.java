@@ -16,6 +16,7 @@ public class Entity {
 	public Rectangle hitBox;
 	public int hitBoxDefaultX, hitBoxDefaultY;
 	public boolean collisionOn = false;
+	public double speedD;
 
 
 }
