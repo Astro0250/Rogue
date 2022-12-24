@@ -124,23 +124,26 @@ public class GamePanel extends JPanel implements Runnable {
 			}
 		}
 		
-		// DEBUG
-		if(keyH.checkDrawTime) {
-			long drawEnd = System.nanoTime();
-			long passed = drawEnd - drawStart;
-			g2.setColor(Color.white);
-			g2.drawString("Draw Time: " + passed, 10, 400);
-			System.out.println("Draw Time: " + passed);
-		}
-		
 		// PLAYER
 		player.draw(g2);
 		
 		// TOP LAYER TILES
 		tileM.drawTop(g2);
+
+
 		
 		// USER INTERFACE
 		UI.draw(g2);
+		
+		// DEBUG
+		if(keyH.checkDrawTime) {
+			long drawEnd = System.nanoTime();
+			long passed = (drawEnd - drawStart);
+			g2.setColor(Color.white);
+			g2.setFont(new Font("Ariel", Font.PLAIN, 20));
+			g2.drawString("Draw Time: " + passed, 10, 400);
+			System.out.println("Draw Time: " + passed);
+		}
 		
 		g2.dispose();
 	}

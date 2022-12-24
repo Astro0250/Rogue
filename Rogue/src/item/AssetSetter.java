@@ -25,9 +25,9 @@ public class AssetSetter {
 		gp.obj[0].worldX = worldX(32 * gp.tileSize);
 		gp.obj[0].worldY = worldY(38 * gp.tileSize);
 		
-		gp.obj[1] = new Key();
-		gp.obj[1].worldX = worldX(56 * gp.tileSize);
-		gp.obj[1].worldY = worldY(38 * gp.tileSize);
+		gp.obj[1] = new EnemyTemp();
+		gp.obj[1].worldX = worldX(40 * gp.tileSize);
+		gp.obj[1].worldY = worldY(70 * gp.tileSize);
 		
 		gp.obj[2] = new Door();
 		gp.obj[2].worldX = worldX(37 * gp.tileSize);
@@ -44,6 +44,8 @@ public class AssetSetter {
 		gp.obj[5] = new Door();
 		gp.obj[5].worldX = worldX(39 * gp.tileSize);
 		gp.obj[5].worldY = worldY(38 * gp.tileSize);
+		
+		
 		
 	}
 }

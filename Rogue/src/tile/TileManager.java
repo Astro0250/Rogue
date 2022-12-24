@@ -196,7 +196,50 @@ public class TileManager {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void setUp(int index, String location, double speedModifier, boolean collision, boolean topLayer) {
+		index+=100;
+		tile[index] = new Tile();
+		try {
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + location + ".png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		tileSpeed.put(index, speedModifier);
+		tile[index].collision = collision;
+		tile[index].topLayer = topLayer;
+	}
+	public void setUp(int index, String location, double speedModifier, boolean collision) {
+		index+=100;
+		tile[index] = new Tile();
+		try {
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + location + ".png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		tileSpeed.put(index, speedModifier);
+		tile[index].collision = collision;
+	}
+	public void setUp(int index, String location, double speedModifier) {
+		index+=100;
+		tile[index] = new Tile();
+		try {
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + location + ".png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		tileSpeed.put(index, speedModifier);
+	}
+	public void setUp(int index, String location) {
+		index+=100;
+		tile[index] = new Tile();
+		try {
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + location + ".png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void loadMap(String a) {
 
 		try {
