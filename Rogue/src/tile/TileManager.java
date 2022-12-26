@@ -137,24 +137,16 @@ public class TileManager {
 	}
 
 	public void loadMap(String a) {
-
 		try {
 			InputStream is = getClass().getResourceAsStream(a);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
 			int col = 0;
 			int row = 0;
-
 			while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
-
 				String line = br.readLine();
-
 				while (col < gp.maxWorldCol) {
-
 					String numbers[] = line.split(" ");
-
 					int num = Integer.parseInt(numbers[col]);
-
 					mapTileNum[col][row] = num;
 					col++;
 				}
@@ -165,9 +157,7 @@ public class TileManager {
 			}
 			br.close();
 		} catch (Exception e) {
-
 		}
-
 	}
 
 	public void draw(Graphics2D g2) {
