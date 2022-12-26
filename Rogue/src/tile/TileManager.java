@@ -58,7 +58,7 @@ public class TileManager {
 		setup(11, "Tree2", 0.9, false, true); // False Tree Top
 
 		String[] TransitionTextureKey = 
-		{ "T", "R", "L", "B", "TR-L", "TR-S", "TL-L", "TL-S", "BR-L", "BR-S", "BL-L", "BL-S" };
+		{ "TR-L", "R", "BR-L", "B", "BL-L", "L", "TL-L", "T", "TL-S", "BL-S", "TR-S", "BR-S" };
 		
 		int counter = 12;
 		for (String i : TransitionTextureKey) {
