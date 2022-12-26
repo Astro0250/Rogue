@@ -38,7 +38,7 @@ public class TileManager {
 
 	public void getTileImage() {
 
-		setup(0, "Void", true);
+		setup(0, "Void", true); // Void
 
 		setup(1, "Grass", 0.9); // Grass
 
@@ -53,15 +53,11 @@ public class TileManager {
 		setup(7, "BridgeUD", 1.1); // Vertical Bridge
 
 		setup(8, "Tree1", true); // Tree Bottom
-
 		setup(9, "Tree2", true); // Real Tree Top
-
 		setup(10, "Tree3", true, true); // Linked Tree Top
-
 		setup(11, "Tree2", 0.9, false, true); // False Tree Top
 
-		String[] TransitionTextureKey = { "T", "R", "L", "B", "TR-L", "TR-S", "TL-L", "TL-S", "BR-L", "BR-S", "BL-L",
-				"BL-S" };
+		String[] TransitionTextureKey = { "T", "R", "L", "B", "TR-L", "TR-S", "TL-L", "TL-S", "BR-L", "BR-S", "BL-L", "BL-S" };
 		int counter = 12;
 		for (String i : TransitionTextureKey) {
 			// Grass -> Sand Transition
