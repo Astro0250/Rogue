@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 public class GetPixelColor {
 	public static void main(String args[]) throws IOException{ 
 		int a = 0;
-        BufferedImage bufferedImage = ImageIO.read(new File("res/premap/Pre-World-Main.png"));    //Put png here    
+        BufferedImage bufferedImage = ImageIO.read(new File("res/premap/Pre-World-Main2.png"));    //Put png here    
         int height = bufferedImage.getHeight(), width = bufferedImage.getWidth();
         int newLine = 0; 
         for (int y = 0; y < height; y++) {
