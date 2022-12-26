@@ -38,47 +38,45 @@ public class TileManager {
 
 	public void getTileImage() {
 
-		if (tileSet == 0) {
-			setup(0, "Void", true);
+		setup(0, "Void", true);
 
-			setup(1, "Grass", 0.9); // Grass
+		setup(1, "Grass", 0.9); // Grass
 
-			setup(2, "Path1", 1.2); // Path1
-			setup(3, "Path2", 1.2); // Path2
+		setup(2, "Path1", 1.2); // Path1
+		setup(3, "Path2", 1.2); // Path2
 
-			setup(4, "Water", true); // Water
+		setup(4, "Water", true); // Water
 
-			setup(5, "Sand", 0.8); // Sand
+		setup(5, "Sand", 0.8); // Sand
 
-			setup(6, "BridgeLR", 1.1); // Horizontal Bridge
-			setup(7, "BridgeUD", 1.1); // Vertical Bridge
+		setup(6, "BridgeLR", 1.1); // Horizontal Bridge
+		setup(7, "BridgeUD", 1.1); // Vertical Bridge
 
-			setup(8, "Tree1", true); // Tree Bottom
+		setup(8, "Tree1", true); // Tree Bottom
 
-			setup(9, "Tree2", true); // Real Tree Top
+		setup(9, "Tree2", true); // Real Tree Top
 
-			setup(10, "Tree3", true, true); // Linked Tree Top
+		setup(10, "Tree3", true, true); // Linked Tree Top
 
-			setup(11, "Tree2", 0.9, false, true); // False Tree Top
+		setup(11, "Tree2", 0.9, false, true); // False Tree Top
 
-			String[] TransitionTextureKey = { "T", "R", "L", "B", "TR-L", "TR-S", "TL-L", "TL-S", "BR-L", "BR-S",
-					"BL-L", "BL-S" };
-			int counter = 12;
-			for (String i : TransitionTextureKey) {
-				// Grass -> Sand Transition
-				setup(counter, "GS-" + i, 0.85);
-				// Grass -> Water Transition
-				setup(counter + 12, "GW-" + i, true);
-				counter++;
-			}
-			// SCALES EACH IMAGE TO THE PROPER SIZE SIZE
-			for (int i = 100; i < 136; i++) {
-				BufferedImage scaledImage = new BufferedImage(gp.tileSize, gp.tileSize, tile[i].image.getType());
-				Graphics2D g2 = scaledImage.createGraphics();
-				g2.drawImage(tile[i].image, 0, 0, gp.tileSize, gp.tileSize, null);
-				tile[i].image = scaledImage;
-				g2.dispose();
-			}
+		String[] TransitionTextureKey = { "T", "R", "L", "B", "TR-L", "TR-S", "TL-L", "TL-S", "BR-L", "BR-S", "BL-L",
+				"BL-S" };
+		int counter = 12;
+		for (String i : TransitionTextureKey) {
+			// Grass -> Sand Transition
+			setup(counter, "GS-" + i, 0.85);
+			// Grass -> Water Transition
+			setup(counter + 12, "GW-" + i, true);
+			counter++;
+		}
+		// SCALES EACH IMAGE TO THE PROPER SIZE SIZE
+		for (int i = 100; i < 136; i++) {
+			BufferedImage scaledImage = new BufferedImage(gp.tileSize, gp.tileSize, tile[i].image.getType());
+			Graphics2D g2 = scaledImage.createGraphics();
+			g2.drawImage(tile[i].image, 0, 0, gp.tileSize, gp.tileSize, null);
+			tile[i].image = scaledImage;
+			g2.dispose();
 		}
 	}
 
@@ -95,6 +93,7 @@ public class TileManager {
 		tile[index].collision = collision;
 		tile[index].topLayer = topLayer;
 	}
+
 	public void setup(int index, String location, boolean collision, boolean topLayer) {
 		index += 100;
 		try {
@@ -106,6 +105,7 @@ public class TileManager {
 		tile[index].collision = collision;
 		tile[index].topLayer = topLayer;
 	}
+
 	public void setup(int index, String location, boolean collision) {
 		index += 100;
 		try {
@@ -116,6 +116,7 @@ public class TileManager {
 		}
 		tile[index].collision = collision;
 	}
+
 	public void setup(int index, String location, double speedModifier) {
 		index += 100;
 		try {
@@ -126,6 +127,7 @@ public class TileManager {
 		}
 		tileSpeed.put(index, speedModifier);
 	}
+
 	public void setup(int index, String location) {
 		index += 100;
 		try {
