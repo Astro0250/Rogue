@@ -57,7 +57,9 @@ public class TileManager {
 		setup(10, "Tree3", true, true); // Linked Tree Top
 		setup(11, "Tree2", 0.9, false, true); // False Tree Top
 
-		String[] TransitionTextureKey = { "T", "R", "L", "B", "TR-L", "TR-S", "TL-L", "TL-S", "BR-L", "BR-S", "BL-L", "BL-S" };
+		String[] TransitionTextureKey = 
+		{ "T", "R", "L", "B", "TR-L", "TR-S", "TL-L", "TL-S", "BR-L", "BR-S", "BL-L", "BL-S" };
+		
 		int counter = 12;
 		for (String i : TransitionTextureKey) {
 			// Grass -> Sand Transition
