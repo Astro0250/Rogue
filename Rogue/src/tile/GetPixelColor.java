@@ -45,18 +45,18 @@ public class GetPixelColor {
                 	case "48 107 48": System.out.print("110 "); break;
                 	case "40 20 0": System.out.print("111 "); break;
                 	// GS Transitions
-                	case "67 77 0": System.out.print("112 "); break;
-                	case "105 121 0": System.out.print("113 "); break;
+                	case "67 77 0": System.out.print("115 "); break;
+                	case "105 121 0": System.out.print("116 "); break;
                 	case "150 173 0": System.out.print("114 "); break;
-                	case "188 217 0": System.out.print("115 "); break;
-                	case "197 228 0": System.out.print("116 "); break;
-                	case "221 255 0": System.out.print("117 "); break;
-                	case "174 255 0": System.out.print("118 "); break;
-                	case "91 133 0": System.out.print("119 "); break;
-                	case "155 226 0": System.out.print("120 "); break;
-                	case "72 105 0": System.out.print("121 "); break;
-                	case "125 183 0": System.out.print("122 "); break;
-                	case "143 209 0": System.out.print("123 "); break;
+                	case "188 217 0": System.out.print("117 "); break;
+                	case "197 228 0": System.out.print("118 "); break;
+                	case "221 255 0": System.out.print("119 "); break;
+                	case "174 255 0": System.out.print("112 "); break;
+                	case "91 133 0": System.out.print("113 "); break;
+                	case "155 226 0": System.out.print("121 "); break;
+                	case "72 105 0": System.out.print("123 "); break;
+                	case "125 183 0": System.out.print("120 "); break;
+                	case "143 209 0": System.out.print("122 "); break;
                 	// GW Transitions
                 	case "0 90 73": System.out.print("124 "); break;
                 	case "0 111 91": System.out.print("125 "); break;
