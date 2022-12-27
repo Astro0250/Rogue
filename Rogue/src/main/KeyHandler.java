@@ -1,8 +1,9 @@
 package main;
 
 import java.awt.event.*;
-import main.GamePanel;
 
+import main.GamePanel;
+import entity.Player;
 import tile.TileManager;
 
 public class KeyHandler implements KeyListener {
@@ -11,6 +12,7 @@ public class KeyHandler implements KeyListener {
 
 	// DEBUG
 	boolean checkDrawTime = false;
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		int code = e.getKeyCode();

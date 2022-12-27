@@ -63,7 +63,6 @@ public class Player extends Entity {
 		speed = 8;
 		direction = "down";
 	}
-
 	public void getPlayerImage() {
 		try {
 
@@ -92,8 +91,6 @@ public class Player extends Entity {
 
 		// CHECK TILE COLLISION
 		collisionOn = false;
-		// Inside the if statements
-
 		// CHECK OBJECT COLLISION
 		int objIndex = gp.cDetect.checkObject(this, true);
 		pickUpObject(objIndex);

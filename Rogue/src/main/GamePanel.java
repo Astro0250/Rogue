@@ -111,6 +111,10 @@ public class GamePanel extends JPanel implements Runnable {
 		long drawStart = 0;
 		if(keyH.checkDrawTime) {
 			drawStart = System.nanoTime();
+			tileM.tile[104].collision = false;
+			for(int i = 124; i < 136; i++) {
+				tileM.tile[i].collision = false;
+			}
 		}
 		
 		// TILE
@@ -137,12 +141,19 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		// DEBUG
 		if(keyH.checkDrawTime) {
+			player.speed = 15;
 			long drawEnd = System.nanoTime();
 			long passed = (drawEnd - drawStart);
 			g2.setColor(Color.white);
 			g2.setFont(new Font("Ariel", Font.PLAIN, 20));
 			g2.drawString("Draw Time: " + passed, 10, 400);
 			System.out.println("Draw Time: " + passed);
+		} else {
+			player.speed = 8;
+			tileM.tile[104].collision = true;
+			for(int i = 124; i < 136; i++) {
+				tileM.tile[i].collision = true;
+			}
 		}
 		
 		g2.dispose();
