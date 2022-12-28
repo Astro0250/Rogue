@@ -93,7 +93,7 @@ public class Player extends Entity {
 		collisionOn = false;
 		// CHECK OBJECT COLLISION
 		int objIndex = gp.cDetect.checkObject(this, true);
-		pickUpObject(objIndex);
+		interactObject(objIndex);
 
 		speedD = speed * speedModifier(gp.cDetect.tileStoodUpon(this));
 		if (keyH.shiftPressed) {
@@ -189,7 +189,7 @@ public class Player extends Entity {
 		}
 	}
 
-	public void pickUpObject(int i) {
+	public void interactObject(int i) {
 		if (i != 999) {
 
 			String objectName = gp.obj[i].name;
