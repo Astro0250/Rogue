@@ -110,6 +110,7 @@ public class Player extends Entity {
 					spriteNum = 1;
 				}
 				gp.cDetect.checkTile(this);
+				gp.cDetect.checkObject(this, true);
 				if (!collisionOn) {
 					if (keyH.leftPressed || keyH.rightPressed) {
 						worldY += (speedpy);
@@ -125,6 +126,7 @@ public class Player extends Entity {
 					spriteNum = 1;
 				}
 				gp.cDetect.checkTile(this);
+				gp.cDetect.checkObject(this, true);
 				if (!collisionOn) {
 					if (keyH.rightPressed || keyH.leftPressed) {
 						worldY -= (speedpy);
@@ -138,7 +140,7 @@ public class Player extends Entity {
 			else if (keyH.rightPressed) {
 				direction = "right";
 				gp.cDetect.checkTile(this);
-
+				gp.cDetect.checkObject(this, true);
 				if (!collisionOn) {
 					if (keyH.upPressed || keyH.downPressed) {
 						worldX += speedpy;
@@ -151,7 +153,7 @@ public class Player extends Entity {
 			else if (keyH.leftPressed) {
 				direction = "left";
 				gp.cDetect.checkTile(this);
-
+				gp.cDetect.checkObject(this, true);
 				if (!collisionOn) {
 					if (keyH.downPressed || keyH.upPressed) {
 						worldX -= (speedpy);

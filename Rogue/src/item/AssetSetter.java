@@ -32,6 +32,7 @@ public class AssetSetter {
 		gp.obj[2] = new Door();
 		gp.obj[2].worldX = worldX(112 * gp.tileSize);
 		gp.obj[2].worldY = worldY(121 * gp.tileSize);
+		gp.obj[2].collision = true;
 	
 		gp.obj[3] = new Key();
 		gp.obj[3].worldX = worldX(151 * gp.tileSize);
@@ -40,10 +41,6 @@ public class AssetSetter {
 		gp.obj[4] = new SpeedPotion();
 		gp.obj[4].worldX = worldX(33 * gp.tileSize);
 		gp.obj[4].worldY = worldY(25 * gp.tileSize);
-		
-		gp.obj[5] = new Door();
-		gp.obj[5].worldX = worldX(39 * gp.tileSize);
-		gp.obj[5].worldY = worldY(38 * gp.tileSize);
 		
 		
 		
