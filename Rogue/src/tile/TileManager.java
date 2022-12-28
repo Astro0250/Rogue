@@ -68,8 +68,18 @@ public class TileManager {
 			setup(counter + 12, "GW-" + i, true);
 			counter++;
 		}
+		setup(36, "WoodFloor");
+		setup(37, "WoodWallB", true);
+		setup(38, "WoodWallBL", true);
+		setup(39, "WoodWallBR", true);
+		setup(40, "WoodWallR", true);
+		setup(41, "WoodWallL", true);
+		setup(42, "WoodWallT", true);
+		setup(43, "WoodWallTL", true);
+		setup(44, "WoodWallTR", true);
 		// SCALES EACH IMAGE TO THE PROPER SIZE SIZE
-		for (int i = 100; i < 136; i++) {
+		// REMEMBER TO SCALE \/ THIS NUMBER WITH THE AMOUNT OF TILES!!!!!!!!!!!!!!!!! (or just make it a variable) (nahhh)
+		for (int i = 100; i <= 144; i++) {
 			BufferedImage scaledImage = new BufferedImage(gp.tileSize, gp.tileSize, tile[i].image.getType());
 			Graphics2D g2 = scaledImage.createGraphics();
 			g2.drawImage(tile[i].image, 0, 0, gp.tileSize, gp.tileSize, null);

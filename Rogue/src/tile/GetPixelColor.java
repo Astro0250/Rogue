@@ -70,7 +70,16 @@ public class GetPixelColor {
                 	case "0 44 65": System.out.print("133 "); break;
                 	case "0 97 145": System.out.print("134 "); break;
                 	case "0 131 196": System.out.print("135 "); break;
-                	
+                	// WOOD HOUS
+                	case "254 177 82": System.out.print("136 "); break;
+                	case "228 158 71": System.out.print("137 "); break;
+                	case "200 136 56": System.out.print("138 "); break;
+                	case "62 41 16": System.out.print("139 "); break;
+                	case "85 57 22": System.out.print("140 "); break;
+                	case "189 126 48": System.out.print("141 "); break;
+                	case "146 97 37": System.out.print("142 "); break;
+                	case "171 113 41": System.out.print("143 "); break;
+                	case "116 77 29": System.out.print("144 "); break;
                 }
            }  
         }

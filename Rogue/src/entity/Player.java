@@ -200,12 +200,13 @@ public class Player extends Entity {
 				gp.UI.showMessage("You got a key!");
 				break;
 			case "Door":
-				gp.UI.showMessage("You need a Key!");
 				if (hasKey > 0) {
 					gp.playSoundEffect(0);
 					gp.obj[i] = null;
 					hasKey--;
 					gp.UI.showMessage("*CLICK*");
+				} else if(hasKey == 0){
+					gp.UI.showMessage("You need a Key!");
 				}
 				break;
 			case "SpeedPotion":
