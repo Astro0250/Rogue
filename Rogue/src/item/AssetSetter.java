@@ -4,6 +4,7 @@ import main.GamePanel;
 
 public class AssetSetter {
 	GamePanel gp;
+	int itemCount = 0;
 
 	public AssetSetter(GamePanel gp) {
 		this.gp = gp;
@@ -20,29 +21,34 @@ public class AssetSetter {
 	public void setObject() {
 		
 		// INSTANTIATES AND PLACES ITEMS ON THE MAP
-		
-		gp.obj[0] = new Chest();
-		gp.obj[0].worldX = worldX(109 * gp.tileSize);
-		gp.obj[0].worldY = worldY(121 * gp.tileSize);
-		
-		gp.obj[1] = new EnemyTemp();
-		gp.obj[1].worldX = worldX(40 * gp.tileSize);
-		gp.obj[1].worldY = worldY(70 * gp.tileSize);
-		
-		gp.obj[2] = new Door();
-		gp.obj[2].worldX = worldX(112 * gp.tileSize);
-		gp.obj[2].worldY = worldY(121 * gp.tileSize);
-		gp.obj[2].collision = true;
-	
-		gp.obj[3] = new Key();
-		gp.obj[3].worldX = worldX(151 * gp.tileSize);
-		gp.obj[3].worldY = worldY(91 * gp.tileSize);
-		
-		gp.obj[4] = new SpeedPotion();
-		gp.obj[4].worldX = worldX(33 * gp.tileSize);
-		gp.obj[4].worldY = worldY(25 * gp.tileSize);
-		
-		
-		
+		setupItem("Chest", 109, 121, true);
+		setupItem("EnemyTemp", 40, 70);
+		setupItem("Door", 112, 121, true);
+		setupItem("Key", 151, 91);
+		setupItem("SpeedPotion", 33, 25);
+	}
+	public void setupItem(String itemType, int x, int y, boolean collision) {
+		switch(itemType) {
+			case "Key": gp.obj[itemCount] = new Key(); break;
+			case "Door": gp.obj[itemCount] = new Door(); break;
+			case "Chest": gp.obj[itemCount] = new Chest(); break;
+			case "SpeedPotion": gp.obj[itemCount] = new SpeedPotion(); break;
+		}
+		gp.obj[itemCount].worldX = worldX(x*gp.tileSize);
+		gp.obj[itemCount].worldY = worldY(y*gp.tileSize);
+		gp.obj[itemCount].collision = collision;
+		itemCount++;
+	}
+	public void setupItem(String itemType, int x, int y) {
+		switch(itemType) {
+			case "Key": gp.obj[itemCount] = new Key(); break;
+			case "Door": gp.obj[itemCount] = new Door(); break;
+			case "Chest": gp.obj[itemCount] = new Chest(); break;
+			case "SpeedPotion": gp.obj[itemCount] = new SpeedPotion(); break;
+			case "EnemyTemp": gp.obj[itemCount] = new EnemyTemp(); break;
+		}
+		gp.obj[itemCount].worldX = worldX(x*gp.tileSize);
+		gp.obj[itemCount].worldY = worldY(y*gp.tileSize);
+		itemCount++;
 	}
 }

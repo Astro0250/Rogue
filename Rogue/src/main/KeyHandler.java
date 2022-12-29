@@ -9,9 +9,14 @@ import tile.TileManager;
 public class KeyHandler implements KeyListener {
 
 	public boolean upPressed, downPressed, rightPressed, leftPressed, shiftPressed;
-
+	GamePanel gp;
+	
 	// DEBUG
 	boolean checkDrawTime = false;
+	
+	public KeyHandler(GamePanel gp) {
+		this.gp = gp;
+	}
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -44,6 +49,13 @@ public class KeyHandler implements KeyListener {
 		}
 		if (code == KeyEvent.VK_SHIFT || code == KeyEvent.VK_SHIFT) {
 			shiftPressed = true;
+		}
+		if (code == KeyEvent.VK_ESCAPE) {
+			if (gp.gameState == gp.playState) {
+				gp.gameState = gp.pauseState;
+			} else if (gp.gameState == gp.pauseState) {
+				gp.gameState = gp.playState;
+			}
 		}
 		
 		// DEBUG

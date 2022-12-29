@@ -9,8 +9,9 @@ import item.Key;
 
 public class UserInterface {
 	GamePanel gp;
-	Font counterFont, messageFont, winFont;
-	BufferedImage keyImage;
+	Graphics2D g2;
+	Font Ariel_50, Ariel_30_Italic, Ariel_80_Bold;
+//	BufferedImage keyImage;
 	public boolean messageOn;
 	public String message = "";
 	int messageCounter;
@@ -18,11 +19,11 @@ public class UserInterface {
 
 	public UserInterface(GamePanel gp) {
 		this.gp = gp;
-		counterFont = new Font("Ariel", Font.PLAIN, 50);
-		messageFont = new Font("Ariel", Font.ITALIC, 30);
-		winFont = new Font("Ariel", Font.BOLD, 80);
-		Key key = new Key();
-		keyImage = key.image;
+		Ariel_50 = new Font("Ariel", Font.PLAIN, 50);
+		Ariel_30_Italic = new Font("Ariel", Font.ITALIC, 30);
+		Ariel_80_Bold = new Font("Ariel", Font.BOLD, 80);
+//		Key key = new Key();
+//		keyImage = key.image;
 	}
 
 	public void showMessage(String text) {
@@ -32,49 +33,28 @@ public class UserInterface {
 	}
 
 	public void draw(Graphics2D g2) {
-
-		if (gameWin) {
-
-			g2.setFont(winFont);
-			g2.setColor(Color.YELLOW);
-
-			String text = "";
-			int textLength;
-			int x;
-			int y;
-
-			text = "YOU WIN!";
-			textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-
-			x = gp.screenWidth / 2 - textLength / 2;
-			y = gp.screenHeight / 2 - 100;
-			
-			g2.drawString(text, x, y);
-			
-			gp.player.direction = "down";
-
-			gp.stopGameThread();
-
-		} else {
-			g2.setFont(counterFont);
-			g2.setColor(Color.BLACK);
-			g2.drawString("= " + gp.player.hasKey, 74, 50);
-			g2.drawImage(keyImage, gp.tileSize / 2, 10, gp.tileSize, gp.tileSize, null);
-
-			// MESSAGE
-			if (messageOn) {
-
-				g2.setFont(messageFont);
-				g2.setColor(Color.yellow);
-				g2.drawString(message, gp.tileSize * 2, gp.tileSize * 5);
-
-				messageCounter++;
-
-				if (messageCounter > 80) {
-					messageCounter = 0;
-					messageOn = false;
-				}
-			}
+		
+		this.g2 = g2;
+		
+		g2.setFont(Ariel_80_Bold);
+		g2.setColor(Color.GRAY);
+		
+		if (gp.gameState == gp.playState) {
+			// SAVING THIS FOR LATER
 		}
+		if (gp.gameState == gp.pauseState) {
+			drawPause();
+		}
+	}
+	public void drawPause() {
+		String text = "PAUSED";
+		int x = getXcenterText(text);
+		int y = gp.screenHeight/2;
+		
+		g2.drawString(text, x, y);
+	}
+	public int getXcenterText(String a) {
+		int x = (gp.screenWidth/2) - ((int) g2.getFontMetrics().getStringBounds(a, g2).getWidth()/2);
+		return x;
 	}
 }

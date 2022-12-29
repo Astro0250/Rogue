@@ -19,6 +19,6 @@ public class Door extends Item{
 		collision = true;
 		
 		hitBox.x = 8;
-		hitBox.width = 30;
+		hitBox.width = 34;
 	}
 }
