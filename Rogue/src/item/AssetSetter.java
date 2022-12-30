@@ -27,15 +27,14 @@ public class AssetSetter {
 	public void setNPC() {
 		
 		gp.npc[0] = new NPC_Max(gp);
-		gp.npc[0].worldX = gp.tileSize*109;
-		gp.npc[0].worldY = gp.tileSize*120;
+		gp.npc[0].worldX = gp.tileSize*123;
+		gp.npc[0].worldY = gp.tileSize*91;
 	}
 	public void setupItem(String itemType, int x, int y, boolean collision) {
 		switch(itemType) {
 			case "Key": gp.obj[itemCount] = new Key(); break;
 			case "Door": gp.obj[itemCount] = new Door(); break;
 			case "Chest": gp.obj[itemCount] = new Chest(); break;
-			case "SpeedPotion": gp.obj[itemCount] = new SpeedPotion(); break;
 		}
 		gp.obj[itemCount].worldX = worldX(x*gp.tileSize);
 		gp.obj[itemCount].worldY = worldY(y*gp.tileSize);
@@ -47,8 +46,6 @@ public class AssetSetter {
 			case "Key": gp.obj[itemCount] = new Key(); break;
 			case "Door": gp.obj[itemCount] = new Door(); break;
 			case "Chest": gp.obj[itemCount] = new Chest(); break;
-			case "SpeedPotion": gp.obj[itemCount] = new SpeedPotion(); break;
-			case "EnemyTemp": gp.obj[itemCount] = new EnemyTemp(); break;
 		}
 		gp.obj[itemCount].worldX = worldX(x*gp.tileSize);
 		gp.obj[itemCount].worldY = worldY(y*gp.tileSize);

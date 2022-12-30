@@ -20,6 +20,7 @@ public class Entity {
 	public int hitBoxDefaultX, hitBoxDefaultY;
 	public boolean collisionOn = false;
 	public double speedD;
+	public int actionLock = 0;
 
 	public Entity(GamePanel gp) {
 		this.gp = gp;
@@ -32,26 +33,17 @@ public class Entity {
 		collisionOn = false;
 		gp.cDetect.checkTile(this);
 		
-//		if(!collisionOn) {
-//			
-//			switch(direction) {
-//			case "up": worldY -= speed; break;
-//			case "down": worldY += speed; break;
-//			case "left": worldX -= speed; break;
-//			case "right": worldX += speed; break;
-//			}
-//		}
+		if(!collisionOn) {
+			
+			switch(direction) {
+			case "up": worldY -= speed; break;
+			case "down": worldY += speed; break;
+			case "left": worldX -= speed; break;
+			case "right": worldX += speed; break;
+			}
+		}
 		spriteCounter++;
 		if(spriteCounter > 12) {
-			if(!collisionOn) {
-				
-				switch(direction) {
-				case "up": worldY -= speed; break;
-				case "down": worldY += speed; break;
-				case "left": worldX -= speed; break;
-				case "right": worldX += speed; break;
-				}
-			}
 			if (spriteNum == 1) {
 				spriteNum = 2;
 			}else if(spriteNum == 2) {

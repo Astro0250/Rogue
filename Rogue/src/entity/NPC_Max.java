@@ -16,7 +16,7 @@ public class NPC_Max extends Entity{
 		super(gp);
 		
 		direction = "down";
-		speed = 5;
+		speed = 2;
 		
 		getImage();
 	}
@@ -40,16 +40,23 @@ public class NPC_Max extends Entity{
 		return image;
 	}
 	public void setAction() {
-		Random random = new Random();
-		int i = random.nextInt(100)+1;
-		if (i<=25) {
-			direction = "up";
-		}else if(i<=50){
-			direction = "down";
-		}else if(i<=75) {
-			direction = "left";
-		}else {
-			direction = "right";
+		
+		actionLock++;
+		if (actionLock == 60) {
+			
+			Random random = new Random();
+			int i = random.nextInt(100)+1;
+			if (i<=25) {
+				direction = "up";
+			}else if(i<=50){
+				direction = "down";
+			}else if(i<=75) {
+				direction = "left";
+			}else {
+				direction = "right";
+			}
+			
+			actionLock = 0;
 		}
 	}
 }
