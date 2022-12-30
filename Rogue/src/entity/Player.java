@@ -87,9 +87,14 @@ public class Player extends Entity {
 
 		// CHECK TILE COLLISION
 		collisionOn = false;
+		
 		// CHECK OBJECT COLLISION
 		int objIndex = gp.cDetect.checkObject(this, true);
 		interactObject(objIndex);
+		
+		// CHECK ENTITY COLLISION
+		int npcIndex = gp.cDetect.checkEntity(this, gp.npc);
+		interactNPC(npcIndex);
 
 		speedD = speed * speedModifier(gp.cDetect.tileStoodUpon(this));
 		if (keyH.shiftPressed) {
@@ -107,6 +112,7 @@ public class Player extends Entity {
 				}
 				gp.cDetect.checkTile(this);
 				gp.cDetect.checkObject(this, true);
+				gp.cDetect.checkEntity(this, gp.npc);
 				if (!collisionOn) {
 					if (keyH.leftPressed || keyH.rightPressed) {
 						worldY += (speedpy);
@@ -123,6 +129,7 @@ public class Player extends Entity {
 				}
 				gp.cDetect.checkTile(this);
 				gp.cDetect.checkObject(this, true);
+				gp.cDetect.checkEntity(this, gp.npc);
 				if (!collisionOn) {
 					if (keyH.rightPressed || keyH.leftPressed) {
 						worldY -= (speedpy);
@@ -137,6 +144,7 @@ public class Player extends Entity {
 				direction = "right";
 				gp.cDetect.checkTile(this);
 				gp.cDetect.checkObject(this, true);
+				gp.cDetect.checkEntity(this, gp.npc);
 				if (!collisionOn) {
 					if (keyH.upPressed || keyH.downPressed) {
 						worldX += speedpy;
@@ -150,6 +158,7 @@ public class Player extends Entity {
 				direction = "left";
 				gp.cDetect.checkTile(this);
 				gp.cDetect.checkObject(this, true);
+				gp.cDetect.checkEntity(this, gp.npc);
 				if (!collisionOn) {
 					if (keyH.downPressed || keyH.upPressed) {
 						worldX -= (speedpy);
@@ -190,7 +199,12 @@ public class Player extends Entity {
 
 		}
 	}
-
+	
+	public void interactNPC(int i) {
+		if (i!= 999) {
+			System.out.println("are hitting an npc");
+		}
+	}
 	public void draw(Graphics2D g2) {
 
 		BufferedImage image = null;
