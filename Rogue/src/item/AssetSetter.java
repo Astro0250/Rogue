@@ -1,5 +1,6 @@
 package item;
 
+import entity.NPC_Max;
 import main.GamePanel;
 
 public class AssetSetter {
@@ -21,11 +22,13 @@ public class AssetSetter {
 	public void setObject() {
 		
 		// INSTANTIATES AND PLACES ITEMS ON THE MAP
-		setupItem("Chest", 109, 121, true);
-		setupItem("EnemyTemp", 40, 70);
-		setupItem("Door", 112, 121, true);
-		setupItem("Key", 151, 91);
-		setupItem("SpeedPotion", 33, 25);
+		
+	}
+	public void setNPC() {
+		
+		gp.npc[0] = new NPC_Max(gp);
+		gp.npc[0].worldX = gp.tileSize*109;
+		gp.npc[0].worldY = gp.tileSize*120;
 	}
 	public void setupItem(String itemType, int x, int y, boolean collision) {
 		switch(itemType) {

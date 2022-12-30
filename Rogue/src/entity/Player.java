@@ -11,17 +11,13 @@ import main.KeyHandler;
 
 public class Player extends Entity {
 
-	GamePanel gp;
 	KeyHandler keyH;
 
 	public final int screenX;
 	public final int screenY;
-
-	public int hasKey = 0;
-
 	public Player(GamePanel gp, KeyHandler keyH) {
-
-		this.gp = gp;
+		
+		super(gp);
 		this.keyH = keyH;
 
 		screenX = (gp.screenWidth / 2) - (gp.tileSize / 2);
@@ -191,37 +187,6 @@ public class Player extends Entity {
 
 	public void interactObject(int i) {
 		if (i != 999) {
-
-			String objectName = gp.obj[i].name;
-
-			switch (objectName) {
-			case "Key":
-				gp.playSoundEffect(0);
-				hasKey++;
-				gp.obj[i] = null;
-				gp.UI.showMessage("You got a key!");
-				break;
-			case "Door":
-				if (hasKey > 0) {
-					gp.playSoundEffect(0);
-					gp.obj[i] = null;
-					hasKey--;
-					gp.UI.showMessage("*CLICK*");
-				} else if(hasKey == 0){
-					gp.UI.showMessage("You need a Key!");
-				}
-				break;
-			case "SpeedPotion":
-				gp.UI.showMessage("Speed Boost!");
-				gp.playSoundEffect(0);
-				speed += 2;
-				gp.obj[i] = null;
-				break;
-			case "Chest":
-				gp.UI.gameWin = true;
-				gp.stopMusic();
-				break;
-			}
 
 		}
 	}
