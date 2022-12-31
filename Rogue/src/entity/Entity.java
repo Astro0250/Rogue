@@ -42,7 +42,9 @@ public class Entity {
 			case "down": worldY += speed; break;
 			case "left": worldX -= speed; break;
 			case "right": worldX += speed; break;
+			
 			}
+	
 		}
 		spriteCounter++;
 		if(spriteCounter > 12) {

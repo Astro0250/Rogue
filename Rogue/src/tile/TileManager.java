@@ -33,7 +33,7 @@ public class TileManager {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
 		getTileImage();
-		loadMap("/maps/World1Editor.txt");
+		loadMap("/maps/finalMap.txt");
 	}
 
 	public void getTileImage() {
