@@ -93,7 +93,7 @@ public class Player extends Entity {
 		interactObject(objIndex);
 		
 		// CHECK ENTITY COLLISION
-		int npcIndex = gp.cDetect.checkEntity(this, gp.npc);
+		int npcIndex = gp.cDetect.checkEntity(this, gp.npc, speedD);
 		interactNPC(npcIndex);
 
 		speedD = speed * speedModifier(gp.cDetect.tileStoodUpon(this));
@@ -110,9 +110,11 @@ public class Player extends Entity {
 				if (spriteNum == 3 || spriteNum == 4) {
 					spriteNum = 1;
 				}
-				gp.cDetect.checkTile(this);
+		
+				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
-				gp.cDetect.checkEntity(this, gp.npc);
+				gp.cDetect.checkEntity(this, gp.npc, speedD);
+	
 				if (!collisionOn) {
 					if (keyH.leftPressed || keyH.rightPressed) {
 						worldY += (speedpy);
@@ -127,9 +129,10 @@ public class Player extends Entity {
 				if (spriteNum == 3 || spriteNum == 4) {
 					spriteNum = 1;
 				}
-				gp.cDetect.checkTile(this);
+				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
-				gp.cDetect.checkEntity(this, gp.npc);
+				gp.cDetect.checkEntity(this, gp.npc, speedD);
+				
 				if (!collisionOn) {
 					if (keyH.rightPressed || keyH.leftPressed) {
 						worldY -= (speedpy);
@@ -142,9 +145,10 @@ public class Player extends Entity {
 			}
 			else if (keyH.rightPressed) {
 				direction = "right";
-				gp.cDetect.checkTile(this);
+				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
-				gp.cDetect.checkEntity(this, gp.npc);
+				gp.cDetect.checkEntity(this, gp.npc, speedD);
+			
 				if (!collisionOn) {
 					if (keyH.upPressed || keyH.downPressed) {
 						worldX += speedpy;
@@ -156,9 +160,10 @@ public class Player extends Entity {
 			}
 			else if (keyH.leftPressed) {
 				direction = "left";
-				gp.cDetect.checkTile(this);
+				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
-				gp.cDetect.checkEntity(this, gp.npc);
+				gp.cDetect.checkEntity(this, gp.npc, speedD);
+		
 				if (!collisionOn) {
 					if (keyH.downPressed || keyH.upPressed) {
 						worldX -= (speedpy);

@@ -25,27 +25,44 @@ public class Entity {
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}
+
 	public void setAction() {}
 	public void update() {
 		
 		setAction();
 		
 		collisionOn = false;
-		gp.cDetect.checkTile(this);
+		gp.cDetect.checkTile(this,speed);
 		gp.cDetect.checkObject(this, false);
 		gp.cDetect.checkPlayer(this);
 		
+		//Stops Max from hugging the wall, also can now bully him, optional
+		if (collisionOn) {
+			switch(direction) {
+			case "up": direction = "down"; break;
+			case "down": direction = "up"; break;
+			case "left": direction = "right"; break;
+			case "right": direction = "left"; break;			
+			}
+		}
+		
+
 		if(!collisionOn) {
 			
 			switch(direction) {
-			case "up": worldY -= speed; break;
-			case "down": worldY += speed; break;
-			case "left": worldX -= speed; break;
-			case "right": worldX += speed; break;
+			case "up":
+			worldY -= speed; break;		
+			case "down":
+			worldY += speed; break;
+			case "left": 
+			worldX -= speed; break;
+			case "right":
+			worldX += speed; break;
 			
 			}
-	
+			
 		}
+		
 		spriteCounter++;
 		if(spriteCounter > 12) {
 			if (spriteNum == 1) {

@@ -23,7 +23,7 @@ public class CollisionDetecter {
 		return tileNumOn;
 	}
 
-	public void checkTile(Entity entity) {
+	public void checkTile(Entity entity, double speed) {
 		entity.collisionOn = false;
 		int entityLeftWorldX = entity.worldX + entity.hitBox.x;
 		int entityRightWorldX = entity.worldX + entity.hitBox.x + entity.hitBox.width;
@@ -40,7 +40,7 @@ public class CollisionDetecter {
 		switch (entity.direction) {
 
 		case "up":
-			entityTopRow = (int) ((entityTopWorldY - entity.speedD) / gp.tileSize);
+			entityTopRow = (int) ((entityTopWorldY - speed) / gp.tileSize);
 
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
@@ -48,9 +48,10 @@ public class CollisionDetecter {
 			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
 				entity.collisionOn = true;
 			}
+			
 			break;
 		case "down":
-			entityBottomRow = (int) ((entityBottomWorldY + entity.speedD) / gp.tileSize);
+			entityBottomRow = (int) ((entityBottomWorldY + speed) / gp.tileSize);
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 
@@ -61,7 +62,7 @@ public class CollisionDetecter {
 
 			break;
 		case "left":
-			entityLeftCol = (int) ((entityLeftWorldX - entity.speedD) / gp.tileSize);
+			entityLeftCol = (int) ((entityLeftWorldX - speed) / gp.tileSize);
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
 
@@ -69,10 +70,12 @@ public class CollisionDetecter {
 				entity.collisionOn = true;
 
 			}
+	
+		
 
 			break;
 		case "right":
-			entityRightCol = (int) ((entityRightWorldX + entity.speedD) / gp.tileSize);
+			entityRightCol = (int) ((entityRightWorldX + speed) / gp.tileSize);
 			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 
@@ -160,7 +163,7 @@ public class CollisionDetecter {
 		return index;
 	}
 	// check npc/enemy collision
-	public int checkEntity(Entity entity, Entity[] target) {
+	public int checkEntity(Entity entity, Entity[] target, double speed) {
 
 		int index = 999;
 
@@ -177,28 +180,28 @@ public class CollisionDetecter {
 
 				switch (entity.direction) {
 				case "up":
-					entity.hitBox.y -= entity.speed;
+					entity.hitBox.y -= speed;
 					if (entity.hitBox.intersects(target[i].hitBox)) {
 							entity.collisionOn = true;
 							index = i;
 					}
 					break;
 				case "down":
-					entity.hitBox.y += entity.speed;
+					entity.hitBox.y += speed;
 					if (entity.hitBox.intersects(target[i].hitBox)) {
 							entity.collisionOn = true;
 							index = i;
 					}
 					break;
 				case "left":
-					entity.hitBox.x -= entity.speed;
+					entity.hitBox.x -= speed;
 					if (entity.hitBox.intersects(target[i].hitBox)) {
 							entity.collisionOn = true;
 							index = i;
 					}
 					break;
 				case "right":
-					entity.hitBox.x += entity.speed;
+					entity.hitBox.x += speed;
 					if (entity.hitBox.intersects(target[i].hitBox)) {
 							entity.collisionOn = true;
 							index = i;
@@ -217,6 +220,8 @@ public class CollisionDetecter {
 
 		return index;
 	}
+	//May potentially result in errors if entity speed starts 
+	//being affected by tiles, will fix if that does become the case
 	public void checkPlayer(Entity entity) {
 		// GET ENTITY HITPOX POSITION
 		entity.hitBox.x = entity.worldX + entity.hitBox.x;
