@@ -13,6 +13,7 @@ public class Entity {
 	public int worldY;	
 	public int speed;
 	public BufferedImage up1, up2, down1, down2, left1, left2, left3, left4, right1, right2, right3, right4;
+	public BufferedImage atk1;
 	public String direction;
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
@@ -86,6 +87,10 @@ public class Entity {
 
 			
 			switch (direction) {
+			case "atk1":
+				image = atk1;
+				break;
+		
 			case "right":
 				if (spriteNum == 1) {
 					image = down1;

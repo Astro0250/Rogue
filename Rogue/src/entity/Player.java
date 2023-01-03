@@ -12,9 +12,15 @@ import main.KeyHandler;
 public class Player extends Entity {
 
 	KeyHandler keyH;
-
+	private String facing;
 	public final int screenX;
 	public final int screenY;
+	public String facing() {
+		return facing;
+	}
+	public void facing(String a) {
+		facing = a;
+	}
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
 		super(gp);

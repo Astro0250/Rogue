@@ -1,14 +1,25 @@
 package item;
 
 import entity.NPC_Max;
+import entity.Attack;
 import main.GamePanel;
+import main.KeyHandler;
+import main.CollisionDetecter;
+import entity.Player;
 
 public class AssetSetter {
 	GamePanel gp;
+	KeyHandler keyH;
+	CollisionDetecter cd;
+	Player p;
 	int itemCount = 0;
 
-	public AssetSetter(GamePanel gp) {
+
+	public AssetSetter(GamePanel gp, KeyHandler keyH, CollisionDetecter cd, Player p) {
 		this.gp = gp;
+		this.keyH = keyH;
+		this.cd = cd;
+		this.p = p;
 	}
 
 	public int worldX(int xcoord) {
@@ -29,6 +40,36 @@ public class AssetSetter {
 		gp.npc[0] = new NPC_Max(gp);
 		gp.npc[0].worldX = gp.tileSize*123;
 		gp.npc[0].worldY = gp.tileSize*91;
+	}
+	public void setAttack() {
+		//System.out.println(cd.tilePositionUpon(p).get(1));
+		gp.atk[0] = new Attack(gp);
+
+		
+		if (keyH.spacePressed) {
+	
+			
+			int Col = (int) cd.tilePositionUpon(p).get(0);
+			int Row = (int) cd.tilePositionUpon(p).get(1);
+
+			if (p.direction.equals("up")) {
+			gp.atk[0].worldX = Col - (3* p.hitBoxDefaultX);
+			gp.atk[0].worldY = Row - (4 * p.hitBoxDefaultY);
+			}
+			if (p.direction.equals("down")) {
+				gp.atk[0].worldX = Col -(2* p.hitBoxDefaultX);
+				gp.atk[0].worldY = Row + p.hitBoxDefaultY;
+			}
+			if (p.direction.equals("left")) {
+				gp.atk[0].worldX = Col - (7 *p.hitBoxDefaultX);
+				gp.atk[0].worldY = Row - p.hitBoxDefaultY;
+			}
+		
+			if (p.direction.equals("right")) {//gp.tileSize
+				gp.atk[0].worldX = Col + p.hitBoxDefaultX;
+				gp.atk[0].worldY = Row - p.hitBoxDefaultY;
+			}
+		}
 	}
 	public void setupItem(String itemType, int x, int y, boolean collision) {
 		switch(itemType) {

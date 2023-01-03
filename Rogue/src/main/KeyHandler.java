@@ -8,7 +8,7 @@ import tile.TileManager;
 
 public class KeyHandler implements KeyListener {
 
-	public boolean upPressed, downPressed, rightPressed, leftPressed, shiftPressed;
+	public boolean upPressed, downPressed, rightPressed, leftPressed, shiftPressed, spacePressed;
 	GamePanel gp;
 	
 	// DEBUG
@@ -35,6 +35,9 @@ public class KeyHandler implements KeyListener {
 
 		int code = e.getKeyCode();
 		
+		if (code == KeyEvent.VK_SPACE) {
+			spacePressed = true;
+		}
 		if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
 			upPressed = true;
 		}
@@ -72,7 +75,10 @@ public class KeyHandler implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 
 		int code = e.getKeyCode();
-
+		
+		if (code == KeyEvent.VK_SPACE) {
+			spacePressed = false;
+		}
 		if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
 			upPressed = false;
 		}

@@ -59,8 +59,5 @@ public class NPC_Max extends Entity{
 			actionLock = 0;
 		}
 	}
-	public void bounce(boolean bounce) {
-		String[] move = new String[] {"up", "down", "left", "right"};
-		
-	}
+	
 }

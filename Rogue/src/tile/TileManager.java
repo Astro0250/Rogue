@@ -25,7 +25,7 @@ public class TileManager {
 	public int mapTileNum[][];
 	public static int tileSet = 0;
 
-	public TileManager(GamePanel gp) {
+	public TileManager(GamePanel gp, int i) {
 
 		this.gp = gp;
 
@@ -33,7 +33,13 @@ public class TileManager {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
 		getTileImage();
-		loadMap("/maps/finalMap.txt");
+		if (i == 1) {
+			loadMap("/maps/finalMap.txt");
+		}
+		if (i == 2) {
+			loadMap("/maps/map3.txt");	
+		
+		}
 	}
 
 	public void getTileImage() {
@@ -82,6 +88,7 @@ public class TileManager {
 		for (int i = 100; i <= 144; i++) {
 			BufferedImage scaledImage = new BufferedImage(gp.tileSize, gp.tileSize, tile[i].image.getType());
 			Graphics2D g2 = scaledImage.createGraphics();
+			
 			g2.drawImage(tile[i].image, 0, 0, gp.tileSize, gp.tileSize, null);
 			tile[i].image = scaledImage;
 			g2.dispose();
@@ -92,6 +99,7 @@ public class TileManager {
 	public void setup(int index, String location, double speedModifier, boolean collision, boolean topLayer) {
 		index += 100;
 		try {
+		
 			tile[index] = new Tile();
 			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + location + ".png"));
 		} catch (IOException e) {
@@ -145,7 +153,7 @@ public class TileManager {
 			e.printStackTrace();
 		}
 	}
-
+	//try clearing maybe
 	public void loadMap(String a) {
 		try {
 			InputStream is = getClass().getResourceAsStream(a);
@@ -157,6 +165,7 @@ public class TileManager {
 				while (col < gp.maxWorldCol) {
 					String numbers[] = line.split(" ");
 					int num = Integer.parseInt(numbers[col]);
+			
 					mapTileNum[col][row] = num;
 					col++;
 				}
@@ -165,6 +174,7 @@ public class TileManager {
 					row++;
 				}
 			}
+		
 			br.close();
 		} catch (Exception e) {
 		}

@@ -1,6 +1,8 @@
 package main;
 
 import entity.Entity;
+import java.util.*;
+import java.util.function.Supplier;
 
 public class CollisionDetecter {
 
@@ -21,6 +23,19 @@ public class CollisionDetecter {
 
 		int tileNumOn = gp.tileM.mapTileNum[entityMiddleCol][entityMiddleRow];
 		return tileNumOn;
+	}
+	public List tilePositionUpon(Entity entity) {
+	
+		int entityMiddleWorldX = entity.worldX + entity.hitBox.x + (entity.hitBox.width / 2);
+		int entityMiddleWorldY = entity.worldY + entity.hitBox.y + (entity.hitBox.height / 2);
+
+		//int entityMiddleCol = entityMiddleWorldX / gp.tileSize;
+		//int entityMiddleRow = entityMiddleWorldY / gp.tileSize;
+		List<Integer> ColRow=new ArrayList<Integer>();
+		ColRow.add(entityMiddleWorldX);
+		ColRow.add(entityMiddleWorldY);
+		//ColRow.removeAll(ColRow);
+		return ColRow;
 	}
 
 	public void checkTile(Entity entity, double speed) {
