@@ -5,7 +5,6 @@ import javax.swing.*;
 import entity.Entity;
 import entity.Player;
 import entity.Attack;
-import item.AssetSetter;
 import item.Item;
 import tile.TileManager;
 

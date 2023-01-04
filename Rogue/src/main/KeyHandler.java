@@ -50,7 +50,7 @@ public class KeyHandler implements KeyListener {
 		if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
 			rightPressed = true;
 		}
-		if (code == KeyEvent.VK_SHIFT || code == KeyEvent.VK_SHIFT) {
+		if (code == KeyEvent.VK_SHIFT) {
 			shiftPressed = true;
 		}
 		if (code == KeyEvent.VK_ESCAPE) {

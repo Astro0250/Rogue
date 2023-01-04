@@ -270,6 +270,34 @@ public class CollisionDetecter {
 					entity.collisionOn = true;
 			}
 			break;
+		case "up left":
+			entity.hitBox.y -= entity.speed;
+			entity.hitBox.x -= entity.speed;
+			if (entity.hitBox.intersects(gp.player.hitBox)) {
+				entity.collisionOn = true;
+			}
+			break;
+		case "up right":
+			entity.hitBox.y -= entity.speed;
+			entity.hitBox.x += entity.speed;
+			if (entity.hitBox.intersects(gp.player.hitBox)) {
+				entity.collisionOn = true;
+			}
+			break;
+		case "down left":
+			entity.hitBox.y += entity.speed;
+			entity.hitBox.x -= entity.speed;
+			if (entity.hitBox.intersects(gp.player.hitBox)) {
+				entity.collisionOn = true;
+			}
+			break;
+		case "down right":
+			entity.hitBox.y += entity.speed;
+			entity.hitBox.x += entity.speed;
+			if (entity.hitBox.intersects(gp.player.hitBox)) {
+				entity.collisionOn = true;
+			}
+			break;
 		}
 
 		entity.hitBox.x = entity.hitBoxDefaultX;

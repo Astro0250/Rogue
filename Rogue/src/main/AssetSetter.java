@@ -1,11 +1,11 @@
-package item;
+package main;
 
 import entity.NPC_Max;
 import entity.Attack;
-import main.GamePanel;
-import main.KeyHandler;
-import main.CollisionDetecter;
 import entity.Player;
+import item.Chest;
+import item.Door;
+import item.Key;
 
 public class AssetSetter {
 	GamePanel gp;

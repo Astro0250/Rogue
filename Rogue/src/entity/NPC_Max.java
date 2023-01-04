@@ -41,23 +41,35 @@ public class NPC_Max extends Entity{
 	}
 	public void setAction() {
 		
-		actionLock++;
-		if (actionLock == 60) {
+//		actionLock++;
+//		if (actionLock == 60) {
 			
-			Random random = new Random();
-			int i = random.nextInt(100)+1;
-			if (i<=25) {
+//			Random random = new Random();
+//			int i = random.nextInt(100)+1;
+			if (gp.player.worldY < worldY) {
 				direction = "up";
-			}else if(i<=50){
+			}else if(gp.player.worldY > worldY){
 				direction = "down";
-			}else if(i<=75) {
+			}
+			if(gp.player.worldX < worldX) {
 				direction = "left";
-			}else {
+				if(gp.player.worldY < worldY) {
+					direction = "up left";
+				} else if(gp.player.worldY > worldY) {
+					direction = "down left";
+				}
+			}else if(gp.player.worldX > worldX){
 				direction = "right";
+				if(gp.player.worldY < worldY) {
+					direction = "up right";
+				} else if(gp.player.worldY > worldY) {
+					direction = "down right";
+				}
 			}
 			
-			actionLock = 0;
-		}
+			
+//			actionLock = 0;
+//		}
 	}
 	
 }

@@ -38,40 +38,57 @@ public class Entity {
 		gp.cDetect.checkPlayer(this);
 		
 		//Stops Max from hugging the wall, also can now bully him, optional
-		if (collisionOn) {
-			switch(direction) {
-			case "up": direction = "down"; break;
-			case "down": direction = "up"; break;
-			case "left": direction = "right"; break;
-			case "right": direction = "left"; break;			
-			}
-		}
+//		if (collisionOn) {
+//			switch(direction) {
+//			case "up": direction = "down"; break;
+//			case "down": direction = "up"; break;
+//			case "left": direction = "right"; break;
+//			case "right": direction = "left"; break;			
+//			}
+//		}
+		int screenX = worldX - gp.player.worldX + gp.player.screenX;
+		int screenY = worldY - gp.player.worldY + gp.player.screenY;
 		
-
-		if(!collisionOn) {
-			
-			switch(direction) {
-			case "up":
-			worldY -= speed; break;		
-			case "down":
-			worldY += speed; break;
-			case "left": 
-			worldX -= speed; break;
-			case "right":
-			worldX += speed; break;
-			
+		if(worldX + (gp.tileSize)> gp.player.worldX - gp.player.screenX && 
+		   worldX - (gp.tileSize) < gp.player.worldX + gp.player.screenX && 
+		   worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY && 
+		   worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
+			gp.cDetect.checkTile(this,speed);
+			gp.cDetect.checkObject(this, false);
+			gp.cDetect.checkPlayer(this);
+			if(!collisionOn) {
+				
+				switch(direction) {
+				case "up":
+				worldY -= speed; break;		
+				case "down":
+				worldY += speed; break;
+				case "left": 
+				worldX -= speed; break;
+				case "right":
+				worldX += speed; break;
+				case "up right":
+				worldY -= speed; worldX += speed; break;
+				case "up left":
+				worldY -= speed; worldX -= speed; break;
+				case "down right":
+				worldY += speed; worldX += speed; break;
+				case "down left":
+				worldY += speed; worldX -= speed; break;
+					
+				}
+				
 			}
 			
-		}
-		
-		spriteCounter++;
-		if(spriteCounter > 12) {
-			if (spriteNum == 1) {
-				spriteNum = 2;
-			}else if(spriteNum == 2) {
-				spriteNum = 1;
+			spriteCounter++;
+			if(spriteCounter > 12) {
+				if (spriteNum == 1) {
+					spriteNum = 2;
+				}else if(spriteNum == 2) {
+					spriteNum = 1;
+				}
+				spriteCounter = 0;
 			}
-			spriteCounter = 0;
 		}
 	}
 	public void draw(Graphics2D g2) {
@@ -125,8 +142,40 @@ public class Entity {
 					image = up1;
 				}
 				break;
+			case "up right":
+				if (spriteNum == 1) {
+					image = down1;
+				}
+				if (spriteNum == 2) {
+					image = up1;
+				}
+				break;
+			case "up left":
+				if (spriteNum == 1) {
+					image = down1;
+				}
+				if (spriteNum == 2) {
+					image = up1;
+				}
+				break;
+			case "down right":
+				if (spriteNum == 1) {
+					image = down1;
+				}
+				if (spriteNum == 2) {
+					image = up1;
+				}
+				break;
+			case "down left":
+				if (spriteNum == 1) {
+					image = down1;
+				}
+				if (spriteNum == 2) {
+					image = up1;
+				}
+				break;
 			}
-			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+			g2.drawImage(image, screenX, screenY, null);
 		}
 	}
 }
