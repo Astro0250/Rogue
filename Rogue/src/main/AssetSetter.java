@@ -1,6 +1,6 @@
 package main;
 
-import entity.NPC_Max;
+import entity.NPC_Enemy;
 import entity.Attack;
 import entity.Player;
 import item.Chest;
@@ -37,7 +37,7 @@ public class AssetSetter {
 	}
 	public void setNPC() {
 		
-		gp.npc[0] = new NPC_Max(gp);
+		gp.npc[0] = new NPC_Enemy(gp);
 		gp.npc[0].worldX = gp.tileSize*123;
 		gp.npc[0].worldY = gp.tileSize*91;
 	}
