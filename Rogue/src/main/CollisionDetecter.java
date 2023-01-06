@@ -101,33 +101,6 @@ public class CollisionDetecter {
 			}
 
 			break;
-		case "up right":
-			entityRightCol = (int) ((entityRightWorldX + speed) / gp.tileSize);
-			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-
-			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
-				entity.collisionOn = true;
-
-			}
-			entityTopRow = (int) ((entityTopWorldY - speed) / gp.tileSize);
-
-			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
-			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-
-			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
-				entity.collisionOn = true;
-			}
-
-			break;
-		case "down right":
-			entityRightCol = (int) ((entityRightWorldX + speed) / gp.tileSize);
-			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-
-			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
-				entity.collisionOn = true;
-	
 		case "down right":
 
 			entityBottomRow = (int) ((entityBottomWorldY + speed) / gp.tileSize);
