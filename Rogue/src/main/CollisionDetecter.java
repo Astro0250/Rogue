@@ -139,6 +139,7 @@ public class CollisionDetecter {
 
 			}
 			break;
+			//Change TileNum used here and below to fix errors
 		case "up right":
 			entityTopRow = (int) ((entityTopWorldY - speed) / gp.tileSize);
 
