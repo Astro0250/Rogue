@@ -100,7 +100,82 @@ public class CollisionDetecter {
 			}
 
 			break;
+		case "up right":
+			entityRightCol = (int) ((entityRightWorldX + speed) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+
+			}
+			entityTopRow = (int) ((entityTopWorldY - speed) / gp.tileSize);
+
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+			}
+
+			break;
+		case "down right":
+			entityRightCol = (int) ((entityRightWorldX + speed) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+
+			}
+			entityBottomRow = (int) ((entityBottomWorldY + speed) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+
+			}
+
+			break;
+		case "up left":
+			entityLeftCol = (int) ((entityLeftWorldX - speed) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+
+			}
+			entityTopRow = (int) ((entityTopWorldY - speed) / gp.tileSize);
+
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+			}
+			
+			break;
+		case "down left":
+			entityLeftCol = (int) ((entityLeftWorldX - speed) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+
+			}
+			entityBottomRow = (int) ((entityBottomWorldY + speed) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+
+			}
+
+			break;
 		}
 	}
 

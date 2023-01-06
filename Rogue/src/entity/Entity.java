@@ -17,7 +17,7 @@ public class Entity {
 	public String direction;
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
-	public Rectangle hitBox = new Rectangle(5, 5, 38, 38);
+	public Rectangle hitBox = new Rectangle(5, 10, 38, 38);
 	public int hitBoxDefaultX, hitBoxDefaultY;
 	public boolean collisionOn = false;
 	public double speedD;
@@ -53,9 +53,11 @@ public class Entity {
 		   worldX - (gp.tileSize) < gp.player.worldX + gp.player.screenX && 
 		   worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY && 
 		   worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
+			
 			gp.cDetect.checkTile(this,speed);
 			gp.cDetect.checkObject(this, false);
 			gp.cDetect.checkPlayer(this);
+			
 			if(!collisionOn) {
 				
 				switch(direction) {

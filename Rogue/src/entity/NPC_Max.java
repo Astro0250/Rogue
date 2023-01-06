@@ -16,7 +16,7 @@ public class NPC_Max extends Entity{
 		super(gp);
 		
 		direction = "down";
-		speed = 2;
+		speed = 3;
 		
 		getImage();
 	}
@@ -66,7 +66,6 @@ public class NPC_Max extends Entity{
 					direction = "down right";
 				}
 			}
-			
 			
 //			actionLock = 0;
 //		}
