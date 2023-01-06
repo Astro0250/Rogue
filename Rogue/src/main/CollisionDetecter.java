@@ -250,7 +250,8 @@ public class CollisionDetecter {
 
 				}
 
-			}
+			}//useful later
+		case "atk1":
 		}
 
 	}
