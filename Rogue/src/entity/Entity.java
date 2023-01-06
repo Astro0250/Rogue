@@ -61,22 +61,14 @@ public class Entity {
 			if(!collisionOn) {
 				
 				switch(direction) {
-				case "up":
-				worldY -= speed; break;		
-				case "down":
-				worldY += speed; break;
-				case "left": 
-				worldX -= speed; break;
-				case "right":
-				worldX += speed; break;
-				case "up right":
-				worldY -= speed; worldX += speed; break;
-				case "up left":
-				worldY -= speed; worldX -= speed; break;
-				case "down right":
-				worldY += speed; worldX += speed; break;
-				case "down left":
-				worldY += speed; worldX -= speed; break;
+				case "up": {worldY -= speed;}
+				case "down": {worldY += speed;}
+				case "left": {worldX -= speed;}
+				case "right": {worldX += speed;}
+				case "up right": {worldY -= speed; worldX += speed;}
+				case "up left": {worldY -= speed; worldX -= speed;}
+				case "down right": {worldY += speed; worldX += speed;}
+				case "down left": {worldY += speed; worldX -= speed;}
 					
 				}
 				
