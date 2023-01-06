@@ -33,10 +33,9 @@ public class Entity {
 		setAction();
 		
 		collisionOn = false;
-		gp.cDetect.checkTile(this, speed);
+		gp.cDetect.checkTile(this,speed);
 		gp.cDetect.checkObject(this, false);
 		gp.cDetect.checkPlayer(this);
-	
 		
 		//Stops Max from hugging the wall, also can now bully him, optional
 //		if (collisionOn) {
@@ -70,7 +69,6 @@ public class Entity {
 				case "up left": {worldY -= speed; worldX -= speed;}
 				case "down right": {worldY += speed; worldX += speed;}
 				case "down left": {worldY += speed; worldX -= speed;}
-					
 				}
 				
 			}
