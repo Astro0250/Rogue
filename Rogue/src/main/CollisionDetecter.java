@@ -14,6 +14,7 @@ public class CollisionDetecter {
 
 	// This will probably be important when certain tiles give you buffs
 	// or hurt you or something, so here have a comment
+	// What?
 	public int tileStoodUpon(Entity entity) {
 		int entityMiddleWorldX = entity.worldX + entity.hitBox.x + (entity.hitBox.width / 2);
 		int entityMiddleWorldY = entity.worldY + entity.hitBox.y + (entity.hitBox.height / 2);
