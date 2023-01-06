@@ -53,21 +53,21 @@ public class AssetSetter {
 			int Row = (int) cd.tilePositionUpon(p).get(1);
 
 			if (p.direction.equals("up")) {
-			gp.atk[0].worldX = Col - (3* p.hitBoxDefaultX);
-			gp.atk[0].worldY = Row - (4 * p.hitBoxDefaultY);
+			gp.atk[0].worldX = Col ;
+			gp.atk[0].worldY = (int)(Row - gp.tileSize *1.3);
 			}
 			if (p.direction.equals("down")) {
-				gp.atk[0].worldX = Col -(2* p.hitBoxDefaultX);
-				gp.atk[0].worldY = Row + p.hitBoxDefaultY;
+				gp.atk[0].worldX = Col ;
+				gp.atk[0].worldY = Row + gp.tileSize;
 			}
 			if (p.direction.equals("left")) {
-				gp.atk[0].worldX = Col - (7 *p.hitBoxDefaultX);
-				gp.atk[0].worldY = Row - p.hitBoxDefaultY;
+				gp.atk[0].worldX = (int)(Col - gp.tileSize * 1.3);
+				gp.atk[0].worldY = Row ;
 			}
 		
 			if (p.direction.equals("right")) {//gp.tileSize
-				gp.atk[0].worldX = Col + p.hitBoxDefaultX;
-				gp.atk[0].worldY = Row - p.hitBoxDefaultY;
+				gp.atk[0].worldX = Col + gp.tileSize ;
+				gp.atk[0].worldY = Row ;
 			}
 		}
 	}

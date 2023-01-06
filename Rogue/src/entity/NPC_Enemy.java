@@ -9,7 +9,7 @@ import java.lang.Math;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
-
+//Collision doesn't work on one length crawlspace due to hitbox
 public class NPC_Enemy extends Entity{
 	
 	public NPC_Enemy(GamePanel gp) {
@@ -48,6 +48,7 @@ public class NPC_Enemy extends Entity{
 //			Random random = new Random();
 //			int i = random.nextInt(100)+1;
 			//buffer can potentially be raised/lowered
+			
 			if (Math.abs(gp.player.worldY  - worldY) <= 2) {
 				worldY = gp.player.worldY;
 			}
