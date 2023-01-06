@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
+import java.lang.Math;
 
 import javax.imageio.ImageIO;
 
@@ -46,10 +47,18 @@ public class NPC_Enemy extends Entity{
 			
 //			Random random = new Random();
 //			int i = random.nextInt(100)+1;
+			//buffer can potentially be raised/lowered
+			if (Math.abs(gp.player.worldY  - worldY) <= 2) {
+				worldY = gp.player.worldY;
+			}
 			if (gp.player.worldY < worldY) {
 				direction = "up";
 			}else if(gp.player.worldY > worldY){
 				direction = "down";
+			}
+
+			if (Math.abs(gp.player.worldX  - worldX) <= 2) {
+				worldX = gp.player.worldX;
 			}
 			if(gp.player.worldX < worldX) {
 				direction = "left";
@@ -66,7 +75,7 @@ public class NPC_Enemy extends Entity{
 					direction = "down right";
 				}
 			}
-			
+		
 			
 //			actionLock = 0;
 //		}
