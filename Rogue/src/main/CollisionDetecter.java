@@ -14,7 +14,6 @@ public class CollisionDetecter {
 
 	// This will probably be important when certain tiles give you buffs
 	// or hurt you or something, so here have a comment
-	// What?
 	public int tileStoodUpon(Entity entity) {
 		int entityMiddleWorldX = entity.worldX + entity.hitBox.x + (entity.hitBox.width / 2);
 		int entityMiddleWorldY = entity.worldY + entity.hitBox.y + (entity.hitBox.height / 2);
@@ -101,8 +100,11 @@ public class CollisionDetecter {
 			}
 
 			break;
-		case "down right":
 
+		
+
+		
+		case "down right":
 			entityBottomRow = (int) ((entityBottomWorldY + speed) / gp.tileSize);
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
@@ -217,6 +219,8 @@ public class CollisionDetecter {
 			entityBottomRow = (int) ((entityBottomWorldY + speed) / gp.tileSize);
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+
+
 			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
 				entityLeftCol = (int) ((entityLeftWorldX - speed) / gp.tileSize);
 				tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
@@ -246,7 +250,8 @@ public class CollisionDetecter {
 
 				}
 
-			}
+			}//useful later
+		case "atk1":
 		}
 
 	}

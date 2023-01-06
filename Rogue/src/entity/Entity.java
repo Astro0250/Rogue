@@ -17,7 +17,7 @@ public class Entity {
 	public String direction;
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
-	public Rectangle hitBox = new Rectangle(5, 10, 38, 38);
+	public Rectangle hitBox = new Rectangle(5, 5, 38, 38);
 	public int hitBoxDefaultX, hitBoxDefaultY;
 	public boolean collisionOn = false;
 	public double speedD;
@@ -33,9 +33,10 @@ public class Entity {
 		setAction();
 		
 		collisionOn = false;
-		gp.cDetect.checkTile(this,speed);
+		gp.cDetect.checkTile(this, speed);
 		gp.cDetect.checkObject(this, false);
 		gp.cDetect.checkPlayer(this);
+	
 		
 		//Stops Max from hugging the wall, also can now bully him, optional
 //		if (collisionOn) {
@@ -53,22 +54,29 @@ public class Entity {
 		   worldX - (gp.tileSize) < gp.player.worldX + gp.player.screenX && 
 		   worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY && 
 		   worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
-			
 			gp.cDetect.checkTile(this,speed);
 			gp.cDetect.checkObject(this, false);
 			gp.cDetect.checkPlayer(this);
-			
 			if(!collisionOn) {
 				
 				switch(direction) {
-				case "up": {worldY -= speed;}
-				case "down": {worldY += speed;}
-				case "left": {worldX -= speed;}
-				case "right": {worldX += speed;}
-				case "up right": {worldY -= speed; worldX += speed;}
-				case "up left": {worldY -= speed; worldX -= speed;}
-				case "down right": {worldY += speed; worldX += speed;}
-				case "down left": {worldY += speed; worldX -= speed;}
+				case "up":
+				worldY -= speed; break;		
+				case "down":
+				worldY += speed; break;
+				case "left": 
+				worldX -= speed; break;
+				case "right":
+				worldX += speed; break;
+				case "up right":
+				worldY -= speed; worldX += speed; break;
+				case "up left":
+				worldY -= speed; worldX -= speed; break;
+				case "down right":
+				worldY += speed; worldX += speed; break;
+				case "down left":
+				worldY += speed; worldX -= speed; break;
+					
 				}
 				
 			}
