@@ -12,6 +12,7 @@ public class Entity {
 	public int worldX;
 	public int worldY;	
 	public int speed;
+	public int health = 100;
 	public BufferedImage up1, up2, down1, down2, left1, left2, left3, left4, right1, right2, right3, right4;
 	public BufferedImage atk1;
 	public String direction;
@@ -37,16 +38,6 @@ public class Entity {
 		gp.cDetect.checkObject(this, false);
 		gp.cDetect.checkPlayer(this);
 	
-		
-		//Stops Max from hugging the wall, also can now bully him, optional
-//		if (collisionOn) {
-//			switch(direction) {
-//			case "up": direction = "down"; break;
-//			case "down": direction = "up"; break;
-//			case "left": direction = "right"; break;
-//			case "right": direction = "left"; break;			
-//			}
-//		}
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
 		int screenY = worldY - gp.player.worldY + gp.player.screenY;
 		
