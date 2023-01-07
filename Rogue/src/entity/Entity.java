@@ -22,6 +22,7 @@ public class Entity {
 	public boolean collisionOn = false;
 	public double speedD;
 	public int actionLock = 0;
+	public int hx, hy;
 
 	public Entity(GamePanel gp) {
 		this.gp = gp;

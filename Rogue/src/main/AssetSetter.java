@@ -1,6 +1,7 @@
 package main;
 
 import entity.NPC_Enemy;
+import entity.Entity;
 import entity.Attack;
 import entity.Player;
 import item.Chest;
@@ -12,14 +13,18 @@ public class AssetSetter {
 	KeyHandler keyH;
 	CollisionDetecter cd;
 	Player p;
+	Attack a;
+	Entity e;
 	int itemCount = 0;
 
 
-	public AssetSetter(GamePanel gp, KeyHandler keyH, CollisionDetecter cd, Player p) {
+	public AssetSetter(GamePanel gp, KeyHandler keyH, CollisionDetecter cd, Player p, Attack a, Entity e) {
 		this.gp = gp;
 		this.keyH = keyH;
 		this.cd = cd;
 		this.p = p;
+		this.a = a;
+		this.e = e;
 	}
 
 	public int worldX(int xcoord) {
@@ -41,35 +46,124 @@ public class AssetSetter {
 		gp.npc[0].worldX = gp.tileSize*123;
 		gp.npc[0].worldY = gp.tileSize*91;
 	}
+	public boolean x = true;
+	public boolean z = false;
+	public boolean num0() {
+		return x;
+	}
+	public void num1(boolean q) {
+		x = q;
+	}
+	public boolean allow() {
+		return z;
+	}
+	public void allow(boolean q) {
+		z = q;
+	}
 	public void setAttack() {
-		//System.out.println(cd.tilePositionUpon(p).get(1));
-		gp.atk[0] = new Attack(gp);
-
 		
-		if (keyH.spacePressed) {
+		//System.out.println(cd.tilePositionUpon(p).get(1));
 	
+		int duration = 31;
+		int cooldown = 62;
+		
+//		if (num0()) {
+//		gp.atk[0] = new Attack(gp);
+//		num1(false);
+//		}
+		
+		int delay = gp.delay();
+		//System.out.println(delay);
+		//System.out.println(delay);
+	//	System.out.println(delay + " main");
+//		if (duration < delay) {
+//		allow = 1;
+//		}
+		if (delay >= cooldown || allow()) {
+
+		if (keyH.spacePressed || allow()) {
 			
+			if (delay>=cooldown) {
+			gp.delay(0);
+			delay = gp.delay();
+			allow(true);
+			}
+			//delay = gp.delay();
+			
+			//System.out.println(e.collisionOn);
+//			System.out.println(e.direction);
+//			if (delay > 31) {
+//				allow = 100;
+//			}
+//				System.out.println(delay + " sub");
+			gp.atk[0] = new Attack(gp);
 			int Col = (int) cd.tilePositionUpon(p).get(0);
 			int Row = (int) cd.tilePositionUpon(p).get(1);
-
+			//System.out.println(Col);
+			gp.atk[0] = new Attack(gp);
+			a.hitBox.x = e.hx;
+			a.hitBox.y = e.hy;
+			e.direction = "atk1";
+			gp.cDetect.checkEntity(a, gp.npc, 1.0);
+			boolean hit = cd.collision();
+			
+			
 			if (p.direction.equals("up")) {
-			gp.atk[0].worldX = Col ;
-			gp.atk[0].worldY = (int)(Row - gp.tileSize *1.3);
+				e.hx = Col;
+				e.hy = (int)(Row - gp.tileSize *1.3);
+				gp.atk[0].worldX = e.hx ;
+				gp.atk[0].worldY = e.hy;
+				
+				if (hit) {
+					System.out.println("Successful Attack!");
+				}
 			}
 			if (p.direction.equals("down")) {
-				gp.atk[0].worldX = Col ;
-				gp.atk[0].worldY = Row + gp.tileSize;
+				e.hx = Col;
+				e.hy = (int)(Row + gp.tileSize);
+				gp.atk[0].worldX = e.hx ;
+				gp.atk[0].worldY = e.hy;
+				if (hit) {
+					System.out.println("Successful Attack!");
+				}
 			}
 			if (p.direction.equals("left")) {
-				gp.atk[0].worldX = (int)(Col - gp.tileSize * 1.3);
-				gp.atk[0].worldY = Row ;
+				e.hx = (int)(Col - gp.tileSize * 1.3);
+				e.hy = Row;
+				gp.atk[0].worldX = e.hx;
+				gp.atk[0].worldY = e.hy ;
+				if (hit) {
+					System.out.println("Successful Attack!");
+				}
 			}
 		
 			if (p.direction.equals("right")) {//gp.tileSize
-				gp.atk[0].worldX = Col + gp.tileSize ;
-				gp.atk[0].worldY = Row ;
+				e.hx = Col + gp.tileSize;
+				e.hy = Row;
+				gp.atk[0].worldX = e.hx ;
+				gp.atk[0].worldY = e.hy;
+				if (hit) {
+					System.out.println("Successful Attack!");
+				}
 			}
+			
+			
+			
+			
+			if (delay >= duration) {
+				allow(false);
+				gp.atk[0] = new Attack(gp);
+			}
+		
+				
+			
+			}
+		
 		}
+		
+		
+		
+		//}
 	}
 	public void setupItem(String itemType, int x, int y, boolean collision) {
 		switch(itemType) {
