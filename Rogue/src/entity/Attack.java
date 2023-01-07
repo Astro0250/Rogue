@@ -24,6 +24,27 @@ public class Attack extends Entity{
 		super(gp);
 		direction = "atk1";
 		getImage();
+		hitBox = new Rectangle();
+		hitBox.x = 8;
+		hitBox.y = 16;
+		hitBoxDefaultX = hitBox.x;
+		hitBoxDefaultY = hitBox.y;
+		hitBox.width = 30;
+		hitBox.height = 30;
+	}
+	public Attack(GamePanel gp, int a, int b) {
+		super(gp);
+		direction = "atk1";
+		getImage();
+		hitBox = new Rectangle();
+		hitBox.x = 8;
+		hitBox.y = 16;
+		hitBoxDefaultX = hitBox.x;
+		hitBoxDefaultY = hitBox.y;
+		hitBox.width = 30;
+		hitBox.height = 30;
+		gp.atk[0].worldX = a;
+		gp.atk[0].worldY = b;
 	}
 
 	public BufferedImage setup(String imageName) {

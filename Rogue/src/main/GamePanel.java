@@ -14,6 +14,8 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable {
 
 	// SCREEN SETTINGS
+	
+	
 	final int originalTileSize = 16; // 16x16 tile
 	final int scale = 3;
 
@@ -34,11 +36,20 @@ public class GamePanel extends JPanel implements Runnable {
 	int FPS = 60;
 
 	// INSTANTIATION
+		private int delay;
+		public int delay() {
+			return delay;
+		}
+		public void delay(int d) {
+			delay = d;
+		}
 		// SYSTEM
 		TileManager tileM = new TileManager(this, 1);
 		KeyHandler keyH = new KeyHandler(this);
 		Sound music = new Sound();
 		Sound soundEffect = new Sound();
+		Attack a = new Attack(this);
+		Entity e = new Entity(this);
 		public CollisionDetecter cDetect = new CollisionDetecter(this);
 		
 		public UserInterface UI = new UserInterface(this);
@@ -46,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		// ENTITY & ITEM
 		public Player player = new Player(this, keyH);
-		public AssetSetter aSetter = new AssetSetter(this, keyH, cDetect, player);
+		public AssetSetter aSetter = new AssetSetter(this, keyH, cDetect, player, a, e);
 		public Item obj[] = new Item[20];
 		public Entity npc[] = new Entity[10];
 		public Entity atk[] = new Entity[1];
@@ -132,6 +143,8 @@ public class GamePanel extends JPanel implements Runnable {
 					atk[i].update();
 				}
 			}
+			//cooldown
+			delay++;
 		} else if (gameState == pauseState) {
 			// nothing for now
 		}
@@ -171,11 +184,14 @@ public class GamePanel extends JPanel implements Runnable {
 			}
 		}
 		// ATK
+	//	while (delay <= 30) {
+		//System.out.println(atk[0].worldX);
 		for(int i = 0; i < atk.length; i++) {
-			if(atk[i] != null) {
+			if(atk[i] != null ) {
 				atk[i].draw(g2);
 			}
 		}
+	//	}
 		
 		// PLAYER
 		player.draw(g2);

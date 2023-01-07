@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 public class CollisionDetecter {
 
 	GamePanel gp;
+	private boolean x;
 
 	public CollisionDetecter(GamePanel gp) {
 		this.gp = gp;
@@ -250,8 +251,30 @@ public class CollisionDetecter {
 
 				}
 
-			}//useful later
-		case "atk1":
+			}
+//		case "atk1":
+//			entityTopRow = (int) ((entityTopWorldY - speed) / gp.tileSize);
+//			entityBottomRow = (int) ((entityBottomWorldY + speed) / gp.tileSize);
+//			entityRightCol = (int) ((entityRightWorldX + speed) / gp.tileSize);
+//			entityLeftCol = (int) ((entityLeftWorldX - speed) / gp.tileSize);
+//			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+//			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+//			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+//				entity.collisionOn = true;
+//
+//			}
+//			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+//			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];	
+//			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+//				entity.collisionOn = true;
+//
+//			}
+//			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+//			tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+//			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+//			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+
+
 		}
 
 	}
@@ -330,22 +353,30 @@ public class CollisionDetecter {
 
 		return index;
 	}
+	public boolean collision() {
+		return x;
+	}
+	public void collision(boolean y) {
+		x = y;
+	}
 	// check npc/enemy collision
 	public int checkEntity(Entity entity, Entity[] target, double speed) {
-
+		x = false;
 		int index = 999;
-
+		
 		for (int i = 0; i < target.length; i++) {
 
 			if (target[i] != null) {
-
+				//System.out.println(entity.hitBox);
 				// GET ENTITY HITPOX POSITION
+				
 				entity.hitBox.x = entity.worldX + entity.hitBox.x;
 				entity.hitBox.y = entity.worldY + entity.hitBox.y;
 				// GET OBJECT HITBOX POSITION
 				target[i].hitBox.x = target[i].worldX + target[i].hitBox.x;
 				target[i].hitBox.y = target[i].worldY + target[i].hitBox.y;
-
+				
+				boolean ab = true;
 				switch (entity.direction) {
 				case "up":
 					entity.hitBox.y -= speed;
@@ -375,19 +406,37 @@ public class CollisionDetecter {
 							index = i;
 					}
 					break;
+				case "atk1": 
+				
+					ab = true;
+					
+					if ((entity.hitBox.x + gp.tileSize >= target[i].hitBox.x || entity.hitBox.x + gp.tileSize >= target[i].hitBox.x + gp.tileSize)
+							&&
+							(entity.hitBox.x  <= target[i].hitBox.x || entity.hitBox.x <= target[i].hitBox.x + gp.tileSize)
+							&&
+							(entity.hitBox.y + gp.tileSize  >= target[i].hitBox.y || entity.hitBox.y + gp.tileSize >= target[i].hitBox.y + gp.tileSize)
+							&&
+							(entity.hitBox.y <= target[i].hitBox.y || entity.hitBox.y <= target[i].hitBox.y + gp.tileSize)) {
+						collision(true);
+						
 				}
-
+				}
+				if (ab) {
 				entity.hitBox.x = entity.hitBoxDefaultX;
 
 				entity.hitBox.y = entity.hitBoxDefaultY;
+				}
+				ab = true;
 				target[i].hitBox.x = target[i].hitBoxDefaultX;
 				target[i].hitBox.y = target[i].hitBoxDefaultY;
-
+				
 			}
 		}
+		
 
 		return index;
 	}
+
 	//May potentially result in errors if entity speed starts 
 	//being affected by tiles, will fix if that does become the case
 	public void checkPlayer(Entity entity) {
