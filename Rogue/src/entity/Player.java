@@ -11,17 +11,19 @@ import main.KeyHandler;
 
 public class Player extends Entity {
 
-	GamePanel gp;
 	KeyHandler keyH;
-
+	private String facing;
 	public final int screenX;
 	public final int screenY;
-
-	public int hasKey = 0;
-
+	public String facing() {
+		return facing;
+	}
+	public void facing(String a) {
+		facing = a;
+	}
 	public Player(GamePanel gp, KeyHandler keyH) {
-
-		this.gp = gp;
+		
+		super(gp);
 		this.keyH = keyH;
 
 		screenX = (gp.screenWidth / 2) - (gp.tileSize / 2);
@@ -91,9 +93,14 @@ public class Player extends Entity {
 
 		// CHECK TILE COLLISION
 		collisionOn = false;
+		
 		// CHECK OBJECT COLLISION
 		int objIndex = gp.cDetect.checkObject(this, true);
 		interactObject(objIndex);
+		
+		// CHECK ENTITY COLLISION
+		int npcIndex = gp.cDetect.checkEntity(this, gp.npc, speedD);
+		interactNPC(npcIndex);
 
 		speedD = speed * speedModifier(gp.cDetect.tileStoodUpon(this));
 		if (keyH.shiftPressed) {
@@ -109,8 +116,11 @@ public class Player extends Entity {
 				if (spriteNum == 3 || spriteNum == 4) {
 					spriteNum = 1;
 				}
-				gp.cDetect.checkTile(this);
+		
+				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
+				gp.cDetect.checkEntity(this, gp.npc, speedD);
+	
 				if (!collisionOn) {
 					if (keyH.leftPressed || keyH.rightPressed) {
 						worldY += (speedpy);
@@ -125,8 +135,10 @@ public class Player extends Entity {
 				if (spriteNum == 3 || spriteNum == 4) {
 					spriteNum = 1;
 				}
-				gp.cDetect.checkTile(this);
+				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
+				gp.cDetect.checkEntity(this, gp.npc, speedD);
+				
 				if (!collisionOn) {
 					if (keyH.rightPressed || keyH.leftPressed) {
 						worldY -= (speedpy);
@@ -139,8 +151,10 @@ public class Player extends Entity {
 			}
 			else if (keyH.rightPressed) {
 				direction = "right";
-				gp.cDetect.checkTile(this);
+				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
+				gp.cDetect.checkEntity(this, gp.npc, speedD);
+			
 				if (!collisionOn) {
 					if (keyH.upPressed || keyH.downPressed) {
 						worldX += speedpy;
@@ -152,8 +166,10 @@ public class Player extends Entity {
 			}
 			else if (keyH.leftPressed) {
 				direction = "left";
-				gp.cDetect.checkTile(this);
+				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
+				gp.cDetect.checkEntity(this, gp.npc, speedD);
+		
 				if (!collisionOn) {
 					if (keyH.downPressed || keyH.upPressed) {
 						worldX -= (speedpy);
@@ -192,40 +208,14 @@ public class Player extends Entity {
 	public void interactObject(int i) {
 		if (i != 999) {
 
-			String objectName = gp.obj[i].name;
-
-			switch (objectName) {
-			case "Key":
-				gp.playSoundEffect(0);
-				hasKey++;
-				gp.obj[i] = null;
-				gp.UI.showMessage("You got a key!");
-				break;
-			case "Door":
-				if (hasKey > 0) {
-					gp.playSoundEffect(0);
-					gp.obj[i] = null;
-					hasKey--;
-					gp.UI.showMessage("*CLICK*");
-				} else if(hasKey == 0){
-					gp.UI.showMessage("You need a Key!");
-				}
-				break;
-			case "SpeedPotion":
-				gp.UI.showMessage("Speed Boost!");
-				gp.playSoundEffect(0);
-				speed += 2;
-				gp.obj[i] = null;
-				break;
-			case "Chest":
-				gp.UI.gameWin = true;
-				gp.stopMusic();
-				break;
-			}
-
 		}
 	}
-
+	
+	public void interactNPC(int i) {
+		if (i!= 999) {
+			System.out.println("are hitting an npc");
+		}
+	}
 	public void draw(Graphics2D g2) {
 
 		BufferedImage image = null;

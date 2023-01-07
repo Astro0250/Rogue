@@ -2,10 +2,12 @@ package main;
 
 import javax.swing.*;
 
+import entity.Entity;
 import entity.Player;
-import item.AssetSetter;
+import entity.Attack;
 import item.Item;
 import tile.TileManager;
+
 
 import java.awt.*;
 
@@ -33,18 +35,21 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// INSTANTIATION
 		// SYSTEM
-		TileManager tileM = new TileManager(this);
+		TileManager tileM = new TileManager(this, 1);
 		KeyHandler keyH = new KeyHandler(this);
 		Sound music = new Sound();
 		Sound soundEffect = new Sound();
 		public CollisionDetecter cDetect = new CollisionDetecter(this);
-		public AssetSetter aSetter = new AssetSetter(this);
+		
 		public UserInterface UI = new UserInterface(this);
 		Thread gameThread;
 		
 		// ENTITY & ITEM
 		public Player player = new Player(this, keyH);
+		public AssetSetter aSetter = new AssetSetter(this, keyH, cDetect, player);
 		public Item obj[] = new Item[20];
+		public Entity npc[] = new Entity[10];
+		public Entity atk[] = new Entity[1];
 		
 		// GAME STATE
 		public int gameState;
@@ -64,6 +69,8 @@ public class GamePanel extends JPanel implements Runnable {
 	public void setupGame() {
 		
 		aSetter.setObject();
+		aSetter.setNPC();
+		aSetter.setAttack();
 		gameState = playState;
 		loopMusic(1);
 	}
@@ -92,6 +99,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 			delta += (currentTime - lastTime) / drawInterval;
 			lastTime = currentTime;
+			
 
 			if (delta >= 1) {
 				update();
@@ -104,12 +112,31 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void update() {
+		//Clear it maybe it will work then, or at least see the errors
+//		if (keyH.shiftPressed == true) {
+//			TileManager tileM = new TileManager(this, 2);
+//		}
 		if (gameState == playState) {
+			// Player
 			player.update();
+			aSetter.setAttack();
+			//NPC
+			for (int i = 0; i < npc.length; i++) {
+				if (npc[i] != null) {
+					npc[i].update();
+				}
+			}
+			//atk
+			for (int i = 0; i < atk.length; i++) {
+				if (atk[i] != null) {
+					atk[i].update();
+				}
+			}
 		} else if (gameState == pauseState) {
 			// nothing for now
 		}
 	}
+	
 
 	public void paintComponent(Graphics g) {
 
@@ -127,13 +154,26 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 		
 		// TILE
+
 		tileM.draw(g2);
 		
 		// ITEM
-		for(int i = 0; i<obj.length; i++) {
+		for(int i = 0; i < obj.length; i++) {
 			if(obj[i] != null) {
 				obj[i].draw(g2, this);
 				
+			}
+		}
+		// NPC
+		for(int i = 0; i < npc.length; i++) {
+			if(npc[i] != null) {
+				npc[i].draw(g2);
+			}
+		}
+		// ATK
+		for(int i = 0; i < atk.length; i++) {
+			if(atk[i] != null) {
+				atk[i].draw(g2);
 			}
 		}
 		
