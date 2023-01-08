@@ -213,7 +213,22 @@ public class Player extends Entity {
 	
 	public void interactNPC(int i) {
 		if (i!= 999) {
-			System.out.println("are hitting an npc");
+			health -= 10;
+			switch(gp.npc[i].direction) {
+				case"up": {worldY -= gp.npc[i].knockback;}
+				case"down": {worldY += gp.npc[i].knockback;}
+				case"left": {worldX -= gp.npc[i].knockback;}
+				case"right": {worldX += gp.npc[i].knockback;}
+				case"up right": {worldY -= gp.npc[i].knockback; worldX += gp.npc[i].knockback;}
+				case"up left": {worldY -= gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}
+				case"down left": {worldY += gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}
+				case"down right": {worldY += gp.npc[i].knockback; worldX += gp.npc[i].knockback;}
+			}
+			if(health < 0) {
+				health = 0;
+			}
+			System.out.println("health = " + health);
+			gp.playSoundEffect(0);
 		}
 	}
 	public void draw(Graphics2D g2) {

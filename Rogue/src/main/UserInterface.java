@@ -25,7 +25,7 @@ public class UserInterface {
 //		Key key = new Key();
 //		keyImage = key.image;
 	}
-
+	
 	public void showMessage(String text) {
 
 		message = text;
@@ -40,7 +40,7 @@ public class UserInterface {
 		g2.setColor(Color.GRAY);
 		
 		if (gp.gameState == gp.playState) {
-			// SAVING THIS FOR LATER
+			drawPlay();
 		}
 		if (gp.gameState == gp.pauseState) {
 			drawPause();
@@ -52,6 +52,13 @@ public class UserInterface {
 		int y = gp.screenHeight/2;
 		
 		g2.drawString(text, x, y);
+	}
+	public void drawPlay() {
+		//dg2.drawRect(10, 10, 100, 20);
+		g2.setColor(Color.black);
+		g2.fillRect(10, 10, 210, 50);
+		g2.setColor(Color.red);
+		g2.fillRect(15, 15, gp.player.health*2, 40);
 	}
 	public int getXcenterText(String a) {
 		int x = (gp.screenWidth/2) - ((int) g2.getFontMetrics().getStringBounds(a, g2).getWidth()/2);
