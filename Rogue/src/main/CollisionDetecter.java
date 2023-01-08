@@ -421,12 +421,12 @@ public class CollisionDetecter {
 						
 				}
 				}
-				if (ab) {
+//				if (ab) {
 				entity.hitBox.x = entity.hitBoxDefaultX;
 
 				entity.hitBox.y = entity.hitBoxDefaultY;
-				}
-				ab = true;
+//				}
+//				ab = true;
 				target[i].hitBox.x = target[i].hitBoxDefaultX;
 				target[i].hitBox.y = target[i].hitBoxDefaultY;
 				

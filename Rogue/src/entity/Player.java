@@ -100,6 +100,7 @@ public class Player extends Entity {
 		
 		// CHECK ENTITY COLLISION
 		int npcIndex = gp.cDetect.checkEntity(this, gp.npc, speedD);
+		//System.out.println(npcIndex);
 		interactNPC(npcIndex);
 
 		speedD = speed * speedModifier(gp.cDetect.tileStoodUpon(this));
@@ -214,15 +215,17 @@ public class Player extends Entity {
 	public void interactNPC(int i) {
 		if (i!= 999) {
 			health -= 10;
+			System.out.println(gp.npc[i].direction);
 			switch(gp.npc[i].direction) {
-				case"up": {worldY -= gp.npc[i].knockback;}
-				case"down": {worldY += gp.npc[i].knockback;}
-				case"left": {worldX -= gp.npc[i].knockback;}
-				case"right": {worldX += gp.npc[i].knockback;}
-				case"up right": {worldY -= gp.npc[i].knockback; worldX += gp.npc[i].knockback;}
-				case"up left": {worldY -= gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}
-				case"down left": {worldY += gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}
-				case"down right": {worldY += gp.npc[i].knockback; worldX += gp.npc[i].knockback;}
+		
+				case"up": {worldY -= gp.npc[i].knockback;} break;
+				case"down": {worldY += gp.npc[i].knockback; }break;
+				case"left": {worldX -= gp.npc[i].knockback; }break;
+				case"right": {worldX += gp.npc[i].knockback;}break;
+				case"up right": {worldY -= gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
+				case"up left": {worldY -= gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
+				case"down left": {worldY += gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
+				case"down right": {worldY += gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
 			}
 			if(health < 0) {
 				health = 0;

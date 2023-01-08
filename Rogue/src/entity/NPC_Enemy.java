@@ -48,35 +48,40 @@ public class NPC_Enemy extends Entity{
 //			Random random = new Random();
 //			int i = random.nextInt(100)+1;
 			//buffer can potentially be raised/lowered
-			
+			String d = "";
 			if (Math.abs(gp.player.worldY  - worldY) <= 2) {
 				worldY = gp.player.worldY;
 			}
-			if (gp.player.worldY < worldY) {
-				direction = "up";
-			}else if(gp.player.worldY > worldY){
-				direction = "down";
-			}
-
 			if (Math.abs(gp.player.worldX  - worldX) <= 2) {
 				worldX = gp.player.worldX;
 			}
-			if(gp.player.worldX < worldX) {
-				direction = "left";
-				if(gp.player.worldY < worldY) {
-					direction = "up left";
-				} else if(gp.player.worldY > worldY) {
-					direction = "down left";
-				}
-			}else if(gp.player.worldX > worldX){
-				direction = "right";
-				if(gp.player.worldY < worldY) {
-					direction = "up right";
-				} else if(gp.player.worldY > worldY) {
-					direction = "down right";
-				}
+			System.out.println(gp.player.worldX + " " + gp.player.worldY + " " + worldX + " " +  worldY);
+			if (gp.player.worldY < worldY) {
+				d = "up";
+			}else if(gp.player.worldY > worldY){
+				d = "down";
 			}
 		
+			if(gp.player.worldX < worldX) {
+				
+				d = "left";
+				
+				if(gp.player.worldY < worldY) {
+					d = "up left";
+				} else if(gp.player.worldY > worldY) {
+					d = "down left";
+				}
+			}else if(gp.player.worldX > worldX){
+			
+				d = "right";
+				
+				if(gp.player.worldY < worldY) {
+					d = "up right";
+				} else if(gp.player.worldY > worldY) {
+					d = "down right";
+				}
+			}
+			direction = d;
 			
 //			actionLock = 0;
 //		}
