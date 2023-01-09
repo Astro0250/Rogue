@@ -66,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable {
 		public int gameState;
 		public int playState = 1;
 		public int pauseState = 2;
+		public int deathState = 3;
 	
 
 	public GamePanel() { // GAME PANEL INSTANTIATION
@@ -127,6 +128,9 @@ public class GamePanel extends JPanel implements Runnable {
 //		if (keyH.shiftPressed == true) {
 //			TileManager tileM = new TileManager(this, 2);
 //		}
+		if (player.health <= 0) {
+			gameState = deathState;
+		}
 		if (gameState == playState) {
 			// Player
 			player.update();
@@ -147,6 +151,8 @@ public class GamePanel extends JPanel implements Runnable {
 			delay++;
 		} else if (gameState == pauseState) {
 			// nothing for now
+		} else if (gameState == deathState) {
+			// also nothing for now
 		}
 	}
 	

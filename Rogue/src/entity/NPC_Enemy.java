@@ -55,7 +55,7 @@ public class NPC_Enemy extends Entity{
 			if (Math.abs(gp.player.worldX  - worldX) <= 2) {
 				worldX = gp.player.worldX;
 			}
-			System.out.println(gp.player.worldX + " " + gp.player.worldY + " " + worldX + " " +  worldY);
+			//System.out.println(gp.player.worldX + " " + gp.player.worldY + " " + worldX + " " +  worldY);
 			if (gp.player.worldY < worldY) {
 				d = "up";
 			}else if(gp.player.worldY > worldY){
@@ -86,5 +86,62 @@ public class NPC_Enemy extends Entity{
 //			actionLock = 0;
 //		}
 	}
+	public void doAction() {
+		collisionOn = false;
+		gp.cDetect.checkTile(this, speed);
+		gp.cDetect.checkObject(this, false);
+		gp.cDetect.checkPlayer(this);
 	
+		int screenX = worldX - gp.player.worldX + gp.player.screenX;
+		int screenY = worldY - gp.player.worldY + gp.player.screenY;
+		
+		if(worldX + (gp.tileSize)> gp.player.worldX - gp.player.screenX && 
+		   worldX - (gp.tileSize) < gp.player.worldX + gp.player.screenX && 
+		   worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY && 
+		   worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
+			gp.cDetect.checkTile(this,speed);
+			gp.cDetect.checkObject(this, false);
+			if(!collisionOn) {
+				
+				switch(direction) {
+				case "up":
+				worldY -= speed; break;		
+				case "down":
+				worldY += speed; break;
+				case "left": 
+				worldX -= speed; break;
+				case "right":
+				worldX += speed; break;
+				case "up right":
+				worldY -= speed; worldX += speed; break;
+				case "up left":
+				worldY -= speed; worldX -= speed; break;
+				case "down right":
+				worldY += speed; worldX += speed; break;
+				case "down left":
+				worldY += speed; worldX -= speed; break;
+					
+				}
+				
+			}
+			
+			spriteCounter++;
+			if(spriteCounter > 12) {
+				if (spriteNum == 1) {
+					spriteNum = 2;
+				}else if(spriteNum == 2) {
+					spriteNum = 1;
+				}
+				spriteCounter = 0;
+			}
+//			if(hitBox.intersects(gp.atk[0].hitBox)) {
+//				switch(gp.player.direction) {
+//				case "up" -> worldY -= gp.player.knockback;
+//				case "down" -> worldY += gp.player.knockback;
+//				case "left" -> worldX -= gp.player.knockback;
+//				case "right" -> worldX += gp.player.knockback;
+//				}
+//			}
+		}
+	}
 }

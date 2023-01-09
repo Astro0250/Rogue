@@ -31,59 +31,11 @@ public class Entity {
 	}
 
 	public void setAction() {}
+	public void doAction() {}
 	public void update() {
 		
 		setAction();
-		
-		collisionOn = false;
-		gp.cDetect.checkTile(this, speed);
-		gp.cDetect.checkObject(this, false);
-		gp.cDetect.checkPlayer(this);
-	
-		int screenX = worldX - gp.player.worldX + gp.player.screenX;
-		int screenY = worldY - gp.player.worldY + gp.player.screenY;
-		
-		if(worldX + (gp.tileSize)> gp.player.worldX - gp.player.screenX && 
-		   worldX - (gp.tileSize) < gp.player.worldX + gp.player.screenX && 
-		   worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY && 
-		   worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
-			gp.cDetect.checkTile(this,speed);
-			gp.cDetect.checkObject(this, false);
-			gp.cDetect.checkPlayer(this);
-			if(!collisionOn) {
-				
-				switch(direction) {
-				case "up":
-				worldY -= speed; break;		
-				case "down":
-				worldY += speed; break;
-				case "left": 
-				worldX -= speed; break;
-				case "right":
-				worldX += speed; break;
-				case "up right":
-				worldY -= speed; worldX += speed; break;
-				case "up left":
-				worldY -= speed; worldX -= speed; break;
-				case "down right":
-				worldY += speed; worldX += speed; break;
-				case "down left":
-				worldY += speed; worldX -= speed; break;
-					
-				}
-				
-			}
-			
-			spriteCounter++;
-			if(spriteCounter > 12) {
-				if (spriteNum == 1) {
-					spriteNum = 2;
-				}else if(spriteNum == 2) {
-					spriteNum = 1;
-				}
-				spriteCounter = 0;
-			}
-		}
+		doAction();
 	}
 	public void draw(Graphics2D g2) {
 		

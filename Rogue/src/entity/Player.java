@@ -215,7 +215,7 @@ public class Player extends Entity {
 	public void interactNPC(int i) {
 		if (i!= 999) {
 			health -= 10;
-			System.out.println(gp.npc[i].direction);
+			//System.out.println(gp.npc[i].direction);
 			switch(gp.npc[i].direction) {
 		
 				case"up": {worldY -= gp.npc[i].knockback;} break;

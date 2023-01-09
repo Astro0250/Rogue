@@ -410,13 +410,7 @@ public class CollisionDetecter {
 				
 					ab = true;
 					
-					if ((entity.hitBox.x + gp.tileSize >= target[i].hitBox.x || entity.hitBox.x + gp.tileSize >= target[i].hitBox.x + gp.tileSize)
-							&&
-							(entity.hitBox.x  <= target[i].hitBox.x || entity.hitBox.x <= target[i].hitBox.x + gp.tileSize)
-							&&
-							(entity.hitBox.y + gp.tileSize  >= target[i].hitBox.y || entity.hitBox.y + gp.tileSize >= target[i].hitBox.y + gp.tileSize)
-							&&
-							(entity.hitBox.y <= target[i].hitBox.y || entity.hitBox.y <= target[i].hitBox.y + gp.tileSize)) {
+					if ((entity.hitBox.intersects(target[i].hitBox))){
 						collision(true);
 						
 				}
