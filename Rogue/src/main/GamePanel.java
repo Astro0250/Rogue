@@ -68,9 +68,8 @@ public class GamePanel extends JPanel implements Runnable {
 		public int pauseState = 2;
 		public int deathState = 3;
 	
-
-	public GamePanel() { // GAME PANEL INSTANTIATION
-
+	// GAME PANEL INSTANTIATION
+	public GamePanel() { 
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(new Color(76,103,133));
 		this.setDoubleBuffered(true);
@@ -79,7 +78,6 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void setupGame() {
-		
 		aSetter.setObject();
 		aSetter.setNPC();
 		aSetter.setAttack();
