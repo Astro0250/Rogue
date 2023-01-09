@@ -26,15 +26,15 @@ Includes all necessary accessor and mutator methods.
 Includes Javadoc comments (i.e. /** */).
 Includes at least one precondition and one postcondition.
 @ Includes non-void methods. 
-@Includes at least one method that returns an object other than a String.
+@ Includes at least one method that returns an object other than a String.
 Includes a toString method and prints an object.
 @ Includes a void method other than the main method. 
-@Includes a static method other than the main method.
-@Includes a method that alters a static variable in a different class.
-@Uses the this keyword.
-@Is reliable.
-@Creates no legal issues nor intellectual property concerns.
-@Benefits at least one society, economy, or culture. // Benefits Society by relieving stress via game
+@ Includes a static method other than the main method.
+@ Includes a method that alters a static variable in a different class.
+@ Uses the this keyword.
+@ Is reliable.
+@ Creates no legal issues nor intellectual property concerns.
+@ Benefits at least one society, economy, or culture. // Benefits Society by relieving stress via game
 
 Unit 6: Arrays
 
