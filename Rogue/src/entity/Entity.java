@@ -33,9 +33,17 @@ public class Entity {
 	public void setAction() {}
 	public void doAction() {}
 	public void update() {
-		
-		setAction();
-		doAction();
+		if (health > 0) {
+			setAction();
+			doAction();
+		} else {
+			worldX += 10000;
+			worldY += 10000;
+			if (actionLock < 1) {
+				System.out.println("Enemy Killed!");
+				actionLock++;
+			}
+		}
 	}
 	public void draw(Graphics2D g2) {
 		

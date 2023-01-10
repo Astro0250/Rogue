@@ -46,7 +46,86 @@ public class Attack extends Entity{
 		gp.atk[0].worldX = a;
 		gp.atk[0].worldY = b;
 	}
+	public boolean z = false;
 
+	public void setAttack() {
+		int duration = 31;
+		int cooldown = 62;
+		int delay = gp.delay();
+		if (delay >= cooldown || z) {
+			if (gp.keyH.spacePressed || z) {
+
+				if (delay >= cooldown) {
+					gp.delay(0);
+					delay = gp.delay();
+					z = true;
+				}
+				gp.atk[0] = new Attack(gp);
+				int Col = (int) gp.cDetect.tilePositionUpon(gp.player).get(0);
+				int Row = (int) gp.cDetect.tilePositionUpon(gp.player).get(1);
+				gp.atk[0] = new Attack(gp);
+				hitBox.x = hx;
+				hitBox.y = hy;
+				direction = "atk1";
+				gp.cDetect.checkEntity(this, gp.npc, 1.0);
+				boolean hit = gp.cDetect.collision();
+
+				if (gp.player.direction.equals("up")) {
+					hx = Col;
+					hy = (int) (Row - gp.tileSize * 1.3);
+					gp.atk[0].worldX = hx;
+					gp.atk[0].worldY = hy;
+
+					if (hit) {
+						gp.npc[gp.cDetect.collisionIndex()].worldY -= gp.player.knockback;
+						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
+						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
+					}
+				}
+				if (gp.player.direction.equals("down")) {
+					hx = Col;
+					hy = (int) (Row + gp.tileSize);
+					gp.atk[0].worldX = hx;
+					gp.atk[0].worldY = hy;
+					if (hit) {
+						gp.npc[gp.cDetect.collisionIndex()].worldY += gp.player.knockback;
+						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
+						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
+					}
+				}
+				if (gp.player.direction.equals("left")) {
+					hx = (int) (Col - gp.tileSize * 1.3);
+					hy = Row;
+					gp.atk[0].worldX = hx;
+					gp.atk[0].worldY = hy;
+					if (hit) {
+						gp.npc[gp.cDetect.collisionIndex()].worldX -= gp.player.knockback;
+						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
+						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
+					}
+				}
+
+				if (gp.player.direction.equals("right")) {// gp.tileSize
+					hx = Col + gp.tileSize;
+					hy = Row;
+					gp.atk[0].worldX = hx;
+					gp.atk[0].worldY = hy;
+					if (hit) {
+						gp.npc[gp.cDetect.collisionIndex()].worldX += gp.player.knockback;
+						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
+						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
+					}
+				}
+
+				if (delay >= duration) {
+					z= false;
+					gp.atk[0] = new Attack(gp);
+				}
+
+			}
+
+		}
+	}
 	public BufferedImage setup(String imageName) {
 		BufferedImage image = null;
 		

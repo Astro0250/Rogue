@@ -64,6 +64,7 @@ public class Player extends Entity {
 		worldY(gp.tileSize * 154);
 		speed = 8;
 		direction = "down";
+		knockback = 100;
 	}
 	public void getPlayerImage() {
 		try {

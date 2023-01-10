@@ -31,7 +31,6 @@ public class UserInterface {
 		message = text;
 		messageOn = true;
 	}
-
 	public void draw(Graphics2D g2) {
 		
 		this.g2 = g2;
