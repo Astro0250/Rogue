@@ -14,8 +14,6 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable {
 
 	// SCREEN SETTINGS
-	
-	
 	final int originalTileSize = 16; // 16x16 tile
 	final int scale = 3;
 
@@ -45,11 +43,10 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 		// SYSTEM
 		TileManager tileM = new TileManager(this, 1);
-		KeyHandler keyH = new KeyHandler(this);
+		public KeyHandler keyH = new KeyHandler(this);
 		Sound music = new Sound();
 		Sound soundEffect = new Sound();
-		Attack a = new Attack(this);
-		Entity e = new Entity(this);
+		public Attack attack = new Attack(this);
 		public CollisionDetecter cDetect = new CollisionDetecter(this);
 		
 		public UserInterface UI = new UserInterface(this);
@@ -57,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		// ENTITY & ITEM
 		public Player player = new Player(this, keyH);
-		public AssetSetter aSetter = new AssetSetter(this, keyH, cDetect, player, a, e);
+		public AssetSetter aSetter = new AssetSetter(this);
 		public Item obj[] = new Item[20];
 		public Entity npc[] = new Entity[10];
 		public Entity atk[] = new Entity[1];
@@ -80,7 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public void setupGame() {
 		aSetter.setObject();
 		aSetter.setNPC();
-		aSetter.setAttack();
+		attack.setAttack();
 		gameState = playState;
 		loopMusic(1);
 	}
@@ -132,7 +129,7 @@ public class GamePanel extends JPanel implements Runnable {
 		if (gameState == playState) {
 			// Player
 			player.update();
-			aSetter.setAttack();
+			attack.setAttack();
 			//NPC
 			for (int i = 0; i < npc.length; i++) {
 				if (npc[i] != null) {
