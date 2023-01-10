@@ -37,6 +37,10 @@ public class AssetSetter {
 		gp.npc[0] = new NPC_Enemy(gp);
 		gp.npc[0].worldX = gp.tileSize * 123;
 		gp.npc[0].worldY = gp.tileSize * 91;
+		
+		gp.npc[1] = new NPC_Enemy(gp);
+		gp.npc[1].worldX = gp.tileSize * 123;
+		gp.npc[1].worldY = gp.tileSize * 86;
 	}
 
 	public void setupItem(String itemType, int x, int y, boolean collision) {

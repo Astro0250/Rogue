@@ -1,5 +1,6 @@
 package main;
 
+import entity.Attack;
 import entity.Entity;
 import java.util.*;
 import java.util.function.Supplier;
@@ -327,6 +328,7 @@ public class CollisionDetecter {
 		return collisionIndex;
 	}
 	public boolean collision() {
+		
 		return x;
 	}
 
@@ -353,7 +355,7 @@ public class CollisionDetecter {
 				target[i].hitBox.x = target[i].worldX + target[i].hitBox.x;
 				target[i].hitBox.y = target[i].worldY + target[i].hitBox.y;
 
-				boolean ab = true;
+				
 				switch (entity.direction) {
 				case "up":
 					entity.hitBox.y -= speed;
@@ -385,19 +387,19 @@ public class CollisionDetecter {
 					break;
 				case "atk1":
 
-					ab = true;
-
+				
+					System.out.println(entity.hitBox.intersects(target[i].hitBox));
+					
 					if ((entity.hitBox.intersects(target[i].hitBox))) {
 						collision(true, i);
 
 					}
 				}
-//				if (ab) {
+
 				entity.hitBox.x = entity.hitBoxDefaultX;
 
 				entity.hitBox.y = entity.hitBoxDefaultY;
-//				}
-//				ab = true;
+
 				target[i].hitBox.x = target[i].hitBoxDefaultX;
 				target[i].hitBox.y = target[i].hitBoxDefaultY;
 
@@ -478,4 +480,36 @@ public class CollisionDetecter {
 		gp.player.hitBox.x = gp.player.hitBoxDefaultX;
 		gp.player.hitBox.y = gp.player.hitBoxDefaultY;
 	}
+
+
+	public void checkAttack(Attack attack, Entity[] target) {
+		//for (int i = 0; i < target.length; i++) {
+			for(Entity entity : gp.npc) {
+			System.out.println(attack.direction);
+				if(entity != null && attack.direction == "atk1") {
+					System.out.println(attack.hitBox.intersects(entity.hitBox));
+					if ((attack.hitBox.intersects(entity.hitBox))) {
+						collision(true, 0);
+
+					}
+					else {
+						collision(false, 0);
+					}
+					
+			//	}
+		}
+//		for(Entity a : gp.npc) {
+//			System.out.print(a);
+//			if(a != null && entity.direction == "atk1") {
+//				if ((entity.hitBox.intersects(a.hitBox))) {
+//					collision(true, a);
+//
+//				}
+//				
+//			}
+		}
+	
+	}
 }
+		
+			
