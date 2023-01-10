@@ -50,7 +50,7 @@ public class UserInterface {
 	public void drawPause() {
 		g2.setFont(Ariel_80_Bold);
 		g2.setColor(Color.GRAY);
-		String text = "PAUSED";
+		String text = "⏸";
 		int x = getXcenterText(text);
 		int y = gp.screenHeight/2;
 		
