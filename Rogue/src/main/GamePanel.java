@@ -147,7 +147,7 @@ public class GamePanel extends JPanel implements Runnable {
 		} else if (gameState == pauseState) {
 			// nothing for now
 		} else if (gameState == deathState) {
-			// also nothing for now
+			player.spriteNum = 5;
 		}
 	}
 	

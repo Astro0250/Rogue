@@ -225,7 +225,6 @@ public class CollisionDetecter {
 				entityLeftCol = (int) ((entityLeftWorldX - speed) / gp.tileSize);
 				tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 				tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
-				/// tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 				if (!(gp.tileM.tile[tileNum1].collision)) {
 					entity.direction = "left";
 					break;
