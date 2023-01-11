@@ -89,7 +89,20 @@ public class Player extends Entity {
 			e.printStackTrace();
 		}
 	}
-
+	public void knockback(String axis, int i) {
+		int occurences = 2;
+		System.out.println("yo this runs");
+		if ("worldX".equals(axis)) {
+			for (int a = 0; a < occurences; a++ ) {
+				worldX += gp.npc[i].knockback/occurences;
+			}
+		}
+		if ("worldY".equals(axis)) {
+			for (int a = 0; a < occurences; a++ ) {
+				worldY += gp.npc[i].knockback/occurences;
+			}
+		}
+	}
 	public void update() {
 
 		// CHECK TILE COLLISION
@@ -219,7 +232,7 @@ public class Player extends Entity {
 			//System.out.println(gp.npc[i].direction);
 			switch(gp.npc[i].direction) {
 		
-				case"up": {worldY -= gp.npc[i].knockback;} break;
+				case"up": {knockback("worldY", i); } break;
 				case"down": {worldY += gp.npc[i].knockback; }break;
 				case"left": {worldX -= gp.npc[i].knockback; }break;
 				case"right": {worldX += gp.npc[i].knockback;}break;
