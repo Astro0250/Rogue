@@ -43,7 +43,27 @@ public class CollisionDetecter {
 		// ColRow.removeAll(ColRow);
 		return ColRow;
 	}
-
+	public void checkCollision(Entity entity, double speed, boolean player, Entity[] target) {
+		checkTile(entity, speed);
+		if(!entity.collisionOn) {
+			checkObject(entity, player);
+		}
+		if(!entity.collisionOn) {
+			checkEntity(entity, target, speed);
+		}
+		if(!entity.collisionOn) {
+			checkPlayer(entity);
+		}
+	}
+	public void checkCollision(Entity entity, double speed, boolean player) {
+		checkTile(entity, speed);
+		if(!entity.collisionOn) {
+			checkObject(entity, player);
+		}
+		if(!entity.collisionOn) {
+			checkPlayer(entity);
+		}
+	}
 	public void checkTile(Entity entity, double speed) {
 		entity.collisionOn = false;
 		int entityLeftWorldX = entity.worldX + entity.hitBox.x;

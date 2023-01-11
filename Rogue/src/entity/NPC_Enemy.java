@@ -106,7 +106,7 @@ public class NPC_Enemy extends Entity{
 		   worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY && 
 		   worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
 			
-			gp.cDetect.checkTile(this,speed+4);
+			gp.cDetect.checkTile(this,speed+1);
 			if(!collisionOn) {
 				gp.cDetect.checkObject(this, false);
 			}
@@ -128,12 +128,12 @@ public class NPC_Enemy extends Entity{
 		int distance = (int)Math.sqrt(dx * dx + dy * dy);
 		if(!collisionOn) {
 			worldX += dx * speed / distance;
-			gp.cDetect.checkTile(this,speed+5);
+			gp.cDetect.checkTile(this,speed+2);
 			if(collisionOn) {
 				worldX -= dx * speed / distance;
 			}
 			worldY += dy * speed / distance;
-			gp.cDetect.checkTile(this,speed+5);
+			gp.cDetect.checkTile(this,speed+2);
 			if(collisionOn) {
 				worldY -= dy * speed / distance;
 			}
