@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
@@ -18,7 +19,12 @@ public class NPC_Enemy extends Entity{
 		
 		direction = "down";
 		speed = 2;
-		
+//		hitBox = new Rectangle();
+//		hitBox.x = 8;
+//		hitBox.y = 16;
+//		
+//		hitBox.width = 30;
+//		hitBox.height = 30;
 		getImage();
 	}
 	public void getImage() {
@@ -94,6 +100,12 @@ public class NPC_Enemy extends Entity{
 	
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
 		int screenY = worldY - gp.player.worldY + gp.player.screenY;
+//		
+		//hitBox.x = worldX;
+		//hitBox.y = worldY;
+		//System.out.println(this.hitBox());
+		
+		
 		
 		if(worldX + (gp.tileSize)> gp.player.worldX - gp.player.screenX && 
 		   worldX - (gp.tileSize) < gp.player.worldX + gp.player.screenX && 
@@ -143,5 +155,7 @@ public class NPC_Enemy extends Entity{
 //				}
 //			}
 		}
+		//hitBox.x = gp.npc[0].worldX;
+		//hitBox.y = gp.npc[0].worldX;
 	}
 }

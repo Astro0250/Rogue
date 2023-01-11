@@ -39,8 +39,8 @@ public class Attack extends Entity{
 		hitBox = new Rectangle();
 		hitBox.x = 8;
 		hitBox.y = 16;
-		hitBoxDefaultX = hitBox.x;
-		hitBoxDefaultY = hitBox.y;
+		hitBoxDefaultX = gp.atk[0].worldX;
+		hitBoxDefaultY = gp.atk[0].worldY;
 		hitBox.width = 30;
 		hitBox.height = 30;
 		gp.atk[0].worldX = a;
@@ -55,7 +55,7 @@ public class Attack extends Entity{
 		int delay = gp.delay();
 		if (delay >= cooldown || z) {
 			if (gp.keyH.spacePressed || z) {
-				System.out.println(gp.cDetect.collisionIndex());
+				//System.out.println(gp.cDetect.collisionIndex());
 				if (delay >= cooldown) {
 					gp.delay(0);
 					delay = gp.delay();
@@ -65,17 +65,17 @@ public class Attack extends Entity{
 				int Col = (int) gp.cDetect.tilePositionUpon(gp.player).get(0);
 				int Row = (int) gp.cDetect.tilePositionUpon(gp.player).get(1);
 				gp.atk[0] = new Attack(gp);
-				hitBox.x = heightX;
-				hitBox.y = heightY;
+//				hitBox.x = gp.atk[0].worldX;
+//				hitBox.y = gp.atk[0].worldY;
+				
 				direction = "atk1";
-				gp.cDetect.checkAttack(this, gp.npc);
+				gp.cDetect.checkEntity(this, gp.npc, 1);
 				boolean hit = gp.cDetect.collision();
 				//System.out.println("hit");
 				if (gp.player.direction.equals("up")) {
-					heightX = Col;
-					heightY = (int) (Row - gp.tileSize * 1.3);
-					gp.atk[0].worldX = heightX;
-					gp.atk[0].worldY = heightY;
+				
+					gp.atk[0].worldX = Col;
+					gp.atk[0].worldY =  (int) (Row - gp.tileSize * 1.3);
 
 					if (hit) {
 						gp.npc[gp.cDetect.collisionIndex()].worldY -= gp.player.knockback;
@@ -84,10 +84,9 @@ public class Attack extends Entity{
 					}
 				}
 				if (gp.player.direction.equals("down")) {
-					heightX = Col;
-					heightY = (int) (Row + gp.tileSize);
-					gp.atk[0].worldX = heightX;
-					gp.atk[0].worldY = heightY;
+			
+					gp.atk[0].worldX = Col;
+					gp.atk[0].worldY = (int) (Row + gp.tileSize);
 					
 					if (hit) {
 						gp.npc[gp.cDetect.collisionIndex()].worldY += gp.player.knockback;
@@ -96,10 +95,9 @@ public class Attack extends Entity{
 					}
 				}
 				if (gp.player.direction.equals("left")) {
-					heightX = (int) (Col - gp.tileSize * 1.3);
-					heightY = Row;
-					gp.atk[0].worldX = heightX;
-					gp.atk[0].worldY = heightY;
+					
+					gp.atk[0].worldX = (int) (Col - gp.tileSize * 1.3);
+					gp.atk[0].worldY = Row;
 					if (hit) {
 						gp.npc[gp.cDetect.collisionIndex()].worldX -= gp.player.knockback;
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
@@ -108,8 +106,7 @@ public class Attack extends Entity{
 				}
 
 				if (gp.player.direction.equals("right")) {// gp.tileSize
-					heightX = Col + gp.tileSize;
-					heightY = Row;
+		
 					gp.atk[0].worldX = Col + gp.tileSize;
 					gp.atk[0].worldY = Row;
 					if (hit) {
@@ -123,6 +120,9 @@ public class Attack extends Entity{
 					z= false;
 					gp.atk[0] = new Attack(gp);
 				}
+				//System.out.println(gp.atk[0].worldX);
+				hitBox.x = gp.atk[0].worldX;
+				hitBox.y = gp.atk[0].worldY;
 
 			}
 
