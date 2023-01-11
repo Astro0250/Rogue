@@ -1,6 +1,9 @@
 package main;
 
+import entity.Attack;
 import entity.Entity;
+
+import java.awt.Rectangle;
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -8,6 +11,7 @@ public class CollisionDetecter {
 
 	GamePanel gp;
 	private boolean x;
+	
 	private int collisionIndex;
 	public CollisionDetecter(GamePanel gp) {
 		this.gp = gp;
@@ -39,7 +43,27 @@ public class CollisionDetecter {
 		// ColRow.removeAll(ColRow);
 		return ColRow;
 	}
-
+	public void checkCollision(Entity entity, double speed, boolean player, Entity[] target) {
+		checkTile(entity, speed);
+		if(!entity.collisionOn) {
+			checkObject(entity, player);
+		}
+		if(!entity.collisionOn) {
+			checkEntity(entity, target, speed);
+		}
+		if(!entity.collisionOn) {
+			checkPlayer(entity);
+		}
+	}
+	public void checkCollision(Entity entity, double speed, boolean player) {
+		checkTile(entity, speed);
+		if(!entity.collisionOn) {
+			checkObject(entity, player);
+		}
+		if(!entity.collisionOn) {
+			checkPlayer(entity);
+		}
+	}
 	public void checkTile(Entity entity, double speed) {
 		entity.collisionOn = false;
 		int entityLeftWorldX = entity.worldX + entity.hitBox.x;
@@ -221,7 +245,6 @@ public class CollisionDetecter {
 				entityLeftCol = (int) ((entityLeftWorldX - speed) / gp.tileSize);
 				tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 				tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
-				/// tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 				if (!(gp.tileM.tile[tileNum1].collision)) {
 					entity.direction = "left";
 					break;
@@ -327,6 +350,7 @@ public class CollisionDetecter {
 		return collisionIndex;
 	}
 	public boolean collision() {
+		
 		return x;
 	}
 
@@ -334,13 +358,18 @@ public class CollisionDetecter {
 		x = y;
 		collisionIndex = b;
 	}
+	
 
 	// check npc/enemy collision
 	public int checkEntity(Entity entity, Entity[] target, double speed) {
 		x = false;
 		
 		int index = 999;
+		
+		//This is important do not replace, entity.hitbox changes constantly but this doesn't
+		Rectangle storer = new Rectangle(entity.hitBox);
 
+		
 		for (int i = 0; i < target.length; i++) {
 
 			if (target[i] != null) {
@@ -353,7 +382,7 @@ public class CollisionDetecter {
 				target[i].hitBox.x = target[i].worldX + target[i].hitBox.x;
 				target[i].hitBox.y = target[i].worldY + target[i].hitBox.y;
 
-				boolean ab = true;
+				
 				switch (entity.direction) {
 				case "up":
 					entity.hitBox.y -= speed;
@@ -385,19 +414,17 @@ public class CollisionDetecter {
 					break;
 				case "atk1":
 
-					ab = true;
-
-					if ((entity.hitBox.intersects(target[i].hitBox))) {
+				
+					
+					if ((storer.intersects(target[i].hitBox))) {
 						collision(true, i);
-
-					}
+											}
 				}
-//				if (ab) {
+
 				entity.hitBox.x = entity.hitBoxDefaultX;
 
 				entity.hitBox.y = entity.hitBoxDefaultY;
-//				}
-//				ab = true;
+
 				target[i].hitBox.x = target[i].hitBoxDefaultX;
 				target[i].hitBox.y = target[i].hitBoxDefaultY;
 
@@ -406,6 +433,8 @@ public class CollisionDetecter {
 
 		return index;
 	}
+	
+	
 
 	// May potentially result in errors if entity speed starts
 	// being affected by tiles, will fix if that does become the case
@@ -413,6 +442,7 @@ public class CollisionDetecter {
 		// GET ENTITY HITPOX POSITION
 		entity.hitBox.x = entity.worldX + entity.hitBox.x;
 		entity.hitBox.y = entity.worldY + entity.hitBox.y;
+		
 		// GET OBJECT HITBOX POSITION
 		gp.player.hitBox.x = gp.player.worldX + gp.player.hitBox.x;
 		gp.player.hitBox.y = gp.player.worldY + gp.player.hitBox.y;
@@ -478,4 +508,49 @@ public class CollisionDetecter {
 		gp.player.hitBox.x = gp.player.hitBoxDefaultX;
 		gp.player.hitBox.y = gp.player.hitBoxDefaultY;
 	}
+
+//
+//	public void checkAttack(Attack attack, Entity[] target) {
+//		//for (int i = 0; i < target.length; i++) {
+//		
+//			for(Entity entity : gp.npc) {
+//				
+//				if(entity != null && attack.direction == "atk1") {
+//					// GET ENTITY HITPOX POSITION
+//
+//					//entity.hitBox.x = entity.worldX + entity.hitBox.x;
+//					//entity.hitBox.y = entity.worldY + entity.hitBox.y;
+//					// GET OBJECT HITBOX POSITION
+////					target[i].hitBox.x = target[i].worldX + target[i].hitBox.x;
+////					target[i].hitBox.y = target[i].worldY + target[i].hitBox.y;
+//					System.out.println(attack.hitBox.intersects(entity.hitBox));
+//					System.out.println(entity.hitBox.x);
+//					entity.hitBox.x=  entity.hitBox.x;
+//					System.out.println(attack.hitBox);
+//					if ((attack.hitBox.intersects(entity.hitBox))) {
+//						//System.out.println("jfdskjfhfdakh");
+//					//	collision(true, 0);
+//						entity.collisionOn = true;
+//
+//					}
+//					else {
+//						collision(false, 0);
+//					}
+//					
+//			//	}
+//		}
+////		for(Entity a : gp.npc) {
+//			System.out.print(a);
+//			if(a != null && entity.direction == "atk1") {
+//				if ((entity.hitBox.intersects(a.hitBox))) {
+//					collision(true, a);
+//
+//				}
+//				
+//			}
+//		}
+	
+//	}
 }
+		
+			

@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
@@ -17,8 +18,13 @@ public class NPC_Enemy extends Entity{
 		super(gp);
 		
 		direction = "down";
-		speed = 2;
-		
+		speed = 4;
+//		hitBox = new Rectangle();
+//		hitBox.x = 8;
+//		hitBox.y = 16;
+//		
+//		hitBox.width = 30;
+//		hitBox.height = 30;
 		getImage();
 	}
 	public void getImage() {
@@ -99,32 +105,12 @@ public class NPC_Enemy extends Entity{
 		   worldX - (gp.tileSize) < gp.player.worldX + gp.player.screenX && 
 		   worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY && 
 		   worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
-			gp.cDetect.checkTile(this,speed);
-			gp.cDetect.checkObject(this, false);
-			if(!collisionOn) {
-				
-				switch(direction) {
-				case "up":
-				worldY -= speed; break;		
-				case "down":
-				worldY += speed; break;
-				case "left": 
-				worldX -= speed; break;
-				case "right":
-				worldX += speed; break;
-				case "up right":
-				worldY -= speed; worldX += speed; break;
-				case "up left":
-				worldY -= speed; worldX -= speed; break;
-				case "down right":
-				worldY += speed; worldX += speed; break;
-				case "down left":
-				worldY += speed; worldX -= speed; break;
-					
-				}
-				
-			}
 			
+			gp.cDetect.checkTile(this,speed+1);
+			if(!collisionOn) {
+				gp.cDetect.checkObject(this, false);
+			}
+				followPlayer();			
 			spriteCounter++;
 			if(spriteCounter > 12) {
 				if (spriteNum == 1) {
@@ -134,14 +120,23 @@ public class NPC_Enemy extends Entity{
 				}
 				spriteCounter = 0;
 			}
-//			if(hitBox.intersects(gp.atk[0].hitBox)) {
-//				switch(gp.player.direction) {
-//				case "up" -> worldY -= gp.player.knockback;
-//				case "down" -> worldY += gp.player.knockback;
-//				case "left" -> worldX -= gp.player.knockback;
-//				case "right" -> worldX += gp.player.knockback;
-//				}
-//			}
+		}
+	}
+	public void followPlayer() {
+		int dx = (gp.player.worldX+(gp.tileSize/2)) - worldX;
+		int dy = (gp.player.worldY+(gp.tileSize/2)) - worldY;
+		int distance = (int)Math.sqrt(dx * dx + dy * dy);
+		if(!collisionOn) {
+			worldX += dx * speed / distance;
+			gp.cDetect.checkTile(this,speed+2);
+			if(collisionOn) {
+				worldX -= dx * speed / distance;
+			}
+			worldY += dy * speed / distance;
+			gp.cDetect.checkTile(this,speed+2);
+			if(collisionOn) {
+				worldY -= dy * speed / distance;
+			}
 		}
 	}
 }
