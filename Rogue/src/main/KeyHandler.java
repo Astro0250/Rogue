@@ -20,14 +20,6 @@ public class KeyHandler implements KeyListener {
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
-		int code = e.getKeyCode();
-		if (code == KeyEvent.VK_SPACE) {
-			if(TileManager.tileSet == 1) {
-				TileManager.tileSet--;
-			} else {
-				TileManager.tileSet++;
-			}
-		}
 	}
 
 	@Override

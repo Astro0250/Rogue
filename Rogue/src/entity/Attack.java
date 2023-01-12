@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
 
 
 public class Attack extends Entity{
+	int soundCounter = 0;
 	public Attack(GamePanel gp) {
 		super(gp);
 		direction = "atk1";
@@ -55,6 +56,10 @@ public class Attack extends Entity{
 		int delay = gp.delay();
 		if (delay >= cooldown || z) {
 			if (gp.keyH.spacePressed || z) {
+				if(soundCounter == 0) {
+					gp.playSoundEffect(0);
+					soundCounter++;
+				}
 				//System.out.println(gp.cDetect.collisionIndex());
 				if (delay >= cooldown) {
 					gp.delay(0);
@@ -82,6 +87,7 @@ public class Attack extends Entity{
 						gp.npc[gp.cDetect.collisionIndex()].worldY -= gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
+						gp.playSoundEffect(2);
 						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
 					}
 					
@@ -96,6 +102,7 @@ public class Attack extends Entity{
 						gp.npc[gp.cDetect.collisionIndex()].worldY += gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
+						gp.playSoundEffect(2);
 						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
 					
 					}
@@ -110,6 +117,7 @@ public class Attack extends Entity{
 						gp.npc[gp.cDetect.collisionIndex()].worldX -= gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
+						gp.playSoundEffect(2);
 						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
 					
 					}
@@ -125,6 +133,7 @@ public class Attack extends Entity{
 						gp.npc[gp.cDetect.collisionIndex()].worldX += gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
+						gp.playSoundEffect(2);
 						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
 					
 					}
@@ -133,6 +142,8 @@ public class Attack extends Entity{
 				if (delay >= duration) {
 					z= false;
 					gp.atk[0] = new Attack(gp);
+					soundCounter = 0;
+					
 				}
 				//System.out.println(gp.atk[0].worldX);
 				hitBox.x = gp.atk[0].worldX;

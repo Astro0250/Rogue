@@ -287,7 +287,6 @@ public class Player extends Entity {
 			gp.playSoundEffect(0);
 			//gp.delayPlayer(0);
 		}
-	//}
 	}
 	public void draw(Graphics2D g2) {
 

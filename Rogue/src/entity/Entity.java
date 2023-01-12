@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -130,7 +131,17 @@ public class Entity {
 				}
 				break;
 			}
+			// Health Bar
+			if(!direction.equals("atk1") && this.health != 100) {
+				g2.setColor(Color.black);
+				g2.fillRect(screenX-2, screenY-23, 54, 15);
+				g2.setColor(Color.red);
+				g2.fillRect(screenX, screenY-20,this.health/2, 10);
+				
+			}
+			//draws sprite
 			g2.drawImage(image, screenX, screenY, null);
 		}
 	}
+
 }
