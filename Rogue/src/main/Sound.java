@@ -17,7 +17,6 @@ public class Sound {
 		soundURL[1] = getClass().getResource("/sound/gameMusic.wav");
 		soundURL[2] = getClass().getResource("/sound/dmgEffect.wav");
 		soundURL[3] = getClass().getResource("/sound/game_over.wav");
-
 	}
 	public void setFile(int i) {
 		

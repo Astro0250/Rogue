@@ -81,13 +81,16 @@ public class Attack extends Entity{
 				
 					gp.atk[0].worldX = Col;
 					gp.atk[0].worldY =  (int) (Row - gp.tileSize * 1.3);
-
+					
 					if (hit) {
+						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "up"))) {
 						gp.npc[gp.cDetect.collisionIndex()].worldY -= gp.player.knockback;
+						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
 						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
 					}
+					
 				}
 				if (gp.player.direction.equals("down")) {
 			
@@ -95,21 +98,28 @@ public class Attack extends Entity{
 					gp.atk[0].worldY = (int) (Row + gp.tileSize);
 					
 					if (hit) {
+						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "down"))) {
 						gp.npc[gp.cDetect.collisionIndex()].worldY += gp.player.knockback;
+						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
 						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
+					
 					}
 				}
 				if (gp.player.direction.equals("left")) {
 					
 					gp.atk[0].worldX = (int) (Col - gp.tileSize * 1.3);
 					gp.atk[0].worldY = Row;
+					
 					if (hit) {
+						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "left"))) {
 						gp.npc[gp.cDetect.collisionIndex()].worldX -= gp.player.knockback;
+						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
 						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
+					
 					}
 				}
 
@@ -117,11 +127,15 @@ public class Attack extends Entity{
 		
 					gp.atk[0].worldX = Col + gp.tileSize;
 					gp.atk[0].worldY = Row;
+					
 					if (hit) {
+						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "right"))) {
 						gp.npc[gp.cDetect.collisionIndex()].worldX += gp.player.knockback;
+						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
 						System.out.println("Enemy Health - " + gp.npc[gp.cDetect.collisionIndex()].health);
+					
 					}
 				}
 

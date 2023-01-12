@@ -41,6 +41,13 @@ public class GamePanel extends JPanel implements Runnable {
 		public void delay(int d) {
 			delay = d;
 		}
+		private int delayPlayer;
+		public int delayPlayer() {
+			return delay;
+		}
+		public void delayPlayer(int d) {
+			delay = d;
+		}
 		// SYSTEM
 		TileManager tileM = new TileManager(this, 1);
 		public KeyHandler keyH = new KeyHandler(this);
@@ -117,12 +124,20 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 
 	}
-
+	//Makes one noise
+	private int unecessary = 0;
+	public int unecessary() {
+		return unecessary;
+	}
+	public void unecessary(int a) {
+		unecessary = a;
+	}
 	public void update() {
 		//Clear it maybe it will work then, or at least see the errors
 //		if (keyH.shiftPressed == true) {
 //			TileManager tileM = new TileManager(this, 2);
 //		}
+		
 		if (player.health <= 0) {
 			gameState = deathState;
 		}
@@ -144,11 +159,16 @@ public class GamePanel extends JPanel implements Runnable {
 			}
 			//cooldown
 			delay++;
+			delayPlayer++;
 		} else if (gameState == pauseState) {
 			// nothing for now
 		} else if (gameState == deathState) {
 			player.spriteNum = 5;
-			playSoundEffect(3);
+			if (unecessary() == 0) {
+			this.playSoundEffect(3);
+			System.out.println(unecessary);
+			}
+			unecessary(5);
 		}
 	}
 	
