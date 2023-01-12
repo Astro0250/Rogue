@@ -83,7 +83,7 @@ public class Attack extends Entity{
 					gp.atk[0].worldY =  (int) (Row - gp.tileSize * 1.3);
 					
 					if (hit) {
-						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "up"))) {
+						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "up", gp.player))) {
 						gp.npc[gp.cDetect.collisionIndex()].worldY -= gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
@@ -98,7 +98,7 @@ public class Attack extends Entity{
 					gp.atk[0].worldY = (int) (Row + gp.tileSize);
 					
 					if (hit) {
-						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "down"))) {
+						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "down", gp.player))) {
 						gp.npc[gp.cDetect.collisionIndex()].worldY += gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
@@ -113,7 +113,7 @@ public class Attack extends Entity{
 					gp.atk[0].worldY = Row;
 					
 					if (hit) {
-						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "left"))) {
+						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "left", gp.player))) {
 						gp.npc[gp.cDetect.collisionIndex()].worldX -= gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
@@ -129,7 +129,7 @@ public class Attack extends Entity{
 					gp.atk[0].worldY = Row;
 					
 					if (hit) {
-						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "right"))) {
+						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "right", gp.player))) {
 						gp.npc[gp.cDetect.collisionIndex()].worldX += gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;

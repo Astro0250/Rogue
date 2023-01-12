@@ -486,7 +486,7 @@ public class CollisionDetecter {
 		return false;
 	}
 	
-	//Literally just overloads it for one parameter
+	//Literally just overloads it for one parameter, which turns out to be useless lmao
 	public boolean checkKnockback(Entity entity, String direction, Player player) {
 		entity.collisionOn = false;
 		int entityLeftWorldX = entity.worldX + entity.hitBox.x;
@@ -498,10 +498,12 @@ public class CollisionDetecter {
 		int entityRightCol = entityRightWorldX / gp.tileSize;
 		int entityTopRow = (entityTopWorldY / gp.tileSize);
 		int entityBottomRow = entityBottomWorldY / gp.tileSize;
-		//Admittedly arbitrary but this number now sets the distance for collision
-		player.knockAmt(30);
-		System.out.println(player.knockAmt());
-		System.out.println((int) ((entityTopWorldY - player.knockAmt()) / gp.tileSize));
+		// this number now sets the distance for collision
+		// for some god forsaken reason other values don't work making the scalability of this questionable
+		
+		player.knockAmt(40);
+		//player.knockAmt(entity.knockback/2);
+		//System.out.println(player.knockAmt());
 		
 		int tileNum1, tileNum2;
 		switch(direction) {
@@ -619,7 +621,7 @@ public class CollisionDetecter {
 
 				tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 				tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-
+				return true;
 //				if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
 ////					entity.collisionOn = true;
 ////					break;
