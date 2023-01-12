@@ -272,7 +272,19 @@ public class CollisionDetecter {
 		}
 
 	}
-
+	public void checkKnockback(String direction) {
+		switch(direction) {
+		
+		case"up": {} break;
+		case"down": { }break;
+		case"left": { }break;
+		case"right": {}break;
+		case"up right": {}break;
+		case"up left": {}break;
+		case"down left": {}break;
+		case"down right": {}break;
+	}
+	}
 	public int checkObject(Entity entity, boolean player) {
 
 		int index = 999;

@@ -89,7 +89,22 @@ public class Player extends Entity {
 			e.printStackTrace();
 		}
 	}
-
+	//marginally beautify knockback
+	public void knockback(String axis, int amount) {
+		//Change this variable if no likey
+		int occurences = 10;
+		
+		if ("worldX".equals(axis)) {
+			for (int a = 0; a < occurences; a++ ) {
+				worldX += amount/occurences;
+			}
+		}
+		if ("worldY".equals(axis)) {
+			for (int a = 0; a < occurences; a++ ) {
+				worldY += amount/occurences;
+			}
+		}
+	}
 	public void update() {
 
 		// CHECK TILE COLLISION
@@ -214,19 +229,28 @@ public class Player extends Entity {
 	}
 	
 	public void interactNPC(int i) {
+		int holder = 0;
 		if (i!= 999) {
 			health -= 10;
 			//System.out.println(gp.npc[i].direction);
 			switch(gp.npc[i].direction) {
 		
-				case"up": {worldY -= gp.npc[i].knockback;} break;
-				case"down": {worldY += gp.npc[i].knockback; }break;
-				case"left": {worldX -= gp.npc[i].knockback; }break;
-				case"right": {worldX += gp.npc[i].knockback;}break;
-				case"up right": {worldY -= gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
-				case"up left": {worldY -= gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
-				case"down left": {worldY += gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
-				case"down right": {worldY += gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
+//				case"up": {worldY -= gp.npc[i].knockback;} break;
+//				case"down": {worldY += gp.npc[i].knockback; }break;
+//				case"left": {worldX -= gp.npc[i].knockback; }break;
+//				case"right": {worldX += gp.npc[i].knockback;}break;
+//				case"up right": {worldY -= gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
+//				case"up left": {worldY -= gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
+//				case"down left": {worldY += gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
+//				case"down right": {worldY += gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
+				case"up": {knockback("worldY", -gp.npc[i].knockback);} break;
+				case"down": {knockback("worldY", gp.npc[i].knockback); }break;
+				case"left": {knockback("worldX", -gp.npc[i].knockback);}break;
+				case"right": {knockback("worldX", gp.npc[i].knockback);}break;
+				case"up right": {knockback("worldY", -gp.npc[i].knockback); knockback("worldX", gp.npc[i].knockback);}break;
+				case"up left": {knockback("worldY", -gp.npc[i].knockback); knockback("worldX", -gp.npc[i].knockback);}break;
+				case"down left": {knockback("worldY", gp.npc[i].knockback);knockback("worldX", -gp.npc[i].knockback);}break;
+				case"down right": {knockback("worldY", gp.npc[i].knockback);knockback("worldX", gp.npc[i].knockback);}break;
 			}
 			if(health < 0) {
 				health = 0;
