@@ -16,6 +16,7 @@ public class Sound {
 		soundURL[0] = getClass().getResource("/sound/boom.wav");
 		soundURL[1] = getClass().getResource("/sound/gameMusic.wav");
 		soundURL[2] = getClass().getResource("/sound/;oh-hell-no-sound-effect-free-download.wav");
+		soundURL[3] = getClass().getResource("/sound/dark-souls-you-died-sound-effect.wav");
 	}
 	public void setFile(int i) {
 		

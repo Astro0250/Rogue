@@ -238,7 +238,8 @@ public class Player extends Entity {
 	
 	public void interactNPC(int i) {
 		collisionOn = false;
-		
+		//System.out.println(gp.delayPlayer());
+		//if (gp.delayPlayer() > 60) {
 		if (i!= 999) {
 			health -= 10;
 			//System.out.println(gp.npc[i].direction);
@@ -284,7 +285,9 @@ public class Player extends Entity {
 			}
 			System.out.println("health = " + health);
 			gp.playSoundEffect(0);
+			//gp.delayPlayer(0);
 		}
+	//}
 	}
 	public void draw(Graphics2D g2) {
 
