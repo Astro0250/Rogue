@@ -125,7 +125,8 @@ public class NPC_Enemy extends Entity{
 	public void followPlayer() {
 		int dx = (gp.player.worldX+(gp.tileSize/2)) - worldX;
 		int dy = (gp.player.worldY+(gp.tileSize/2)) - worldY;
-		int distance = (int)Math.sqrt(dx * dx + dy * dy);
+		// have to add one since occasionally will just divide by 0
+		int distance = 1 + (int)Math.sqrt(dx * dx + dy * dy);
 		if(!collisionOn) {
 			worldX += dx * speed / distance;
 			gp.cDetect.checkTile(this,speed+2);

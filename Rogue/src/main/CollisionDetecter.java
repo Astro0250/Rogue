@@ -2,13 +2,14 @@ package main;
 
 import entity.Attack;
 import entity.Entity;
+import entity.Player;
 
 import java.awt.Rectangle;
 import java.util.*;
 import java.util.function.Supplier;
 
 public class CollisionDetecter {
-
+	
 	GamePanel gp;
 	private boolean x;
 	
@@ -272,18 +273,217 @@ public class CollisionDetecter {
 		}
 
 	}
-	public void checkKnockback(String direction) {
-		switch(direction) {
+	public boolean checkKnockback(Entity entity, String direction) {
+		entity.collisionOn = false;
+		int entityLeftWorldX = entity.worldX + entity.hitBox.x;
+		int entityRightWorldX = entity.worldX + entity.hitBox.x + entity.hitBox.width;
+		int entityTopWorldY = entity.worldY + entity.hitBox.y;
+		int entityBottomWorldY = entity.worldY + entity.hitBox.y + entity.hitBox.height;
+
+		int entityLeftCol = entityLeftWorldX / gp.tileSize;
+		int entityRightCol = entityRightWorldX / gp.tileSize;
+		int entityTopRow = (entityTopWorldY / gp.tileSize);
+		int entityBottomRow = entityBottomWorldY / gp.tileSize;
 		
-		case"up": {} break;
-		case"down": { }break;
-		case"left": { }break;
-		case"right": {}break;
-		case"up right": {}break;
-		case"up left": {}break;
-		case"down left": {}break;
-		case"down right": {}break;
+		int tileNum1, tileNum2;
+		switch(direction) {
+		case "up":
+			entityTopRow = (int) ((entityTopWorldY - entity.knockback) / gp.tileSize);
+
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				return true;
+				//entity.collisionOn = true;
+			}
+
+			break;
+		case "down":
+			entityBottomRow = (int) ((entityBottomWorldY + entity.knockback) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				//entity.collisionOn = true;
+				return true;
+			}
+
+			break;
+		case "left":
+			entityLeftCol = (int) ((entityLeftWorldX - entity.knockback) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				//entity.collisionOn = true;
+				return true;
+			}
+
+			break;
+		case "right":
+			entityRightCol = (int) ((entityRightWorldX + entity.knockback) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				//entity.collisionOn = true;
+				return true;
+			}
+
+			break;
+
+		case "down right":
+			entityBottomRow = (int) ((entityBottomWorldY + entity.knockback) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+				entityRightCol = (int) ((entityRightWorldX + entity.knockback) / gp.tileSize);
+				tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+				/// tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+				return true;
+//				if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+//					//entity.collisionOn = true;
+//					return true;
+//					//break;
+//
+//				}
+
+			}
+			entityRightCol = (int) ((entityRightWorldX + entity.knockback) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+				entityBottomRow = (int) ((entityBottomWorldY +entity.knockback) / gp.tileSize);
+				tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+				tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+				return true;
+//				if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+//					//entity.collisionOn = true;
+//					return true;
+//					//break;
+//
+//				}
+
+			}
+			break;
+		// Change TileNum used here and below to fix errors
+		case "up right":
+			entityTopRow = (int) ((entityTopWorldY - entity.knockback) / gp.tileSize);
+
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+				entityRightCol = (int) ((entityRightWorldX + entity.knockback) / gp.tileSize);
+				tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+				return true;
+				/// tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+//				if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+////					entity.collisionOn = true;
+////					break;
+//					return true;
+//				}
+
+			}
+			entityRightCol = (int) ((entityRightWorldX + entity.knockback) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+				entityTopRow = (int) ((entityTopWorldY - entity.knockback) / gp.tileSize);
+
+				tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+				tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+
+//				if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+////					entity.collisionOn = true;
+////					break;
+//					return true;
+//				}
+
+			}
+			break;
+
+		case "up left":
+			entityTopRow = (int) ((entityTopWorldY - entity.knockback) / gp.tileSize);
+
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entityLeftCol = (int) ((entityLeftWorldX - entity.knockback) / gp.tileSize);
+				tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+				tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+				/// tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+//				if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+////					entity.collisionOn = true;
+////					break;
+//					return true;
+//				}
+				return true;
+			}
+			entityLeftCol = (int) ((entityLeftWorldX - entity.knockback) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+				entityTopRow = (int) ((entityTopWorldY - entity.knockback) / gp.tileSize);
+
+				tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+				tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+
+//				if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+////					entity.collisionOn = true;
+////					break;
+//					return true;
+//				}
+				return true;
+			}
+			break;
+		case "down left":
+			entityBottomRow = (int) ((entityBottomWorldY + entity.knockback) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entityLeftCol = (int) ((entityLeftWorldX - entity.knockback) / gp.tileSize);
+				tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+				tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+				return true;
+//				if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+////					entity.collisionOn = true;
+////					break;
+//					return true;
+//				}
+
+			}
+			entityLeftCol = (int) ((entityLeftWorldX - entity.knockback) / gp.tileSize);
+			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+			tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+
+			if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+				entity.collisionOn = true;
+				entityBottomRow = (int) ((entityBottomWorldY + entity.knockback) / gp.tileSize);
+				tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+				tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+				return true;
+//				if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+////					entity.collisionOn = true;
+////					break;
+//					return true;
+//				}
+
+			}
 	}
+		return false;
 	}
 	public int checkObject(Entity entity, boolean player) {
 
