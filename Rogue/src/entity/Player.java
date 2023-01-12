@@ -232,7 +232,7 @@ public class Player extends Entity {
 				health = 0;
 			}
 			System.out.println("health = " + health);
-			gp.playSoundEffect(0);
+			gp.playSoundEffect(2);
 		}
 	}
 	public void draw(Graphics2D g2) {

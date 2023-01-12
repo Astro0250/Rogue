@@ -79,7 +79,7 @@ public class GamePanel extends JPanel implements Runnable {
 		aSetter.setNPC();
 		attack.setAttack();
 		gameState = playState;
-		loopMusic(1);
+		//loopMusic(1);
 	}
 
 	public void startGameThread() {
@@ -148,6 +148,7 @@ public class GamePanel extends JPanel implements Runnable {
 			// nothing for now
 		} else if (gameState == deathState) {
 			player.spriteNum = 5;
+			playSoundEffect(3);
 		}
 	}
 	
