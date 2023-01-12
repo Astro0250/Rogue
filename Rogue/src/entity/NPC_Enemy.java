@@ -123,10 +123,11 @@ public class NPC_Enemy extends Entity{
 		}
 	}
 	public void followPlayer() {
-		int dx = (gp.player.worldX+(gp.tileSize/2)) - worldX;
-		int dy = (gp.player.worldY+(gp.tileSize/2)) - worldY;
+		int dx = (gp.player.worldX+(gp.player.hitBox.x/2)) - worldX;
+		int dy = (gp.player.worldY+(gp.player.hitBox.y/2)) - worldY;
 		// have to add one since occasionally will just divide by 0
-		int distance = 1 + (int)Math.sqrt(dx * dx + dy * dy);
+		int distance = (int)Math.sqrt(dx * dx + dy * dy);
+		if (!(distance <= 0)) {
 		if(!collisionOn) {
 			worldX += dx * speed / distance;
 			gp.cDetect.checkTile(this,speed+2);
@@ -137,6 +138,7 @@ public class NPC_Enemy extends Entity{
 			gp.cDetect.checkTile(this,speed+2);
 			if(collisionOn) {
 				worldY -= dy * speed / distance;
+			}
 			}
 		}
 	}
