@@ -15,13 +15,15 @@ public class Player extends Entity {
 	private String facing;
 	public final int screenX;
 	public final int screenY;
-//	private static int knockamt;
-//	public static int knockamt() {
-//		return knockamt;
-//	}
-//	public static void knockamt(int a) {
-//		knockamt = a;
-//	}
+	private int knockAmt;
+	
+	
+	public int knockAmt() {
+		return knockAmt;
+	}
+	public void knockAmt(int a) {
+		knockAmt = a;
+	}
 	public String facing() {
 		return facing;
 	}
@@ -99,9 +101,9 @@ public class Player extends Entity {
 	//marginally beautify knockback
 	public void knockback(String axis, int amount) {
 		//Change this variable if no likey
-		int occurences = 10;
+		int occurences = 25;
 		//Holder
-//		knockamt(amount);
+		knockAmt(amount/occurences);
 		if ("worldX".equals(axis)) {
 			for (int a = 0; a < occurences; a++ ) {
 				worldX += amount/occurences;
@@ -254,29 +256,29 @@ public class Player extends Entity {
 //				case"down left": {worldY += gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
 //				case"down right": {worldY += gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
 				case"up": {
-					if (!(gp.cDetect.checkKnockback(this, "up"))) {
+					if (!(gp.cDetect.checkKnockback(this, "up", this))) {
 					knockback("worldY", -gp.npc[i].knockback) ;}
 					} break;
-				case"down": {if (!(gp.cDetect.checkKnockback(this, "down"))) {
+				case"down": {if (!(gp.cDetect.checkKnockback(this, "down", this))) {
 				knockback("worldY", gp.npc[i].knockback); }}
 				break;
-				case"left": {if (!(gp.cDetect.checkKnockback(this, "left"))) { 
+				case"left": {if (!(gp.cDetect.checkKnockback(this, "left", this))) { 
 				knockback("worldX", -gp.npc[i].knockback);}}
 				break;
-				case"right": {if (!(gp.cDetect.checkKnockback(this, "right"))) {
+				case"right": {if (!(gp.cDetect.checkKnockback(this, "right", this))) {
 					knockback("worldX", gp.npc[i].knockback);}}
 				break;
 				
-				case"up right": {if (!(gp.cDetect.checkKnockback(this, "up right"))) { 
+				case"up right": {if (!(gp.cDetect.checkKnockback(this, "up right", this))) { 
 				knockback("worldY", -gp.npc[i].knockback); knockback("worldX", gp.npc[i].knockback);}}
 				break;
-				case"up left": {if (!(gp.cDetect.checkKnockback(this, "up left"))) { 
+				case"up left": {if (!(gp.cDetect.checkKnockback(this, "up left", this))) { 
 				knockback("worldY", -gp.npc[i].knockback); knockback("worldX", -gp.npc[i].knockback);}}
 				break;
-				case"down left": {if (!(gp.cDetect.checkKnockback(this, "down left"))) {
+				case"down left": {if (!(gp.cDetect.checkKnockback(this, "down left", this))) {
 				knockback("worldY", gp.npc[i].knockback); knockback("worldX", -gp.npc[i].knockback);}}
 				break;
-				case"down right": {if (!(gp.cDetect.checkKnockback(this, "down right"))) {
+				case"down right": {if (!(gp.cDetect.checkKnockback(this, "down right", this))) {
 				knockback("worldY", gp.npc[i].knockback); knockback("worldX", gp.npc[i].knockback);}}
 				break;
 			}
