@@ -13,17 +13,18 @@ public class Sound {
 	
 	public Sound() {
 		// INSTANCIATES AUDIO FILES
-		soundURL[0] = getClass().getResource("/sound/boom.wav");
+		soundURL[0] = getClass().getResource("/sound/atkEffect.wav");
 		soundURL[1] = getClass().getResource("/sound/gameMusic.wav");
-		soundURL[2] = getClass().getResource("/sound/;oh-hell-no-sound-effect-free-download.wav");
+		soundURL[2] = getClass().getResource("/sound/dmgEffect.wav");
+		soundURL[3] = getClass().getResource("/sound/game_over.wav");
 	}
 	public void setFile(int i) {
 		
 		try {
 			
-			AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
+			AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundURL[i]);
 			clip = AudioSystem.getClip();
-			clip.open(ais);
+			clip.open(audioStream);
 			
 		}catch(Exception e) {
 			

@@ -15,6 +15,15 @@ public class Player extends Entity {
 	private String facing;
 	public final int screenX;
 	public final int screenY;
+	private int knockAmt;
+	
+	
+	public int knockAmt() {
+		return knockAmt;
+	}
+	public void knockAmt(int a) {
+		knockAmt = a;
+	}
 	public String facing() {
 		return facing;
 	}
@@ -89,17 +98,21 @@ public class Player extends Entity {
 			e.printStackTrace();
 		}
 	}
-	public void knockback(String axis, int i) {
-		int occurences = 2;
-		System.out.println("yo this runs");
+
+	//marginally beautify knockback
+	public void knockback(String axis, int amount) {
+		//Change this variable if no likey
+		int occurences = 25;
+		//Holder
+		knockAmt(amount/occurences);
 		if ("worldX".equals(axis)) {
 			for (int a = 0; a < occurences; a++ ) {
-				worldX += gp.npc[i].knockback/occurences;
+				worldX += amount/occurences;
 			}
 		}
 		if ("worldY".equals(axis)) {
 			for (int a = 0; a < occurences; a++ ) {
-				worldY += gp.npc[i].knockback/occurences;
+				worldY += amount/occurences;
 			}
 		}
 	}
@@ -227,25 +240,55 @@ public class Player extends Entity {
 	}
 	
 	public void interactNPC(int i) {
+		collisionOn = false;
+		//System.out.println(gp.delayPlayer());
+		//if (gp.delayPlayer() > 60) {
 		if (i!= 999) {
 			health -= 10;
 			//System.out.println(gp.npc[i].direction);
 			switch(gp.npc[i].direction) {
-		
-				case"up": {knockback("worldY", i); } break;
-				case"down": {worldY += gp.npc[i].knockback; }break;
-				case"left": {worldX -= gp.npc[i].knockback; }break;
-				case"right": {worldX += gp.npc[i].knockback;}break;
-				case"up right": {worldY -= gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
-				case"up left": {worldY -= gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
-				case"down left": {worldY += gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
-				case"down right": {worldY += gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
-			}
+      
+//				case"up": {worldY -= gp.npc[i].knockback;} break;
+//				case"down": {worldY += gp.npc[i].knockback; }break;
+//				case"left": {worldX -= gp.npc[i].knockback; }break;
+//				case"right": {worldX += gp.npc[i].knockback;}break;
+//				case"up right": {worldY -= gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
+//				case"up left": {worldY -= gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
+//				case"down left": {worldY += gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
+//				case"down right": {worldY += gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
+				case"up": {
+					if (!(gp.cDetect.checkKnockback(this, "up", this))) {
+					knockback("worldY", -gp.npc[i].knockback) ;}
+					} break;
+				case"down": {if (!(gp.cDetect.checkKnockback(this, "down", this))) {
+				knockback("worldY", gp.npc[i].knockback); }}
+				break;
+				case"left": {if (!(gp.cDetect.checkKnockback(this, "left", this))) { 
+				knockback("worldX", -gp.npc[i].knockback);}}
+				break;
+				case"right": {if (!(gp.cDetect.checkKnockback(this, "right", this))) {
+					knockback("worldX", gp.npc[i].knockback);}}
+				break;
+				
+				case"up right": {if (!(gp.cDetect.checkKnockback(this, "up right", this))) { 
+				knockback("worldY", -gp.npc[i].knockback); knockback("worldX", gp.npc[i].knockback);}}
+				break;
+				case"up left": {if (!(gp.cDetect.checkKnockback(this, "up left", this))) { 
+				knockback("worldY", -gp.npc[i].knockback); knockback("worldX", -gp.npc[i].knockback);}}
+				break;
+				case"down left": {if (!(gp.cDetect.checkKnockback(this, "down left", this))) {
+				knockback("worldY", gp.npc[i].knockback); knockback("worldX", -gp.npc[i].knockback);}}
+				break;
+				case"down right": {if (!(gp.cDetect.checkKnockback(this, "down right", this))) {
+				knockback("worldY", gp.npc[i].knockback); knockback("worldX", gp.npc[i].knockback);}}
+				break;
+      }
 			if(health < 0) {
 				health = 0;
 			}
 			System.out.println("health = " + health);
 			gp.playSoundEffect(0);
+			//gp.delayPlayer(0);
 		}
 	}
 	public void draw(Graphics2D g2) {
