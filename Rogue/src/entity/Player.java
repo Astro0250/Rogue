@@ -98,6 +98,7 @@ public class Player extends Entity {
 			e.printStackTrace();
 		}
 	}
+
 	//marginally beautify knockback
 	public void knockback(String axis, int amount) {
 		//Change this variable if no likey
@@ -246,7 +247,7 @@ public class Player extends Entity {
 			health -= 10;
 			//System.out.println(gp.npc[i].direction);
 			switch(gp.npc[i].direction) {
-		
+      
 //				case"up": {worldY -= gp.npc[i].knockback;} break;
 //				case"down": {worldY += gp.npc[i].knockback; }break;
 //				case"left": {worldX -= gp.npc[i].knockback; }break;
@@ -281,7 +282,7 @@ public class Player extends Entity {
 				case"down right": {if (!(gp.cDetect.checkKnockback(this, "down right", this))) {
 				knockback("worldY", gp.npc[i].knockback); knockback("worldX", gp.npc[i].knockback);}}
 				break;
-			}
+      }
 			if(health < 0) {
 				health = 0;
 			}

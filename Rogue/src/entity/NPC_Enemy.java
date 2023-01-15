@@ -128,16 +128,17 @@ public class NPC_Enemy extends Entity{
 		// have to add one since occasionally will just divide by 0
 		int distance = (int)Math.sqrt(dx * dx + dy * dy);
 		if (!(distance <= 0)) {
-		if(!collisionOn) {
-			worldX += dx * speed / distance;
+
+  if(!collisionOn) {
+			worldX += distanceX * speed / distance;
 			gp.cDetect.checkTile(this,speed+2);
 			if(collisionOn) {
-				worldX -= dx * speed / distance;
+				worldX -= distanceX * speed / distance;
 			}
-			worldY += dy * speed / distance;
+			worldY += distanceY * speed / distance;
 			gp.cDetect.checkTile(this,speed+2);
 			if(collisionOn) {
-				worldY -= dy * speed / distance;
+				worldY -= distanceY * speed / distance;
 			}
 			}
 		}
