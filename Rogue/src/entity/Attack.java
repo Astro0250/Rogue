@@ -51,7 +51,7 @@ public class Attack extends Entity{
 	public boolean z = false;
 
 	public void setAttack() {
-		int duration = 31;
+		int duration = 20;
 		int cooldown = 62;
 		int delay = gp.delay();
 		if (delay >= cooldown || z) {
@@ -78,7 +78,7 @@ public class Attack extends Entity{
 				//System.out.println("hit");
 				if (gp.player.direction.equals("up")) {
 				
-					gp.atk.worldX = Col;
+					gp.atk.worldX = Col -  (int)(gp.tileSize * 0.2);
 					gp.atk.worldY =  (int) (Row - gp.tileSize * 1.3);
 					
 					if (hit) {
@@ -95,7 +95,7 @@ public class Attack extends Entity{
 				}
 				if (gp.player.direction.equals("down")) {
 			
-					gp.atk.worldX = Col;
+					gp.atk.worldX = Col - (int)(gp.tileSize * 0.2);
 					gp.atk.worldY = (int) (Row + gp.tileSize);
 					
 					if (hit) {
@@ -202,11 +202,11 @@ public class Attack extends Entity{
 			//If you want attack in reverse order switch these variables
 			spriteNum = 1;
 		}
-		if(delay <= 20 && delay > 10) {
+		if(delay <= 15 && delay > 10) {
 			
 			spriteNum = 2;
 		}
-		if(delay <= 30 && delay > 20) {
+		if(delay <= 20 && delay > 15) {
 			spriteNum = 3;
 		}
 		
