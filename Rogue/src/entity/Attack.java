@@ -83,6 +83,8 @@ public class Attack extends Entity{
 					if (collisionOn) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "up", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldY -= gp.player.knockback;
+							collisionOn = false;
+
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
@@ -98,6 +100,8 @@ public class Attack extends Entity{
 					if (collisionOn) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "down", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldY += gp.player.knockback;
+							collisionOn = false;
+
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
@@ -113,6 +117,7 @@ public class Attack extends Entity{
 					if (collisionOn) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "left", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldX -= gp.player.knockback;
+							collisionOn = false;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
@@ -128,6 +133,7 @@ public class Attack extends Entity{
 					if (collisionOn) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "right", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldX += gp.player.knockback;
+							collisionOn = false;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
@@ -145,7 +151,6 @@ public class Attack extends Entity{
 				//System.out.println(gp.atk[0].worldX);
 				hitBox.x = gp.atk.worldX;
 				hitBox.y = gp.atk.worldY;
-
 			}
 
 		}
