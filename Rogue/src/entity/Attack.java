@@ -187,33 +187,46 @@ public class Attack extends Entity{
 		
 	}
 	public void draw(Graphics2D g2) {
+		//System.out.println(spriteNum);
 		
 		BufferedImage image = null;
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
 		int screenY = worldY - gp.player.worldY + gp.player.screenY;
 		direction = gp.player.direction;
-		if(spriteDelay >= 45) {
-			spriteDelay = 0;
-			if(spriteNum >= 3) {
-				spriteNum = 1;
-			} else {
-				spriteNum++;
-			}
+		int delay = gp.delay();
+		
+		
+		//Use duration/3 values 
+		
+		if(delay <= 10) {
+			//If you want attack in reverse order switch these variables
+			spriteNum = 1;
 		}
+		if(delay <= 20 && delay > 10) {
+			
+			spriteNum = 2;
+		}
+		if(delay <= 30 && delay > 20) {
+			spriteNum = 3;
+		}
+		
 		switch (direction) {
 		case "right":
-			//System.out.println(spriteNum);
+			
 			if (spriteNum == 1) {
+				
 				image = right1;
 			}else if (spriteNum == 2) {
+				
 				image = right2;
 			}else if (spriteNum == 3) {
+				
 				image = right3;
 			}
 			break;
 
 		case "left":
-			//System.out.println(spriteNum);
+			
 			if (spriteNum == 1) {
 				image = left1;
 			}else if (spriteNum == 2) {
@@ -223,7 +236,7 @@ public class Attack extends Entity{
 			}
 			break;
 		case "up":
-			//System.out.println(spriteNum);
+			
 			if (spriteNum == 1) {
 				image = up1;
 			}else if (spriteNum == 2) {
@@ -234,7 +247,7 @@ public class Attack extends Entity{
 			break;
 
 		case "down":
-			//System.out.println(spriteNum);
+			
 			if (spriteNum == 1) {
 				image = down1;
 			}else if (spriteNum == 2) {
@@ -244,6 +257,7 @@ public class Attack extends Entity{
 			}
 			break;
 		}
+	
 		spriteDelay++;
 		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 	}
