@@ -53,7 +53,6 @@ public class GamePanel extends JPanel implements Runnable {
 		public KeyHandler keyH = new KeyHandler(this);
 		Sound music = new Sound();
 		Sound soundEffect = new Sound();
-		public Attack attack = new Attack(this);
 		public CollisionDetecter cDetect = new CollisionDetecter(this);
 		
 		public UserInterface UI = new UserInterface(this);
@@ -61,10 +60,11 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		// ENTITY & ITEM
 		public Player player = new Player(this, keyH);
+		public Attack attack = new Attack(this);
 		public AssetSetter aSetter = new AssetSetter(this);
 		public Item obj[] = new Item[20];
 		public Entity npc[] = new Entity[10];
-		public Entity atk[] = new Entity[1];
+		public Attack atk = new Attack(this);
 		
 		// GAME STATE
 		public int gameState;
@@ -152,11 +152,7 @@ public class GamePanel extends JPanel implements Runnable {
 				}
 			}
 			//atk
-			for (int i = 0; i < atk.length; i++) {
-				if (atk[i] != null) {
-					atk[i].update();
-				}
-			}
+			atk.setAttack();;
 			//cooldown
 			delay++;
 			delayPlayer++;
@@ -165,8 +161,8 @@ public class GamePanel extends JPanel implements Runnable {
 		} else if (gameState == deathState) {
 			player.spriteNum = 5;
 			if (unecessary() == 0) {
-			this.playSoundEffect(3);
-			System.out.println(unecessary);
+				this.playSoundEffect(3);
+				System.out.println(unecessary);
 			}
 			unecessary(5);
 		}
@@ -206,14 +202,7 @@ public class GamePanel extends JPanel implements Runnable {
 			}
 		}
 		// ATK
-	//	while (delay <= 30) {
-		//System.out.println(atk[0].worldX);
-		for(int i = 0; i < atk.length; i++) {
-			if(atk[i] != null ) {
-				atk[i].draw(g2);
-			}
-		}
-	//	}
+		atk.draw(g2);	
 		
 		// PLAYER
 		player.draw(g2);

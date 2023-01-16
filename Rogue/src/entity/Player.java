@@ -16,22 +16,25 @@ public class Player extends Entity {
 	public final int screenX;
 	public final int screenY;
 	private int knockAmt;
-	
-	
+
 	public int knockAmt() {
 		return knockAmt;
 	}
+
 	public void knockAmt(int a) {
 		knockAmt = a;
 	}
+
 	public String facing() {
 		return facing;
 	}
+
 	public void facing(String a) {
 		facing = a;
 	}
+
 	public Player(GamePanel gp, KeyHandler keyH) {
-		
+
 		super(gp);
 		this.keyH = keyH;
 
@@ -75,6 +78,7 @@ public class Player extends Entity {
 		direction = "down";
 		knockback = 100;
 	}
+
 	public void getPlayerImage() {
 		try {
 
@@ -98,35 +102,37 @@ public class Player extends Entity {
 			e.printStackTrace();
 		}
 	}
-	//marginally beautify knockback
+
+	// marginally beautify knockback
 	public void knockback(String axis, int amount) {
-		//Change this variable if no likey
+		// Change this variable if no likey
 		int occurences = 25;
-		//Holder
-		knockAmt(amount/occurences);
+		// Holder
+		knockAmt(amount / occurences);
 		if ("worldX".equals(axis)) {
-			for (int a = 0; a < occurences; a++ ) {
-				worldX += amount/occurences;
+			for (int a = 0; a < occurences; a++) {
+				worldX += amount / occurences;
 			}
 		}
 		if ("worldY".equals(axis)) {
-			for (int a = 0; a < occurences; a++ ) {
-				worldY += amount/occurences;
+			for (int a = 0; a < occurences; a++) {
+				worldY += amount / occurences;
 			}
 		}
 	}
+
 	public void update() {
 
 		// CHECK TILE COLLISION
 		collisionOn = false;
-		
+
 		// CHECK OBJECT COLLISION
 		int objIndex = gp.cDetect.checkObject(this, true);
 		interactObject(objIndex);
-		
+
 		// CHECK ENTITY COLLISION
 		int npcIndex = gp.cDetect.checkEntity(this, gp.npc, speedD);
-		//System.out.println(npcIndex);
+		// System.out.println(npcIndex);
 		interactNPC(npcIndex);
 
 		speedD = speed * speedModifier(gp.cDetect.tileStoodUpon(this));
@@ -137,17 +143,16 @@ public class Player extends Entity {
 
 		if ((keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed)) {
 			if (keyH.downPressed && keyH.upPressed) {
-			}
-			else if (keyH.downPressed) {
+			} else if (keyH.downPressed) {
 				direction = "down";
 				if (spriteNum == 3 || spriteNum == 4) {
 					spriteNum = 1;
 				}
-		
+
 				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
 				gp.cDetect.checkEntity(this, gp.npc, speedD);
-	
+
 				if (!collisionOn) {
 					if (keyH.leftPressed || keyH.rightPressed) {
 						worldY += (speedpy);
@@ -155,8 +160,7 @@ public class Player extends Entity {
 						worldY += speedD;
 					}
 				}
-			}
-			else if (keyH.upPressed) {
+			} else if (keyH.upPressed) {
 
 				direction = "up";
 				if (spriteNum == 3 || spriteNum == 4) {
@@ -165,7 +169,7 @@ public class Player extends Entity {
 				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
 				gp.cDetect.checkEntity(this, gp.npc, speedD);
-				
+
 				if (!collisionOn) {
 					if (keyH.rightPressed || keyH.leftPressed) {
 						worldY -= (speedpy);
@@ -175,13 +179,12 @@ public class Player extends Entity {
 				}
 			}
 			if (keyH.rightPressed && keyH.leftPressed) {
-			}
-			else if (keyH.rightPressed) {
+			} else if (keyH.rightPressed) {
 				direction = "right";
 				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
 				gp.cDetect.checkEntity(this, gp.npc, speedD);
-			
+
 				if (!collisionOn) {
 					if (keyH.upPressed || keyH.downPressed) {
 						worldX += speedpy;
@@ -190,13 +193,12 @@ public class Player extends Entity {
 					}
 				}
 
-			}
-			else if (keyH.leftPressed) {
+			} else if (keyH.leftPressed) {
 				direction = "left";
 				gp.cDetect.checkTile(this, speedD);
 				gp.cDetect.checkObject(this, true);
 				gp.cDetect.checkEntity(this, gp.npc, speedD);
-		
+
 				if (!collisionOn) {
 					if (keyH.downPressed || keyH.upPressed) {
 						worldX -= (speedpy);
@@ -237,59 +239,78 @@ public class Player extends Entity {
 
 		}
 	}
-	
+
 	public void interactNPC(int i) {
 		collisionOn = false;
-		//System.out.println(gp.delayPlayer());
-		//if (gp.delayPlayer() > 60) {
-		if (i!= 999) {
+		// System.out.println(gp.delayPlayer());
+		// if (gp.delayPlayer() > 60) {
+		if (i != 999) {
 			health -= 10;
-			//System.out.println(gp.npc[i].direction);
-			switch(gp.npc[i].direction) {
-		
-//				case"up": {worldY -= gp.npc[i].knockback;} break;
-//				case"down": {worldY += gp.npc[i].knockback; }break;
-//				case"left": {worldX -= gp.npc[i].knockback; }break;
-//				case"right": {worldX += gp.npc[i].knockback;}break;
-//				case"up right": {worldY -= gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
-//				case"up left": {worldY -= gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
-//				case"down left": {worldY += gp.npc[i].knockback; worldX -= gp.npc[i].knockback;}break;
-//				case"down right": {worldY += gp.npc[i].knockback; worldX += gp.npc[i].knockback;}break;
-				case"up": {
-					if (!(gp.cDetect.checkKnockback(this, "up", this))) {
-					knockback("worldY", -gp.npc[i].knockback) ;}
-					} break;
-				case"down": {if (!(gp.cDetect.checkKnockback(this, "down", this))) {
-				knockback("worldY", gp.npc[i].knockback); }}
+			// System.out.println(gp.npc[i].direction);
+			switch (gp.npc[i].direction) {
+			case "up": {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+					knockback("worldY", -gp.npc[i].knockback);
+				}
+			}
 				break;
-				case"left": {if (!(gp.cDetect.checkKnockback(this, "left", this))) { 
-				knockback("worldX", -gp.npc[i].knockback);}}
+			case "down": {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+					knockback("worldY", gp.npc[i].knockback);
+				}
+			}
 				break;
-				case"right": {if (!(gp.cDetect.checkKnockback(this, "right", this))) {
-					knockback("worldX", gp.npc[i].knockback);}}
+			case "left": {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+					knockback("worldX", -gp.npc[i].knockback);
+				}
+			}
 				break;
-				
-				case"up right": {if (!(gp.cDetect.checkKnockback(this, "up right", this))) { 
-				knockback("worldY", -gp.npc[i].knockback); knockback("worldX", gp.npc[i].knockback);}}
+			case "right": {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+					knockback("worldX", gp.npc[i].knockback);
+				}
+			}
 				break;
-				case"up left": {if (!(gp.cDetect.checkKnockback(this, "up left", this))) { 
-				knockback("worldY", -gp.npc[i].knockback); knockback("worldX", -gp.npc[i].knockback);}}
+
+			case "up right": {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+					knockback("worldY", -gp.npc[i].knockback);
+					knockback("worldX", gp.npc[i].knockback);
+				}
+			}
 				break;
-				case"down left": {if (!(gp.cDetect.checkKnockback(this, "down left", this))) {
-				knockback("worldY", gp.npc[i].knockback); knockback("worldX", -gp.npc[i].knockback);}}
+			case "up left": {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+					knockback("worldY", -gp.npc[i].knockback);
+					knockback("worldX", -gp.npc[i].knockback);
+				}
+			}
 				break;
-				case"down right": {if (!(gp.cDetect.checkKnockback(this, "down right", this))) {
-				knockback("worldY", gp.npc[i].knockback); knockback("worldX", gp.npc[i].knockback);}}
+			case "down left": {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+					knockback("worldY", gp.npc[i].knockback);
+					knockback("worldX", -gp.npc[i].knockback);
+				}
+			}
+				break;
+			case "down right": {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+					knockback("worldY", gp.npc[i].knockback);
+					knockback("worldX", gp.npc[i].knockback);
+				}
+			}
 				break;
 			}
-			if(health < 0) {
+			if (health < 0) {
 				health = 0;
 			}
 			System.out.println("health = " + health);
-			gp.playSoundEffect(0);
-			//gp.delayPlayer(0);
+			gp.playSoundEffect(2);
+			// gp.delayPlayer(0);
 		}
 	}
+
 	public void draw(Graphics2D g2) {
 
 		BufferedImage image = null;

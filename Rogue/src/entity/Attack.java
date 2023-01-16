@@ -18,12 +18,12 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageIO;
 
 
-
 public class Attack extends Entity{
 	int soundCounter = 0;
+	int spriteDelay = 0;
 	public Attack(GamePanel gp) {
 		super(gp);
-		direction = "atk1";
+		direction = gp.player.direction;
 		getImage();
 		hitBox = new Rectangle();
 		hitBox.x = 8;
@@ -35,17 +35,17 @@ public class Attack extends Entity{
 	}
 	public Attack(GamePanel gp, int a, int b) {
 		super(gp);
-		direction = "atk1";
+		direction = gp.player.direction;
 		getImage();
 		hitBox = new Rectangle();
 		hitBox.x = 8;
 		hitBox.y = 16;
-		hitBoxDefaultX = gp.atk[0].worldX;
-		hitBoxDefaultY = gp.atk[0].worldY;
+		hitBoxDefaultX = gp.atk.worldX;
+		hitBoxDefaultY = gp.atk.worldY;
 		hitBox.width = 30;
 		hitBox.height = 30;
-		gp.atk[0].worldX = a;
-		gp.atk[0].worldY = b;
+		gp.atk.worldX = a;
+		gp.atk.worldY = b;
 	}
 	//important for the cooldown/duration
 	public boolean z = false;
@@ -66,25 +66,23 @@ public class Attack extends Entity{
 					delay = gp.delay();
 					z = true;
 				}
-				gp.atk[0] = new Attack(gp);
 				int Col = (int) gp.cDetect.tilePositionUpon(gp.player).get(0);
 				int Row = (int) gp.cDetect.tilePositionUpon(gp.player).get(1);
-				gp.atk[0] = new Attack(gp);
 //				hitBox.x = gp.atk[0].worldX;
 //				hitBox.y = gp.atk[0].worldY;
 				
-				direction = "atk1";
-				gp.cDetect.checkEntity(this, gp.npc, 1);
+				direction = gp.player.direction;
+				gp.cDetect.checkAttack(this, gp.npc, 1);
 				boolean hit = gp.cDetect.collision();
 				//System.out.println("hit");
 				if (gp.player.direction.equals("up")) {
 				
-					gp.atk[0].worldX = Col;
-					gp.atk[0].worldY =  (int) (Row - gp.tileSize * 1.3);
+					gp.atk.worldX = Col;
+					gp.atk.worldY =  (int) (Row - gp.tileSize * 1.3);
 					
-					if (hit) {
+					if (collisionOn) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "up", gp.player))) {
-						gp.npc[gp.cDetect.collisionIndex()].worldY -= gp.player.knockback;
+							gp.npc[gp.cDetect.collisionIndex()].worldY -= gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
@@ -94,12 +92,12 @@ public class Attack extends Entity{
 				}
 				if (gp.player.direction.equals("down")) {
 			
-					gp.atk[0].worldX = Col;
-					gp.atk[0].worldY = (int) (Row + gp.tileSize);
+					gp.atk.worldX = Col;
+					gp.atk.worldY = (int) (Row + gp.tileSize);
 					
-					if (hit) {
+					if (collisionOn) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "down", gp.player))) {
-						gp.npc[gp.cDetect.collisionIndex()].worldY += gp.player.knockback;
+							gp.npc[gp.cDetect.collisionIndex()].worldY += gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
@@ -109,12 +107,12 @@ public class Attack extends Entity{
 				}
 				if (gp.player.direction.equals("left")) {
 					
-					gp.atk[0].worldX = (int) (Col - gp.tileSize * 1.3);
-					gp.atk[0].worldY = Row;
+					gp.atk.worldX = (int) (Col - gp.tileSize * 1.3);
+					gp.atk.worldY = Row;
 					
-					if (hit) {
+					if (collisionOn) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "left", gp.player))) {
-						gp.npc[gp.cDetect.collisionIndex()].worldX -= gp.player.knockback;
+							gp.npc[gp.cDetect.collisionIndex()].worldX -= gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
@@ -124,13 +122,12 @@ public class Attack extends Entity{
 				}
 
 				if (gp.player.direction.equals("right")) {// gp.tileSize
-		
-					gp.atk[0].worldX = Col + gp.tileSize;
-					gp.atk[0].worldY = Row;
+					gp.atk.worldX = Col + gp.tileSize;
+					gp.atk.worldY = Row;
 					
-					if (hit) {
+					if (collisionOn) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "right", gp.player))) {
-						gp.npc[gp.cDetect.collisionIndex()].worldX += gp.player.knockback;
+							gp.npc[gp.cDetect.collisionIndex()].worldX += gp.player.knockback;
 						}
 						gp.npc[gp.cDetect.collisionIndex()].health -= 10;
 						gp.playSoundEffect(2);
@@ -141,13 +138,13 @@ public class Attack extends Entity{
 
 				if (delay >= duration) {
 					z= false;
-					gp.atk[0] = new Attack(gp);
+					gp.atk = new Attack(gp);
 					soundCounter = 0;
 					
 				}
 				//System.out.println(gp.atk[0].worldX);
-				hitBox.x = gp.atk[0].worldX;
-				hitBox.y = gp.atk[0].worldY;
+				hitBox.x = gp.atk.worldX;
+				hitBox.y = gp.atk.worldY;
 
 			}
 
@@ -157,7 +154,7 @@ public class Attack extends Entity{
 		BufferedImage image = null;
 		
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/attacks/"+imageName+".png"));
+			image = ImageIO.read(getClass().getResourceAsStream("/attacks/playerAtk"+imageName+".png"));
 			BufferedImage scaledImage = new BufferedImage(gp.tileSize, gp.tileSize, image.getType());
 			Graphics2D g2 = scaledImage.createGraphics();
 			g2.drawImage(image, 0, 0, gp.tileSize, gp.tileSize, null);
@@ -169,7 +166,80 @@ public class Attack extends Entity{
 		return image;
 	}
 	public void getImage() {
-		atk1 = setup("Basic");
+		up1 = setup("Up1");
+		up2 = setup("Up2");
+		up3 = setup("Up3");
+		down1 = setup("Down1");
+		down2 = setup("Down2");
+		down3 = setup("Down3");
+		right1 = setup("Right1");
+		right2 = setup("Right2");
+		right3 = setup("Right3");
+		left1 = setup("Left1");
+		left2 = setup("Left2");
+		left3 = setup("Left3");
+		
+	}
+	public void draw(Graphics2D g2) {
+		
+		BufferedImage image = null;
+		int screenX = worldX - gp.player.worldX + gp.player.screenX;
+		int screenY = worldY - gp.player.worldY + gp.player.screenY;
+		direction = gp.player.direction;
+		if(spriteDelay >= 45) {
+			spriteDelay = 0;
+			if(spriteNum >= 3) {
+				spriteNum = 1;
+			} else {
+				spriteNum++;
+			}
+		}
+		switch (direction) {
+		case "right":
+			System.out.println(spriteNum);
+			if (spriteNum == 1) {
+				image = right1;
+			}else if (spriteNum == 2) {
+				image = right2;
+			}else if (spriteNum == 3) {
+				image = right3;
+			}
+			break;
+
+		case "left":
+			System.out.println(spriteNum);
+			if (spriteNum == 1) {
+				image = left1;
+			}else if (spriteNum == 2) {
+				image = left2;
+			}else if (spriteNum == 3) {
+				image = left3;
+			}
+			break;
+		case "up":
+			System.out.println(spriteNum);
+			if (spriteNum == 1) {
+				image = up1;
+			}else if (spriteNum == 2) {
+				image = up2;
+			}else if (spriteNum == 3) {
+				image = up3;
+			}
+			break;
+
+		case "down":
+			System.out.println(spriteNum);
+			if (spriteNum == 1) {
+				image = down1;
+			}else if (spriteNum == 2) {
+				image = down2;
+			}else if (spriteNum == 3) {
+				image = down3;
+			}
+			break;
+		}
+		spriteDelay++;
+		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 	}
 	
 }

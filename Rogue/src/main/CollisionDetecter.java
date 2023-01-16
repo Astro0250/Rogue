@@ -793,6 +793,79 @@ public class CollisionDetecter {
 	
 
 	// check npc/enemy collision
+	public int checkAttack(Attack atk, Entity[] target, double speed) {
+		
+		x = false;
+		
+		int index = 999;
+		
+		//This is important do not replace, entity.hitbox changes constantly but this doesn't
+		Rectangle storer = new Rectangle(atk.hitBox);
+
+		
+		for (int i = 0; i < target.length; i++) {
+
+			if (target[i] != null) {
+				// System.out.println(entity.hitBox);
+				// GET ENTITY HITPOX POSITION
+
+				atk.hitBox.x = atk.worldX + atk.hitBox.x;
+				atk.hitBox.y = atk.worldY + atk.hitBox.y;
+				// GET OBJECT HITBOX POSITION
+				target[i].hitBox.x = target[i].worldX + target[i].hitBox.x;
+				target[i].hitBox.y = target[i].worldY + target[i].hitBox.y;
+
+				
+				switch (atk.direction) {
+				case "up":
+					atk.hitBox.y -= speed;
+					if (atk.hitBox.intersects(target[i].hitBox)) {
+						atk.collisionOn = true;
+						index = i;
+					}
+					break;
+				case "down":
+					atk.hitBox.y += speed;
+					if (atk.hitBox.intersects(target[i].hitBox)) {
+						atk.collisionOn = true;
+						index = i;
+					}
+					break;
+				case "left":
+					atk.hitBox.x -= speed;
+					if (atk.hitBox.intersects(target[i].hitBox)) {
+						atk.collisionOn = true;
+						index = i;
+					}
+					break;
+				case "right":
+					atk.hitBox.x += speed;
+					if (atk.hitBox.intersects(target[i].hitBox)) {
+						atk.collisionOn = true;
+						index = i;
+					}
+					break;
+				case "atk1":
+
+				
+					
+					if ((storer.intersects(target[i].hitBox))) {
+						collision(true, i);
+											}
+				}
+
+				atk.hitBox.x = atk.hitBoxDefaultX;
+
+				atk.hitBox.y = atk.hitBoxDefaultY;
+
+				target[i].hitBox.x = target[i].hitBoxDefaultX;
+				target[i].hitBox.y = target[i].hitBoxDefaultY;
+
+			}
+		}
+
+		return index;
+	}
 	public int checkEntity(Entity entity, Entity[] target, double speed) {
 		x = false;
 		
