@@ -74,13 +74,14 @@ public class Attack extends Entity{
 				direction = gp.player.direction;
 				gp.cDetect.checkAttack(this, gp.npc, 1);
 				boolean hit = gp.cDetect.collision();
+				//System.out.println(hit);
 				//System.out.println("hit");
 				if (gp.player.direction.equals("up")) {
 				
 					gp.atk.worldX = Col;
 					gp.atk.worldY =  (int) (Row - gp.tileSize * 1.3);
 					
-					if (collisionOn) {
+					if (hit) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "up", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldY -= gp.player.knockback;
 							collisionOn = false;
@@ -97,7 +98,7 @@ public class Attack extends Entity{
 					gp.atk.worldX = Col;
 					gp.atk.worldY = (int) (Row + gp.tileSize);
 					
-					if (collisionOn) {
+					if (hit) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "down", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldY += gp.player.knockback;
 							collisionOn = false;
@@ -114,7 +115,7 @@ public class Attack extends Entity{
 					gp.atk.worldX = (int) (Col - gp.tileSize * 1.3);
 					gp.atk.worldY = Row;
 					
-					if (collisionOn) {
+					if (hit) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "left", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldX -= gp.player.knockback;
 							collisionOn = false;
@@ -130,7 +131,7 @@ public class Attack extends Entity{
 					gp.atk.worldX = Col + gp.tileSize;
 					gp.atk.worldY = Row;
 					
-					if (collisionOn) {
+					if (hit) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "right", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldX += gp.player.knockback;
 							collisionOn = false;
@@ -201,7 +202,7 @@ public class Attack extends Entity{
 		}
 		switch (direction) {
 		case "right":
-			System.out.println(spriteNum);
+			//System.out.println(spriteNum);
 			if (spriteNum == 1) {
 				image = right1;
 			}else if (spriteNum == 2) {
@@ -212,7 +213,7 @@ public class Attack extends Entity{
 			break;
 
 		case "left":
-			System.out.println(spriteNum);
+			//System.out.println(spriteNum);
 			if (spriteNum == 1) {
 				image = left1;
 			}else if (spriteNum == 2) {
@@ -222,7 +223,7 @@ public class Attack extends Entity{
 			}
 			break;
 		case "up":
-			System.out.println(spriteNum);
+			//System.out.println(spriteNum);
 			if (spriteNum == 1) {
 				image = up1;
 			}else if (spriteNum == 2) {
@@ -233,7 +234,7 @@ public class Attack extends Entity{
 			break;
 
 		case "down":
-			System.out.println(spriteNum);
+			//System.out.println(spriteNum);
 			if (spriteNum == 1) {
 				image = down1;
 			}else if (spriteNum == 2) {
