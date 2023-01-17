@@ -63,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
 		public Attack attack = new Attack(this);
 		public AssetSetter aSetter = new AssetSetter(this);
 		public Item obj[] = new Item[20];
-		public Entity npc[] = new Entity[10];
+		public Entity npc[] = new Entity[30];
 		public Attack atk = new Attack(this);
 		
 		// GAME STATE
@@ -71,6 +71,8 @@ public class GamePanel extends JPanel implements Runnable {
 		public int playState = 1;
 		public int pauseState = 2;
 		public int deathState = 3;
+		public int dialogueState = 4;
+		public int classState = 5;
 	
 	// GAME PANEL INSTANTIATION
 	public GamePanel() { 
@@ -86,7 +88,7 @@ public class GamePanel extends JPanel implements Runnable {
 		aSetter.setNPC();
 		attack.setAttack();
 		gameState = playState;
-		//loopMusic(1);
+		loopMusic(1);
 	}
 
 	public void startGameThread() {
@@ -234,7 +236,9 @@ public class GamePanel extends JPanel implements Runnable {
 				tileM.tile[i].collision = true;
 			}
 		}
-		
+		if(gameState == classState) {
+			UI.drawClassifiedDoc(g2);
+		}
 		g2.dispose();
 	}
 	public void loopMusic(int i) {

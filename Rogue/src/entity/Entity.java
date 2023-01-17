@@ -24,8 +24,12 @@ public class Entity {
 	public Rectangle hitBoxE = new Rectangle(5, 5, 38, 38);//5, 5, 38, 38
 	public int hitBoxDefaultX, hitBoxDefaultY;
 	public boolean collisionOn = false;
+	public boolean doesDamage = true;
 	public double speedD;
 	public int actionLock = 0;
+	int dialogueSet = 1;
+	String dialogue[] = new String[20];
+	int dialogueIndex = 0;
 	
 
 	public Entity(GamePanel gp) {
@@ -33,16 +37,17 @@ public class Entity {
 	}
 
 	public void setAction() {}
+	public void speak() {}
 	public void doAction() {}
 	public void update() {
 		if (health > 0) {
 			setAction();
 			doAction();
 		} else {
-			worldX = 0;
-			worldY = 0;
+			worldX = gp.tileSize*29;
+			worldY = gp.tileSize*28;
 			if (actionLock < 1) {
-				System.out.println("Enemy Killed!");
+				gp.player.kills++;
 				actionLock++;
 			}
 		}
@@ -128,7 +133,7 @@ public class Entity {
 				break;
 			}
 			// Health Bar
-			if(!direction.equals("atk1") && this.health != 100) {
+			if(!direction.equals("atk1") && this.health < 100) {
 				g2.setColor(Color.black);
 				g2.fillRect(screenX-2, screenY-23, 54, 15);
 				g2.setColor(Color.red);

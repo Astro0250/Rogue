@@ -16,6 +16,10 @@ public class Player extends Entity {
 	public final int screenX;
 	public final int screenY;
 	private int knockAmt;
+	public int keyCount = 0;
+	public BufferedImage classified;
+	int temp;
+	int kills = 0;
 
 	public int knockAmt() {
 		return knockAmt;
@@ -81,7 +85,8 @@ public class Player extends Entity {
 
 	public void getPlayerImage() {
 		try {
-
+			classified = ImageIO.read(getClass().getResource("/CLASSIFIED_DOCUMENTS/CLASSIFIED.png"));
+			
 			up1 = ImageIO.read(getClass().getResource("/player/Up1.png"));
 			up2 = ImageIO.read(getClass().getResource("/player/Up2.png"));
 
@@ -122,7 +127,6 @@ public class Player extends Entity {
 	}
 
 	public void update() {
-
 		// CHECK TILE COLLISION
 		collisionOn = false;
 
@@ -236,18 +240,54 @@ public class Player extends Entity {
 
 	public void interactObject(int i) {
 		if (i != 999) {
-
+			switch(gp.obj[i].name) {
+				case"Chest":{gp.gameState = gp.classState;}
+				case"GateHor":{
+					if(keyCount > 0 && gp.obj[i].collision) {
+						gp.obj[i].collision = false;
+						gp.obj[i].image = gp.obj[i].image2;
+						gp.playSoundEffect(4);
+						keyCount--;
+					}
+				}
+				case"GateVertLR":{
+					if(keyCount > 0 && gp.obj[i].collision) {
+						gp.obj[i].collision = false;
+						gp.obj[i].image = gp.obj[i].image2;
+						gp.playSoundEffect(4);
+						keyCount--;
+					}
+				}
+				case"GateVertRL":{
+					if(keyCount > 0 && gp.obj[i].collision) {
+						gp.obj[i].collision = false;
+						gp.obj[i].image = gp.obj[i].image2;
+						gp.playSoundEffect(4);
+						keyCount--;
+					}
+				}
+			}	
 		}
 	}
 
 	public void interactNPC(int i) {
 		collisionOn = false;
-		// System.out.println(gp.delayPlayer());
-		// if (gp.delayPlayer() > 60) {
 		if (i != 999) {
-			health -= 10;
-			// System.out.println(gp.npc[i].direction);
-			switch (gp.npc[i].direction) {
+			if(gp.npc[i].doesDamage) {
+				health -= 10;
+				switch (gp.npc[i].direction) {
+				case "up": {
+					if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+						knockback("worldY", -gp.npc[i].knockback);
+					}
+				}
+					break;
+				case "down": {
+					if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+						knockback("worldY", gp.npc[i].knockback);
+					}
+				}
+switch (gp.npc[i].direction) {
 			case "up": {
 				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this, 1))) {
 					knockback("worldY", -gp.npc[i].knockback);
@@ -302,15 +342,33 @@ public class Player extends Entity {
 			}
 				break;
 			}
-			if (health < 0) {
-				health = 0;
+				if (health < 0) {
+					health = 0;
+				}
+				System.out.println("health = " + health);
+				gp.playSoundEffect(2);
+			} else {
+				switch(direction) {
+				case"up" -> worldY += speed*2;
+				case"down" -> worldY -= speed*2;
+				case"left" -> worldX += speed*2;
+				case"right" -> worldX -= speed*2;
+				}
+				if(kills >= 2) {
+					System.out.println(kills);
+					gp.npc[i] = new NPC_Sir_Jefferies(gp, 3);;
+					gp.npc[i].worldX = gp.tileSize * 108;
+					gp.npc[i].worldY = gp.tileSize * 120;
+					kills = 0;
+				}
+				gp.gameState = gp.dialogueState;
+				gp.npc[i].speak();
+				if((gp.npc[i].dialogueIndex == 1 && gp.npc[i].dialogueSet == 1) || (gp.npc[i].dialogueIndex == 6 && gp.npc[i].dialogueSet == 2)) {
+					keyCount++;
+				}
 			}
-			System.out.println("health = " + health);
-			gp.playSoundEffect(2);
-			// gp.delayPlayer(0);
 		}
 	}
-
 	public void draw(Graphics2D g2) {
 
 		BufferedImage image = null;

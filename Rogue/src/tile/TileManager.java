@@ -83,9 +83,12 @@ public class TileManager {
 		setup(42, "WoodWallT", true);
 		setup(43, "WoodWallTL", true);
 		setup(44, "WoodWallTR", true);
+		setup(45, "CrackedBridgeUD", true);
+		setup(46, "CrackedBridgeDU", true);
+
 		// SCALES EACH IMAGE TO THE PROPER SIZE SIZE
 		// REMEMBER TO SCALE \/ THIS NUMBER WITH THE AMOUNT OF TILES!!!!!!!!!!!!!!!!! (or just make it a variable) (nahhh)
-		for (int i = 100; i <= 144; i++) {
+		for (int i = 100; i <= 146; i++) {
 			BufferedImage scaledImage = new BufferedImage(gp.tileSize, gp.tileSize, tile[i].image.getType());
 			Graphics2D g2 = scaledImage.createGraphics();
 			

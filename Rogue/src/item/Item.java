@@ -8,13 +8,15 @@ import main.GamePanel;
 
 public class Item {
 	
-	public BufferedImage image;
+	public BufferedImage image, image2;
 	public String name;
 	public boolean collision = false;
 	public int worldX, worldY;
 	public Rectangle hitBox = new Rectangle(0,0,48,48);
 	public int hitBoxDefaultX = 0;
 	public int hitBoxDefaultY = 0;
+	public int sizeX = 48;
+	public int sizeY = 48;
 	
 	public void draw(Graphics2D g2, GamePanel gp) {
 		
@@ -26,7 +28,7 @@ public class Item {
 		   worldY + (gp.tileSize) > gp.player.worldY - gp.player.screenY && 
 		   worldY - (gp.tileSize) < gp.player.worldY + gp.player.screenY) {
 
-			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+			g2.drawImage(image, screenX, screenY, sizeX, sizeY, null);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -16,6 +17,7 @@ public class UserInterface {
 	public String message = "";
 	int messageCounter;
 	public boolean gameWin;
+	public String currentDialogue = "";
 
 	public UserInterface(GamePanel gp) {
 		this.gp = gp;
@@ -44,6 +46,40 @@ public class UserInterface {
 		if (gp.gameState == gp.deathState) {
 			drawDead();
 		}
+		if (gp.gameState == gp.dialogueState) {
+			drawDialogue();
+		}
+		
+	}
+	public void drawClassifiedDoc(Graphics2D g2) {
+		g2.drawImage(gp.player.classified, 200, 10, null);
+	}
+	public void drawDialogue() {
+		// WINDOW 
+		int x = gp.tileSize;
+		int y = gp.tileSize/2;
+		int width = gp.screenWidth - x*2;
+		int height = gp.tileSize*5;
+		drawSubWindow(x, y, width, height);
+		
+		x += gp.tileSize;
+		y += gp.tileSize*2;
+		g2.setFont(new Font("Ariel", Font.BOLD, 35));
+		
+		for(String line : currentDialogue.split("\n")) {
+			g2.drawString(line, x, y);
+			y+= 40;
+		}		
+	}
+	public void drawSubWindow(int x, int y, int width, int height) {
+		
+		Color PB = new Color(16, 7, 18, 220);
+		g2.setColor(PB);
+		g2.fillRoundRect(x, y, width, height, 35, 35);
+		
+		g2.setColor(Color.white);
+		g2.setStroke(new BasicStroke(4));
+		g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
 		
 	}
 	public void drawPause() {
