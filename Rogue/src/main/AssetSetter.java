@@ -2,11 +2,9 @@ package main;
 
 import entity.NPC_Enemy;
 import entity.NPC_Sir_Jefferies;
-import entity.Entity;
-import entity.Attack;
-import entity.Player;
 import item.Chest;
 import item.Door;
+import item.Gate;
 import item.Key;
 
 public class AssetSetter {
@@ -30,6 +28,7 @@ public class AssetSetter {
 	public void setObject() {
 
 		// INSTANTIATES AND PLACES ITEMS ON THE MAP
+		setupItem("Gate", 132, 107, true);
 
 	}
 
@@ -59,7 +58,11 @@ public class AssetSetter {
 		case "Chest":
 			gp.obj[itemCount] = new Chest();
 			break;
+		case "Gate":
+			gp.obj[itemCount] = new Gate();
+			break;
 		}
+
 		gp.obj[itemCount].worldX = worldX(x * gp.tileSize);
 		gp.obj[itemCount].worldY = worldY(y * gp.tileSize);
 		gp.obj[itemCount].collision = collision;
