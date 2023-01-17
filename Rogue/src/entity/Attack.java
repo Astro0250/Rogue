@@ -92,7 +92,10 @@ public class Attack extends Entity{
 				
 				direction = gp.player.direction;
 				gp.cDetect.checkAttack(this, gp.npc, 1);
-				boolean hit = gp.cDetect.collision();
+				boolean hit = false;
+				if (delay == 1) {
+				 hit = gp.cDetect.collision();
+				}
 				//System.out.println(hit);
 				//System.out.println("hit");
 				if (gp.player.direction.equals("up")) {

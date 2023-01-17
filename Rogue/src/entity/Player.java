@@ -249,53 +249,53 @@ public class Player extends Entity {
 			// System.out.println(gp.npc[i].direction);
 			switch (gp.npc[i].direction) {
 			case "up": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this, 1))) {
 					knockback("worldY", -gp.npc[i].knockback);
 				}
 			}
 				break;
 			case "down": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this, 1))) {
 					knockback("worldY", gp.npc[i].knockback);
 				}
 			}
 				break;
 			case "left": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this, 1))) {
 					knockback("worldX", -gp.npc[i].knockback);
 				}
 			}
 				break;
 			case "right": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this, 1))) {
 					knockback("worldX", gp.npc[i].knockback);
 				}
 			}
 				break;
 
 			case "up right": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this, 1))) {
 					knockback("worldY", -gp.npc[i].knockback);
 					knockback("worldX", gp.npc[i].knockback);
 				}
 			}
 				break;
 			case "up left": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this, 1))) {
 					knockback("worldY", -gp.npc[i].knockback);
 					knockback("worldX", -gp.npc[i].knockback);
 				}
 			}
 				break;
 			case "down left": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this, 1))) {
 					knockback("worldY", gp.npc[i].knockback);
 					knockback("worldX", -gp.npc[i].knockback);
 				}
 			}
 				break;
 			case "down right": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this, 1))) {
 					knockback("worldY", gp.npc[i].knockback);
 					knockback("worldX", gp.npc[i].knockback);
 				}
