@@ -333,7 +333,7 @@ public class Player extends Entity {
 				if (health < 0) {
 					health = 0;
 				}
-				System.out.println("health = " + health);
+				//System.out.println("health = " + health);
 				gp.playSoundEffect(2);
 			} else {
 				switch(direction) {
@@ -343,7 +343,7 @@ public class Player extends Entity {
 				case"right" -> worldX -= speed*2;
 				}
 				if(kills >= 2) {
-					System.out.println(kills);
+					//System.out.println(kills);
 					gp.npc[i] = new NPC_Sir_Jefferies(gp, 3);;
 					gp.npc[i].worldX = gp.tileSize * 108;
 					gp.npc[i].worldY = gp.tileSize * 120;
@@ -351,7 +351,7 @@ public class Player extends Entity {
 				}
 				gp.gameState = gp.dialogueState;
 				gp.npc[i].speak();
-				if((gp.npc[i].dialogueIndex == 1 && gp.npc[i].dialogueSet == 1) || (gp.npc[i].dialogueIndex == 6 && gp.npc[i].dialogueSet == 2)) {
+				if((gp.npc[i].dialogueIndex == 1 && gp.npc[i].dialogueSet == 1) || (gp.npc[i].dialogueIndex == 6 && gp.npc[i].dialogueSet == 2) || (gp.npc[i].dialogueIndex == 2 && gp.npc[i].dialogueSet == 3)) {
 					keyCount++;
 				}
 			}
