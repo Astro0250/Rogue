@@ -71,6 +71,8 @@ public class GetPixelColor {
                     	case "25 59 25" -> pw.print("109 ");
                     	case "48 107 48" -> pw.print("110 ");
                     	case "40 20 0" -> pw.print("111 ");
+                    	case "229 0 229" -> pw.print("145 ");
+                    	case "86 16 86" -> pw.print("146 ");
                     	// GS Transitions
                     	case "67 77 0" -> pw.print("115 ");
                     	case "105 121 0" -> pw.print("116 ");

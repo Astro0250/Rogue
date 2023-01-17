@@ -16,6 +16,8 @@ public class Player extends Entity {
 	public final int screenX;
 	public final int screenY;
 	private int knockAmt;
+	public int keyCount = 2;
+	int temp;
 
 	public int knockAmt() {
 		return knockAmt;
@@ -236,78 +238,95 @@ public class Player extends Entity {
 
 	public void interactObject(int i) {
 		if (i != 999) {
-
+			switch(gp.obj[i].name) {
+				case"GateHor":{
+					if(keyCount > 0 && gp.obj[i].collision) {
+						gp.obj[i].collision = false;
+						gp.obj[i].image = gp.obj[i].image2;
+					}
+				}
+				case"GateVertLR":{
+					if(keyCount > 0 && gp.obj[i].collision) {
+						gp.obj[i].collision = false;
+						gp.obj[i].image = gp.obj[i].image2;
+					}
+				}
+				case"GateVertRL":{
+					if(keyCount > 0 && gp.obj[i].collision) {
+						gp.obj[i].collision = false;
+						gp.obj[i].image = gp.obj[i].image2;
+					}
+				}
+			}	
 		}
 	}
 
 	public void interactNPC(int i) {
 		collisionOn = false;
-		// System.out.println(gp.delayPlayer());
-		// if (gp.delayPlayer() > 60) {
 		if (i != 999) {
-			health -= 10;
-			// System.out.println(gp.npc[i].direction);
-			switch (gp.npc[i].direction) {
-			case "up": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
-					knockback("worldY", -gp.npc[i].knockback);
+			if(gp.npc[i].doesDamage) {
+				health -= 10;
+				switch (gp.npc[i].direction) {
+				case "up": {
+					if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+						knockback("worldY", -gp.npc[i].knockback);
+					}
 				}
-			}
-				break;
-			case "down": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
-					knockback("worldY", gp.npc[i].knockback);
+					break;
+				case "down": {
+					if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+						knockback("worldY", gp.npc[i].knockback);
+					}
 				}
-			}
-				break;
-			case "left": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
-					knockback("worldX", -gp.npc[i].knockback);
+					break;
+				case "left": {
+					if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+						knockback("worldX", -gp.npc[i].knockback);
+					}
 				}
-			}
-				break;
-			case "right": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
-					knockback("worldX", gp.npc[i].knockback);
+					break;
+				case "right": {
+					if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+						knockback("worldX", gp.npc[i].knockback);
+					}
 				}
-			}
-				break;
-
-			case "up right": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
-					knockback("worldY", -gp.npc[i].knockback);
-					knockback("worldX", gp.npc[i].knockback);
+					break;
+	
+				case "up right": {
+					if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+						knockback("worldY", -gp.npc[i].knockback);
+						knockback("worldX", gp.npc[i].knockback);
+					}
 				}
-			}
-				break;
-			case "up left": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
-					knockback("worldY", -gp.npc[i].knockback);
-					knockback("worldX", -gp.npc[i].knockback);
+					break;
+				case "up left": {
+					if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+						knockback("worldY", -gp.npc[i].knockback);
+						knockback("worldX", -gp.npc[i].knockback);
+					}
 				}
-			}
-				break;
-			case "down left": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
-					knockback("worldY", gp.npc[i].knockback);
-					knockback("worldX", -gp.npc[i].knockback);
+					break;
+				case "down left": {
+					if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+						knockback("worldY", gp.npc[i].knockback);
+						knockback("worldX", -gp.npc[i].knockback);
+					}
 				}
-			}
-				break;
-			case "down right": {
-				if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
-					knockback("worldY", gp.npc[i].knockback);
-					knockback("worldX", gp.npc[i].knockback);
+					break;
+				case "down right": {
+					if (!(gp.cDetect.checkKnockback(this, gp.npc[i].direction, this))) {
+						knockback("worldY", gp.npc[i].knockback);
+						knockback("worldX", gp.npc[i].knockback);
+					}
 				}
+					break;
+				}
+				if (health < 0) {
+					health = 0;
+				}
+				System.out.println("health = " + health);
+				gp.playSoundEffect(2);
 			}
-				break;
-			}
-			if (health < 0) {
-				health = 0;
-			}
-			System.out.println("health = " + health);
-			gp.playSoundEffect(2);
-			// gp.delayPlayer(0);
 		}
 	}
 

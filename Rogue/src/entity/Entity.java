@@ -24,6 +24,7 @@ public class Entity {
 	public Rectangle hitBoxE = new Rectangle(5, 5, 38, 38);//5, 5, 38, 38
 	public int hitBoxDefaultX, hitBoxDefaultY;
 	public boolean collisionOn = false;
+	public boolean doesDamage = true;
 	public double speedD;
 	public int actionLock = 0;
 	
@@ -128,7 +129,7 @@ public class Entity {
 				break;
 			}
 			// Health Bar
-			if(!direction.equals("atk1") && this.health != 100) {
+			if(!direction.equals("atk1") && this.health <= 100) {
 				g2.setColor(Color.black);
 				g2.fillRect(screenX-2, screenY-23, 54, 15);
 				g2.setColor(Color.red);

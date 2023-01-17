@@ -15,7 +15,8 @@ public class NPC_Sir_Jefferies extends Entity{
 	public NPC_Sir_Jefferies(GamePanel gp) {
 		
 		super(gp);
-		
+		doesDamage = false;
+		health = 10000;
 		direction = "down";
 		speed = 0;
 		hitBox.x = 0;

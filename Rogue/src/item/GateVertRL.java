@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Gate extends Item{
+public class GateVertRL extends Item{
 
-	public Gate() {
+	public GateVertRL() {
 		
-		name = "Gate";
+		name = "GateVertRL";
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/items/Gate.png"));
+			image = ImageIO.read(getClass().getResourceAsStream("/items/GateMidVertRL.png"));
 					
 		} catch(IOException e) {
 			e.printStackTrace();
