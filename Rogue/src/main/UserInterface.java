@@ -94,7 +94,7 @@ public class UserInterface {
 	public void drawPlay() {
 		//dg2.drawRect(10, 10, 100, 20);
 		g2.setColor(Color.black);
-		g2.fillRect(10, 10, 210, 50);
+		g2.fillRect(10, 10, gp.player.health*2+10, 50);
 		g2.setColor(Color.red);
 		g2.fillRect(15, 15, gp.player.health*2, 40);
 	}

@@ -47,10 +47,14 @@ public class AssetSetter {
 		gp.npc[3].worldX = (gp.tileSize * 34) - gp.tileSize/2;
 		gp.npc[3].worldY = gp.tileSize * 162;
 		
+		gp.npc[4] = new NPC_Enemy(gp);
+		gp.npc[4].worldX = gp.tileSize * 150;
+		gp.npc[4].worldY = gp.tileSize * 91;
+		
 		int crafty = 152;
 		int miney = 92;
 		double undertale;
-		for(int i = 4; i < 29; i++) {
+		for(int i = 5; i < 29; i++) {
 			gp.npc[i] = new NPC_Enemy(gp);
 			gp.npc[i].worldX = gp.tileSize * crafty;
 			gp.npc[i].worldY = gp.tileSize * miney;

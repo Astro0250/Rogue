@@ -78,6 +78,7 @@ public class Player extends Entity {
 	public void setDefaultValues() {
 		worldX(gp.tileSize * 42);
 		worldY(gp.tileSize * 154);
+		health = 100;
 		speed = 8;
 		direction = "down";
 		knockback = 100;
