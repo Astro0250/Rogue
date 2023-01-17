@@ -18,6 +18,8 @@ public class UserInterface {
 	int messageCounter;
 	public boolean gameWin;
 	public String currentDialogue = "";
+	long startTime = System.nanoTime();
+	int counter = 0;
 
 	public UserInterface(GamePanel gp) {
 		this.gp = gp;
@@ -52,7 +54,12 @@ public class UserInterface {
 		
 	}
 	public void drawClassifiedDoc(Graphics2D g2) {
-		g2.drawImage(gp.player.classified, 200, 10, null);
+		if(counter == 0) {
+		String a = "" + (System.nanoTime()-startTime)/1000000000;
+		System.out.println("Your Time Was - " + a + " seconds");
+		counter++;
+		}
+		g2.drawImage(gp.player.classified, gp.screenWidth/2-388/2, gp.screenHeight/2-500/2, null);
 	}
 	public void drawDialogue() {
 		// WINDOW 
@@ -94,7 +101,7 @@ public class UserInterface {
 	public void drawPlay() {
 		//dg2.drawRect(10, 10, 100, 20);
 		g2.setColor(Color.black);
-		g2.fillRect(10, 10, gp.player.health*2+10, 50);
+		g2.fillRect(10, 10, 210, 50);
 		g2.setColor(Color.red);
 		g2.fillRect(15, 15, gp.player.health*2, 40);
 	}

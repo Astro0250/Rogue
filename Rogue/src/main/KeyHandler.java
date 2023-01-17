@@ -13,9 +13,10 @@ public class KeyHandler implements KeyListener {
 	
 	// DEBUG
 	boolean checkDrawTime = false;
-	
+	long startTime = System.nanoTime();
 	public KeyHandler(GamePanel gp) {
 		this.gp = gp;
+		
 	}
 	
 	@Override
@@ -26,6 +27,10 @@ public class KeyHandler implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 
 		int code = e.getKeyCode();
+		if(code == KeyEvent.VK_ENTER) {
+			String a = "" + (System.nanoTime()-startTime)/1000000000;
+			System.out.println("Your current time is - "+a+" seconds");
+		}
 		if(gp.gameState == gp.playState) {
 			if (code == KeyEvent.VK_SPACE) {
 				spacePressed = true;
