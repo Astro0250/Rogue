@@ -14,7 +14,7 @@ public class Entity {
 	public int worldY;	
 	public int speed;
 	public int health = 100;
-	public int knockback = 50;;
+	public int knockback = 50;
 	public BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, left4, right1, right2, right3, right4;
 	public BufferedImage atk1;
 	public String direction;
@@ -39,8 +39,8 @@ public class Entity {
 			setAction();
 			doAction();
 		} else {
-			worldX += 10000;
-			worldY += 10000;
+			worldX = 0;
+			worldY = 0;
 			if (actionLock < 1) {
 				System.out.println("Enemy Killed!");
 				actionLock++;

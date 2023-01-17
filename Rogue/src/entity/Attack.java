@@ -21,6 +21,20 @@ import javax.imageio.ImageIO;
 public class Attack extends Entity{
 	int soundCounter = 0;
 	int spriteDelay = 0;
+	private int attackDuration = 20;
+	private int cooldownDuration = 60;
+	public int getAttackDuration() {
+		return attackDuration;
+	}
+	public void setAttackDuration(int duration) {
+		attackDuration = duration;
+	}
+	public int getCooldownDuration() {
+		return cooldownDuration;
+	}
+	public void setCooldownDuration(int duration) {
+		cooldownDuration = duration;
+	}
 	public Attack(GamePanel gp) {
 		super(gp);
 		direction = gp.player.direction;
@@ -32,6 +46,7 @@ public class Attack extends Entity{
 		hitBoxDefaultY = hitBox.y;
 		hitBox.width = 30;
 		hitBox.height = 30;
+		
 	}
 	public Attack(GamePanel gp, int a, int b) {
 		super(gp);
@@ -46,13 +61,17 @@ public class Attack extends Entity{
 		hitBox.height = 30;
 		gp.atk.worldX = a;
 		gp.atk.worldY = b;
+		
+		
 	}
 	//important for the cooldown/duration
 	public boolean z = false;
 
 	public void setAttack() {
-		int duration = 31;
-		int cooldown = 62;
+		
+	
+		int duration = getAttackDuration();
+		int cooldown = getCooldownDuration();
 		int delay = gp.delay();
 		if (delay >= cooldown || z) {
 			if (gp.keyH.spacePressed || z) {
@@ -74,13 +93,14 @@ public class Attack extends Entity{
 				direction = gp.player.direction;
 				gp.cDetect.checkAttack(this, gp.npc, 1);
 				boolean hit = gp.cDetect.collision();
+				//System.out.println(hit);
 				//System.out.println("hit");
 				if (gp.player.direction.equals("up")) {
 				
-					gp.atk.worldX = Col;
+					gp.atk.worldX = Col -  (int)(gp.tileSize * 0.2);
 					gp.atk.worldY =  (int) (Row - gp.tileSize * 1.3);
 					
-					if (collisionOn) {
+					if (hit) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "up", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldY -= gp.player.knockback;
 							collisionOn = false;
@@ -94,10 +114,10 @@ public class Attack extends Entity{
 				}
 				if (gp.player.direction.equals("down")) {
 			
-					gp.atk.worldX = Col;
+					gp.atk.worldX = Col - (int)(gp.tileSize * 0.2);
 					gp.atk.worldY = (int) (Row + gp.tileSize);
 					
-					if (collisionOn) {
+					if (hit) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "down", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldY += gp.player.knockback;
 							collisionOn = false;
@@ -114,7 +134,7 @@ public class Attack extends Entity{
 					gp.atk.worldX = (int) (Col - gp.tileSize * 1.3);
 					gp.atk.worldY = Row;
 					
-					if (collisionOn) {
+					if (hit) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "left", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldX -= gp.player.knockback;
 							collisionOn = false;
@@ -130,7 +150,7 @@ public class Attack extends Entity{
 					gp.atk.worldX = Col + gp.tileSize;
 					gp.atk.worldY = Row;
 					
-					if (collisionOn) {
+					if (hit) {
 						if(!(gp.cDetect.checkKnockback(gp.npc[gp.cDetect.collisionIndex()], "right", gp.player))) {
 							gp.npc[gp.cDetect.collisionIndex()].worldX += gp.player.knockback;
 							collisionOn = false;
@@ -186,33 +206,46 @@ public class Attack extends Entity{
 		
 	}
 	public void draw(Graphics2D g2) {
+		//System.out.println(spriteNum);
 		
 		BufferedImage image = null;
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
 		int screenY = worldY - gp.player.worldY + gp.player.screenY;
 		direction = gp.player.direction;
-		if(spriteDelay >= 45) {
-			spriteDelay = 0;
-			if(spriteNum >= 3) {
-				spriteNum = 1;
-			} else {
-				spriteNum++;
-			}
+		int delay = gp.delay();
+		
+		
+		//Use duration/3 values 
+		
+		if(delay <= getAttackDuration()/2) {
+			//If you want attack in reverse order switch these variables
+			spriteNum = 1;
 		}
+		if(delay <= getAttackDuration() - getAttackDuration()/4 && delay > getAttackDuration()/2) {
+			
+			spriteNum = 2;
+		}
+		if(delay <= getAttackDuration() && delay > getAttackDuration()- getAttackDuration()/4) {
+			spriteNum = 3;
+		}
+		
 		switch (direction) {
 		case "right":
-			System.out.println(spriteNum);
+			
 			if (spriteNum == 1) {
+				
 				image = right1;
 			}else if (spriteNum == 2) {
+				
 				image = right2;
 			}else if (spriteNum == 3) {
+				
 				image = right3;
 			}
 			break;
 
 		case "left":
-			System.out.println(spriteNum);
+			
 			if (spriteNum == 1) {
 				image = left1;
 			}else if (spriteNum == 2) {
@@ -222,7 +255,7 @@ public class Attack extends Entity{
 			}
 			break;
 		case "up":
-			System.out.println(spriteNum);
+			
 			if (spriteNum == 1) {
 				image = up1;
 			}else if (spriteNum == 2) {
@@ -233,7 +266,7 @@ public class Attack extends Entity{
 			break;
 
 		case "down":
-			System.out.println(spriteNum);
+			
 			if (spriteNum == 1) {
 				image = down1;
 			}else if (spriteNum == 2) {
@@ -243,6 +276,7 @@ public class Attack extends Entity{
 			}
 			break;
 		}
+	
 		spriteDelay++;
 		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 	}

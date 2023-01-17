@@ -13,6 +13,7 @@ public class CollisionDetecter {
 	GamePanel gp;
 	private boolean x;
 	
+	
 	private int collisionIndex;
 	public CollisionDetecter(GamePanel gp) {
 		this.gp = gp;
@@ -501,11 +502,12 @@ public class CollisionDetecter {
 		// this number now sets the distance for collision
 		// for some god forsaken reason other values don't work making the scalability of this questionable
 		
-		player.knockAmt(40);
+		player.knockAmt(100);
 		//player.knockAmt(entity.knockback/2);
 		//System.out.println(player.knockAmt());
 		
 		int tileNum1, tileNum2;
+		
 		switch(direction) {
 		case "up":
 			entityTopRow = (int) ((entityTopWorldY - player.knockAmt()) / gp.tileSize);
@@ -791,6 +793,7 @@ public class CollisionDetecter {
 		collisionIndex = b;
 	}
 	
+	
 
 	// check npc/enemy collision
 	public int checkAttack(Attack atk, Entity[] target, double speed) {
@@ -802,47 +805,55 @@ public class CollisionDetecter {
 		//This is important do not replace, entity.hitbox changes constantly but this doesn't
 		Rectangle storer = new Rectangle(atk.hitBox);
 
-		
 		for (int i = 0; i < target.length; i++) {
-
+			
 			if (target[i] != null) {
 				// System.out.println(entity.hitBox);
 				// GET ENTITY HITPOX POSITION
-
+				
 				atk.hitBox.x = atk.worldX + atk.hitBox.x;
 				atk.hitBox.y = atk.worldY + atk.hitBox.y;
 				// GET OBJECT HITBOX POSITION
 				target[i].hitBox.x = target[i].worldX + target[i].hitBox.x;
 				target[i].hitBox.y = target[i].worldY + target[i].hitBox.y;
 
+
 				
 				switch (atk.direction) {
 				case "up":
-					atk.hitBox.y -= speed;
-					if (atk.hitBox.intersects(target[i].hitBox)) {
+					storer.y -= speed;
+					if (storer.intersects(target[i].hitBox)) {
 						atk.collisionOn = true;
 						index = i;
+						collision(true, i);
+						
 					}
 					break;
 				case "down":
-					atk.hitBox.y += speed;
-					if (atk.hitBox.intersects(target[i].hitBox)) {
+					storer.y += speed;
+					if (storer.intersects(target[i].hitBox)) {
 						atk.collisionOn = true;
 						index = i;
+						collision(true, i);
+						
 					}
 					break;
 				case "left":
-					atk.hitBox.x -= speed;
-					if (atk.hitBox.intersects(target[i].hitBox)) {
+					storer.x -= speed;
+					if (storer.intersects(target[i].hitBox)) {
 						atk.collisionOn = true;
 						index = i;
+						collision(true, i);
+						
 					}
 					break;
 				case "right":
-					atk.hitBox.x += speed;
-					if (atk.hitBox.intersects(target[i].hitBox)) {
+					storer.x += speed;
+					if (storer.intersects(target[i].hitBox)) {
+						
 						atk.collisionOn = true;
 						index = i;
+						collision(true, i);
 					}
 					break;
 				case "atk1":
@@ -850,6 +861,7 @@ public class CollisionDetecter {
 				
 					
 					if ((storer.intersects(target[i].hitBox))) {
+					
 						collision(true, i);
 											}
 				}
