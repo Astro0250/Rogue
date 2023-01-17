@@ -28,8 +28,8 @@ public class NPC_Enemy extends Entity{
 		getImage();
 	}
 	public void getImage() {
-		down1 = setup("Max1");
-		up1 = setup("Max2");
+		down1 = setup("Enemy1");
+		up1 = setup("Enemy2");
 	}
 	public BufferedImage setup(String imageName) {
 		BufferedImage image = null;

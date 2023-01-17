@@ -158,6 +158,9 @@ public class GamePanel extends JPanel implements Runnable {
 			delayPlayer++;
 		} else if (gameState == pauseState) {
 			// nothing for now
+			System.out.println(player.worldX);
+			System.out.println(player.worldY);
+
 		} else if (gameState == deathState) {
 			player.spriteNum = 5;
 			if (unecessary() == 0) {
