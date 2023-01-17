@@ -21,6 +21,20 @@ import javax.imageio.ImageIO;
 public class Attack extends Entity{
 	int soundCounter = 0;
 	int spriteDelay = 0;
+	private int attackDuration = 20;
+	private int cooldownDuration = 60;
+	public int getAttackDuration() {
+		return attackDuration;
+	}
+	public void setAttackDuration(int duration) {
+		attackDuration = duration;
+	}
+	public int getCooldownDuration() {
+		return cooldownDuration;
+	}
+	public void setCooldownDuration(int duration) {
+		cooldownDuration = duration;
+	}
 	public Attack(GamePanel gp) {
 		super(gp);
 		direction = gp.player.direction;
@@ -32,6 +46,7 @@ public class Attack extends Entity{
 		hitBoxDefaultY = hitBox.y;
 		hitBox.width = 30;
 		hitBox.height = 30;
+		
 	}
 	public Attack(GamePanel gp, int a, int b) {
 		super(gp);
@@ -46,13 +61,17 @@ public class Attack extends Entity{
 		hitBox.height = 30;
 		gp.atk.worldX = a;
 		gp.atk.worldY = b;
+		
+		
 	}
 	//important for the cooldown/duration
 	public boolean z = false;
 
 	public void setAttack() {
-		int duration = 20;
-		int cooldown = 62;
+		
+	
+		int duration = getAttackDuration();
+		int cooldown = getCooldownDuration();
 		int delay = gp.delay();
 		if (delay >= cooldown || z) {
 			if (gp.keyH.spacePressed || z) {
@@ -198,15 +217,15 @@ public class Attack extends Entity{
 		
 		//Use duration/3 values 
 		
-		if(delay <= 10) {
+		if(delay <= getAttackDuration()/2) {
 			//If you want attack in reverse order switch these variables
 			spriteNum = 1;
 		}
-		if(delay <= 15 && delay > 10) {
+		if(delay <= getAttackDuration() - getAttackDuration()/4 && delay > getAttackDuration()/2) {
 			
 			spriteNum = 2;
 		}
-		if(delay <= 20 && delay > 15) {
+		if(delay <= getAttackDuration() && delay > getAttackDuration()- getAttackDuration()/4) {
 			spriteNum = 3;
 		}
 		

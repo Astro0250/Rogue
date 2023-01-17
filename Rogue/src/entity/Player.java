@@ -108,7 +108,7 @@ public class Player extends Entity {
 		// Change this variable if no likey
 		int occurences = 25;
 		// Holder
-		knockAmt(amount / occurences);
+		//knockAmt(amount / occurences);
 		if ("worldX".equals(axis)) {
 			for (int a = 0; a < occurences; a++) {
 				worldX += amount / occurences;

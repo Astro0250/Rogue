@@ -502,11 +502,12 @@ public class CollisionDetecter {
 		// this number now sets the distance for collision
 		// for some god forsaken reason other values don't work making the scalability of this questionable
 		
-		player.knockAmt(40);
+		player.knockAmt(100);
 		//player.knockAmt(entity.knockback/2);
 		//System.out.println(player.knockAmt());
 		
 		int tileNum1, tileNum2;
+		
 		switch(direction) {
 		case "up":
 			entityTopRow = (int) ((entityTopWorldY - player.knockAmt()) / gp.tileSize);
